@@ -1,0 +1,1449 @@
+{
+  "templates": [
+    {
+      "name": "business-solutions",
+      "representativePages": [
+        "https://www.usa.canon.com/business/workplace-security/device-security",
+        "https://www.usa.canon.com/business/industrial/galvano-scanners",
+        "https://www.usa.canon.com/business/workplace-solutions/production-solutions/aleyant-solutions",
+        "https://www.usa.canon.com/business/products/toner-supplies",
+        "https://www.usa.canon.com/printer-buying-guide"
+      ],
+      "urls": [
+        "https://www.usa.canon.com/Camera-Buying-Guide",
+        "https://www.usa.canon.com/business/industrial/galvano-scanners",
+        "https://www.usa.canon.com/business/it-and-security",
+        "https://www.usa.canon.com/business/it-and-security/five-pillars-of-security",
+        "https://www.usa.canon.com/business/it-and-security/five-pillars-of-security/cybersecurity",
+        "https://www.usa.canon.com/business/it-and-security/five-pillars-of-security/cybersecurity/email-inbox-protection",
+        "https://www.usa.canon.com/business/it-and-security/five-pillars-of-security/device-security",
+        "https://www.usa.canon.com/business/it-and-security/five-pillars-of-security/document-security",
+        "https://www.usa.canon.com/business/it-and-security/five-pillars-of-security/information-security",
+        "https://www.usa.canon.com/business/it-and-security/five-pillars-of-security/print-security",
+        "https://www.usa.canon.com/business/it-and-security/security-services",
+        "https://www.usa.canon.com/business/managed-services/managed-security",
+        "https://www.usa.canon.com/business/managed-services/managed-security/email-inbox-protection",
+        "https://www.usa.canon.com/business/products/mailing-and-fulfillment",
+        "https://www.usa.canon.com/business/products/toner-supplies",
+        "https://www.usa.canon.com/business/workplace-security",
+        "https://www.usa.canon.com/business/workplace-security/cybersecurity",
+        "https://www.usa.canon.com/business/workplace-security/device-security",
+        "https://www.usa.canon.com/business/workplace-security/document-security",
+        "https://www.usa.canon.com/business/workplace-security/information-security",
+        "https://www.usa.canon.com/business/workplace-security/print-security",
+        "https://www.usa.canon.com/business/workplace-security/security",
+        "https://www.usa.canon.com/business/workplace-solutions/production-solutions/aleyant-solutions",
+        "https://www.usa.canon.com/business/workplace-solutions/production-solutions/rsa-webcrd",
+        "https://www.usa.canon.com/printer-buying-guide"
+      ],
+      "description": "Business solutions and workplace security page with feature sections"
+    },
+    {
+      "name": "learning-hub",
+      "representativePages": [
+        "https://www.usa.canon.com/learning",
+        "https://www.usa.canon.com/about-us/corporate-social-responsibility/environment/bird-branch-project/about-the-bird-branch-project",
+        "https://www.usa.canon.com/business/why-canon",
+        "https://www.usa.canon.com/about-us/community-and-social-involvement/walk-for-american-cancer-society",
+        "https://www.usa.canon.com/business/workplace-solutions/production-solutions/web-to-print-ecommerce"
+      ],
+      "urls": [
+        "https://www.usa.canon.com/about-us",
+        "https://www.usa.canon.com/about-us/canon-americas-headquarters",
+        "https://www.usa.canon.com/about-us/community-and-social-involvement",
+        "https://www.usa.canon.com/about-us/community-and-social-involvement/townwide-fund-of-huntington",
+        "https://www.usa.canon.com/about-us/community-and-social-involvement/walk-for-american-cancer-society",
+        "https://www.usa.canon.com/about-us/corporate-social-responsibility",
+        "https://www.usa.canon.com/about-us/corporate-social-responsibility/art-education/american-museum-of-natural-history",
+        "https://www.usa.canon.com/about-us/corporate-social-responsibility/art-education/ncf-envirothon",
+        "https://www.usa.canon.com/about-us/corporate-social-responsibility/environment/bird-branch-project/about-the-bird-branch-project",
+        "https://www.usa.canon.com/about-us/corporate-social-responsibility/environment/huntington-oyster-bay-audubon-society",
+        "https://www.usa.canon.com/about-us/history-of-cusa",
+        "https://www.usa.canon.com/about-us/kyosei-our-corporate-philosophy",
+        "https://www.usa.canon.com/business/Sustainability",
+        "https://www.usa.canon.com/business/about-business-support",
+        "https://www.usa.canon.com/business/canon-alliance-partner-program",
+        "https://www.usa.canon.com/business/canon-alliance-partner-program/developer-support-program",
+        "https://www.usa.canon.com/business/canon-alliance-partner-program/large-format-solutions-page",
+        "https://www.usa.canon.com/business/canon-alliance-partner-program/scanner-solutions-page",
+        "https://www.usa.canon.com/business/industrial",
+        "https://www.usa.canon.com/business/industrial/3d-machine-vision-system",
+        "https://www.usa.canon.com/business/industrial/non-contact-displacement-sensor",
+        "https://www.usa.canon.com/business/industries",
+        "https://www.usa.canon.com/business/industries/education-higher-ed",
+        "https://www.usa.canon.com/business/industries/education-k-12",
+        "https://www.usa.canon.com/business/industries/government-solutions",
+        "https://www.usa.canon.com/business/industries/government-solutions/federal-government-solutions",
+        "https://www.usa.canon.com/business/industries/government-solutions/state-and-local-solutions",
+        "https://www.usa.canon.com/business/industries/healthcare",
+        "https://www.usa.canon.com/business/industries/healthcare/cahme",
+        "https://www.usa.canon.com/business/industries/hospitality",
+        "https://www.usa.canon.com/business/industries/legal",
+        "https://www.usa.canon.com/business/it-and-security/it-application-development-services/application-modernization",
+        "https://www.usa.canon.com/business/it-and-security/it-application-development-services/artificial-intelligence",
+        "https://www.usa.canon.com/business/it-and-security/it-application-development-services/data-engineering",
+        "https://www.usa.canon.com/business/it-and-security/it-application-development-services/enterprise-applications",
+        "https://www.usa.canon.com/business/it-and-security/it-application-development-services/quality-assurance",
+        "https://www.usa.canon.com/business/managed-services",
+        "https://www.usa.canon.com/business/managed-services/managed-it-services",
+        "https://www.usa.canon.com/business/managed-services/managed-print",
+        "https://www.usa.canon.com/business/managed-services/managed-workplace",
+        "https://www.usa.canon.com/business/production-print",
+        "https://www.usa.canon.com/business/products",
+        "https://www.usa.canon.com/business/products/canon-office-cloud",
+        "https://www.usa.canon.com/business/products/card-label-cable-printers",
+        "https://www.usa.canon.com/business/products/computers-accessories",
+        "https://www.usa.canon.com/business/products/imagerunner-advance-platform",
+        "https://www.usa.canon.com/business/products/imagerunner-advance-platform/Simplify-Control-Evolve",
+        "https://www.usa.canon.com/business/products/imagerunner-advance-platform/enterprise-solutions-awards",
+        "https://www.usa.canon.com/business/products/label-solutions",
+        "https://www.usa.canon.com/business/products/large-format-printing-scanning",
+        "https://www.usa.canon.com/business/products/large-format-printing-scanning/PosterArtist",
+        "https://www.usa.canon.com/business/products/large-format-printing-scanning/large-format-direct-to-fabric-printing-and-finishing",
+        "https://www.usa.canon.com/business/products/large-format-printing-scanning/large-format-finishing-solutions",
+        "https://www.usa.canon.com/business/products/office-printers-copiers",
+        "https://www.usa.canon.com/business/products/production-printing",
+        "https://www.usa.canon.com/business/products/production-printing/finishing-embellishment-solutions",
+        "https://www.usa.canon.com/business/products/production-printing/production-sheetfed-presses",
+        "https://www.usa.canon.com/business/products/production-printing/production-web-fed-presses",
+        "https://www.usa.canon.com/business/products/production-printing/variopress-iv7",
+        "https://www.usa.canon.com/business/products/scanning/Scanner-solutions-for-accounting",
+        "https://www.usa.canon.com/business/products/scanning/canon-solutions-for-state-and-local-governments",
+        "https://www.usa.canon.com/business/products/scanning/fadgi-technical-guidelines-for-digitization",
+        "https://www.usa.canon.com/business/products/scanning/scanner-solutions-for-financial-services",
+        "https://www.usa.canon.com/business/products/scanning/scanner-solutions-for-government",
+        "https://www.usa.canon.com/business/products/toner-supplies/auto-toner-replenishment-service",
+        "https://www.usa.canon.com/business/semiconductor",
+        "https://www.usa.canon.com/business/semiconductor/deposition",
+        "https://www.usa.canon.com/business/semiconductor/lithography",
+        "https://www.usa.canon.com/business/semiconductor/vacuum-components",
+        "https://www.usa.canon.com/business/where-to-buy-business-products",
+        "https://www.usa.canon.com/business/why-canon",
+        "https://www.usa.canon.com/business/workplace-solutions/business-process-automation",
+        "https://www.usa.canon.com/business/workplace-solutions/business-process-automation/document-digitization",
+        "https://www.usa.canon.com/business/workplace-solutions/business-process-automation/document-solutions",
+        "https://www.usa.canon.com/business/workplace-solutions/business-process-automation/procure-to-pay-accounts-payable-automation",
+        "https://www.usa.canon.com/business/workplace-solutions/ctrl-email",
+        "https://www.usa.canon.com/business/workplace-solutions/information-management-solutions",
+        "https://www.usa.canon.com/business/workplace-solutions/managed-services",
+        "https://www.usa.canon.com/business/workplace-solutions/print-management-solutions",
+        "https://www.usa.canon.com/business/workplace-solutions/production-solutions",
+        "https://www.usa.canon.com/business/workplace-solutions/production-solutions/web-to-print-ecommerce",
+        "https://www.usa.canon.com/business/workplace-solutions/professional-services",
+        "https://www.usa.canon.com/imageforce",
+        "https://www.usa.canon.com/learning",
+        "https://www.usa.canon.com/office",
+        "https://www.usa.canon.com/order-help/where-to-buy",
+        "https://www.usa.canon.com/printingsolutions",
+        "https://www.usa.canon.com/pro/cinema-eos-dealer-locator",
+        "https://www.usa.canon.com/pro/industries/broadcast",
+        "https://www.usa.canon.com/pro/industries/cinema",
+        "https://www.usa.canon.com/pro/industries/government"
+      ],
+      "description": "Learning and educational content page with tutorials and guides"
+    },
+    {
+      "name": "community-showcase",
+      "representativePages": [
+        "https://www.usa.canon.com/about-us/community-and-social-involvement/across-the-us"
+      ],
+      "urls": [
+        "https://www.usa.canon.com/about-us/community-and-social-involvement/across-the-us"
+      ],
+      "description": "Community involvement showcase with regional content layout"
+    },
+    {
+      "name": "membership-page",
+      "representativePages": [
+        "https://www.usa.canon.com/pro/canon-professional-services/cps-enterprise-membership",
+        "https://www.usa.canon.com/about-us/community-and-social-involvement/huntington-arts-council",
+        "https://www.usa.canon.com/pro/canon-professional-services",
+        "https://www.usa.canon.com/about-us/kyosei-our-corporate-philosophy/environment-and-sustainability",
+        "https://www.usa.canon.com/pro/canon-professional-services/cps-qualified-products"
+      ],
+      "urls": [
+        "https://www.usa.canon.com/about-us/community-and-social-involvement/huntington-arts-council",
+        "https://www.usa.canon.com/about-us/kyosei-our-corporate-philosophy/environment-and-sustainability",
+        "https://www.usa.canon.com/pro/canon-professional-services",
+        "https://www.usa.canon.com/pro/canon-professional-services/cps-cinema-membership",
+        "https://www.usa.canon.com/pro/canon-professional-services/cps-enterprise-membership",
+        "https://www.usa.canon.com/pro/canon-professional-services/cps-gold-membership",
+        "https://www.usa.canon.com/pro/canon-professional-services/cps-platinum-membership",
+        "https://www.usa.canon.com/pro/canon-professional-services/cps-qualified-products",
+        "https://www.usa.canon.com/pro/canon-professional-services/cps-silver-membership",
+        "https://www.usa.canon.com/pro/canon-professional-services/cps-student-membership",
+        "https://www.usa.canon.com/pro/canon-professional-services/faq"
+      ],
+      "description": "Professional services membership and partnership detail page"
+    },
+    {
+      "name": "services-page",
+      "representativePages": [
+        "https://www.usa.canon.com/pro/canon-professional-services/canon-evaluation-loans",
+        "https://www.usa.canon.com/pro/rf-lens-world/cinema-lenses",
+        "https://www.usa.canon.com/digital-cameras/eos-webcam-utility",
+        "https://www.usa.canon.com/privacy/california-privacy-policy",
+        "https://www.usa.canon.com/pro/cameras/speedlite-flashes"
+      ],
+      "urls": [
+        "https://www.usa.canon.com/about-us/corporate-profile",
+        "https://www.usa.canon.com/about-us/corporate-social-responsibility/art-education",
+        "https://www.usa.canon.com/about-us/corporate-social-responsibility/art-education/japan-center-essay-competition",
+        "https://www.usa.canon.com/about-us/corporate-social-responsibility/art-education/the-metropolitan-museum-of-art",
+        "https://www.usa.canon.com/about-us/corporate-social-responsibility/art-education/the-museum-of-modern-art",
+        "https://www.usa.canon.com/about-us/corporate-social-responsibility/environment",
+        "https://www.usa.canon.com/about-us/corporate-social-responsibility/environment/clean-earth-campaign",
+        "https://www.usa.canon.com/about-us/corporate-social-responsibility/environment/earth-day",
+        "https://www.usa.canon.com/about-us/corporate-social-responsibility/environment/new-york-marine-rescue-center",
+        "https://www.usa.canon.com/about-us/corporate-social-responsibility/environment/yellowstone-forever",
+        "https://www.usa.canon.com/about-us/innovation",
+        "https://www.usa.canon.com/business/products/large-format-printing-scanning/PosterArtist/posterartist-case-study-factories",
+        "https://www.usa.canon.com/business/products/large-format-printing-scanning/PosterArtist/posterartist-case-study-hospitals",
+        "https://www.usa.canon.com/business/products/large-format-printing-scanning/PosterArtist/posterartist-case-study-hotels",
+        "https://www.usa.canon.com/business/products/large-format-printing-scanning/PosterArtist/posterartist-case-study-offices",
+        "https://www.usa.canon.com/business/products/large-format-printing-scanning/PosterArtist/posterartist-case-study-public-venue",
+        "https://www.usa.canon.com/business/products/large-format-printing-scanning/PosterArtist/posterartist-case-study-retail",
+        "https://www.usa.canon.com/business/products/large-format-printing-scanning/PosterArtist/posterartist-case-study-schools",
+        "https://www.usa.canon.com/business/products/large-format-printing-scanning/PosterArtist/posterartist-case-study-transportation",
+        "https://www.usa.canon.com/business/products/production-printing/canon-imagepress-v1000",
+        "https://www.usa.canon.com/business/products/production-printing/case-studies",
+        "https://www.usa.canon.com/business/products/software-solutions/business-problems-solved",
+        "https://www.usa.canon.com/business/products/software-solutions/uniflow-one",
+        "https://www.usa.canon.com/business/semiconductor/canon-cpo-equipment-program",
+        "https://www.usa.canon.com/business/workplace-security/security-cameras",
+        "https://www.usa.canon.com/business/workplace-solutions/ctrl-everything",
+        "https://www.usa.canon.com/digital-cameras/eos-r-system",
+        "https://www.usa.canon.com/digital-cameras/eos-webcam-utility",
+        "https://www.usa.canon.com/learning/inspiration",
+        "https://www.usa.canon.com/privacy/california-privacy-policy",
+        "https://www.usa.canon.com/pro/InfoComm-2024",
+        "https://www.usa.canon.com/pro/cameras/dslr-cameras",
+        "https://www.usa.canon.com/pro/cameras/eos-r-system",
+        "https://www.usa.canon.com/pro/cameras/speedlite-flashes",
+        "https://www.usa.canon.com/pro/canon-professional-services/canon-evaluation-loans",
+        "https://www.usa.canon.com/pro/canon-professional-services/repairs",
+        "https://www.usa.canon.com/pro/cinema-eos-dealer-locator/cinema-eos-4k-reference-displays",
+        "https://www.usa.canon.com/pro/cinema-eos-dealer-locator/cinema-eos-c100",
+        "https://www.usa.canon.com/pro/cinema-eos-dealer-locator/cinema-eos-c200",
+        "https://www.usa.canon.com/pro/cinema-eos-dealer-locator/cinema-eos-c300",
+        "https://www.usa.canon.com/pro/cinema-eos-dealer-locator/cinema-eos-c700",
+        "https://www.usa.canon.com/pro/cinema-eos-dealer-locator/cinema-eos-cine-servo-lenses",
+        "https://www.usa.canon.com/pro/cinema-eos-dealer-locator/cinema-eos-compact-servo-lenses",
+        "https://www.usa.canon.com/pro/cinema-eos-dealer-locator/cinema-eos-compact-zoom-lenses",
+        "https://www.usa.canon.com/pro/cinema-eos-dealer-locator/cinema-eos-multi-purpose",
+        "https://www.usa.canon.com/pro/cinema-eos-dealer-locator/cinema-eos-prime-lenses",
+        "https://www.usa.canon.com/pro/cinema-eos-dealer-locator/cinema-eos-sumire-prime-lenses",
+        "https://www.usa.canon.com/pro/cinema-eos-dealer-locator/cinema-eos-zoom-lenses",
+        "https://www.usa.canon.com/pro/electronic-range-calculators",
+        "https://www.usa.canon.com/pro/forms/learn",
+        "https://www.usa.canon.com/pro/forms/satellite",
+        "https://www.usa.canon.com/pro/forms/satellite-thank-you",
+        "https://www.usa.canon.com/pro/industries",
+        "https://www.usa.canon.com/pro/industries/house-of-worship",
+        "https://www.usa.canon.com/pro/inspiration",
+        "https://www.usa.canon.com/pro/inspiration/pro-articles-archived/q-and-a-reality-winner-dp",
+        "https://www.usa.canon.com/pro/lenses",
+        "https://www.usa.canon.com/pro/resources",
+        "https://www.usa.canon.com/pro/rf-lens-world",
+        "https://www.usa.canon.com/pro/rf-lens-world/advantages",
+        "https://www.usa.canon.com/pro/rf-lens-world/cinema-lenses",
+        "https://www.usa.canon.com/pro/rf-lens-world/history",
+        "https://www.usa.canon.com/pro/rf-lens-world/vr-lens"
+      ],
+      "description": "Professional services information page with features and benefits"
+    },
+    {
+      "name": "policy-page",
+      "representativePages": [
+        "https://www.usa.canon.com/about-us/corporate-social-responsibility/csr-guidelines"
+      ],
+      "urls": [
+        "https://www.usa.canon.com/about-us/corporate-social-responsibility/csr-guidelines"
+      ],
+      "description": "Policy, guidelines, and legal document page"
+    },
+    {
+      "name": "project-landing",
+      "representativePages": [
+        "https://www.usa.canon.com/about-us/corporate-social-responsibility/environment/bird-branch-project"
+      ],
+      "urls": [
+        "https://www.usa.canon.com/about-us/corporate-social-responsibility/environment/bird-branch-project"
+      ],
+      "description": "Environmental or community project landing page with overview content"
+    },
+    {
+      "name": "lens-collection",
+      "representativePages": [
+        "https://www.usa.canon.com/pro/lenses/ef-l-lenses",
+        "https://www.usa.canon.com/business/resources",
+        "https://www.usa.canon.com/shop/video-cameras/video-accessories/other-camcorder-accessories",
+        "https://www.usa.canon.com/business/industrial/contact-semiconductor-products",
+        "https://www.usa.canon.com/shop/special-deals/miniatures-more"
+      ],
+      "urls": [
+        "https://www.usa.canon.com/about-us/corporate-social-responsibility/environment/bird-branch-project/bird-photo-gallery",
+        "https://www.usa.canon.com/business/industrial/contact-semiconductor-products",
+        "https://www.usa.canon.com/business/resources",
+        "https://www.usa.canon.com/business/workplace-solutions/business-process-automation/solutions-partner",
+        "https://www.usa.canon.com/pro/lenses/ef-l-lenses",
+        "https://www.usa.canon.com/shop/business/industrial/motion-control/frameless-motors",
+        "https://www.usa.canon.com/shop/business/industrial/motion-control/linear-ultra-sonic-motors",
+        "https://www.usa.canon.com/shop/special-deals/canon-apparel",
+        "https://www.usa.canon.com/shop/special-deals/miniatures-more",
+        "https://www.usa.canon.com/shop/video-cameras/video-accessories/cases-straps",
+        "https://www.usa.canon.com/shop/video-cameras/video-accessories/lights",
+        "https://www.usa.canon.com/shop/video-cameras/video-accessories/other-camcorder-accessories"
+      ],
+      "description": "Professional lens collection page with product grid"
+    },
+    {
+      "name": "article-guide",
+      "representativePages": [
+        "https://www.usa.canon.com/about-us/corporate-social-responsibility/environment/bird-branch-project/etiquette-for-wild-bird-photography"
+      ],
+      "urls": [
+        "https://www.usa.canon.com/about-us/corporate-social-responsibility/environment/bird-branch-project/etiquette-for-wild-bird-photography"
+      ],
+      "description": "Article or guide page with instructional content"
+    },
+    {
+      "name": "technical-calculator",
+      "representativePages": [
+        "https://www.usa.canon.com/pro/electronic-range-calculators/angle-of-view",
+        "https://www.usa.canon.com/printers/chromebook-printing-and-scanning",
+        "https://www.usa.canon.com/pro/cinema-eos-dealer-locator/cinema-eos-c500",
+        "https://www.usa.canon.com/business/canon-alliance-partner-program/scanner-solutions-page/dr-scanner-partner-list",
+        "https://www.usa.canon.com/pro/electronic-range-calculators/depth-of-field"
+      ],
+      "urls": [
+        "https://www.usa.canon.com/business/canon-alliance-partner-program/scanner-solutions-page/dr-scanner-partner-list",
+        "https://www.usa.canon.com/business/canon-alliance-partner-program/scanner-solutions-page/dr-scanner-partner-list1",
+        "https://www.usa.canon.com/printers/chromebook-printing-and-scanning",
+        "https://www.usa.canon.com/pro/cinema-eos-dealer-locator/cinema-eos-c500",
+        "https://www.usa.canon.com/pro/electronic-range-calculators/angle-of-view",
+        "https://www.usa.canon.com/pro/electronic-range-calculators/depth-of-field"
+      ],
+      "description": "Technical calculator and specifications tool page"
+    },
+    {
+      "name": "resource-listing",
+      "representativePages": [
+        "https://www.usa.canon.com/pro/resources/calculators-simulators",
+        "https://www.usa.canon.com/business/canon-alliance-partner-program/specialty-printer-solutions-page",
+        "https://www.usa.canon.com/printers/easy-ink-delivery-info",
+        "https://www.usa.canon.com/printers/iso-productivity-standards",
+        "https://www.usa.canon.com/pro/electronic-range-calculators/object-dimension-object-distance-focal-length"
+      ],
+      "urls": [
+        "https://www.usa.canon.com/business/canon-alliance-partner-program/specialty-printer-solutions-page",
+        "https://www.usa.canon.com/printers/easy-ink-delivery-info",
+        "https://www.usa.canon.com/printers/iso-productivity-standards",
+        "https://www.usa.canon.com/pro/electronic-range-calculators/object-dimension-object-distance-focal-length",
+        "https://www.usa.canon.com/pro/resources/calculators-simulators"
+      ],
+      "description": "Resource listing page with downloads, brochures, and documents"
+    },
+    {
+      "name": "contact-form",
+      "representativePages": [
+        "https://www.usa.canon.com/business/contact-us/contact-form-vaio",
+        "https://www.usa.canon.com/business/contact-us/thank-you"
+      ],
+      "urls": [
+        "https://www.usa.canon.com/business/contact-us/contact-form-vaio",
+        "https://www.usa.canon.com/business/contact-us/thank-you"
+      ],
+      "description": "Contact inquiry form page"
+    },
+    {
+      "name": "standalone-form",
+      "representativePages": [
+        "https://www.usa.canon.com/business/forms/vaio-form"
+      ],
+      "urls": [
+        "https://www.usa.canon.com/business/forms/vaio-form"
+      ],
+      "description": "Standalone form page for submissions"
+    },
+    {
+      "name": "industry-page",
+      "representativePages": [
+        "https://www.usa.canon.com/business/industries/government-solutions/markets-government",
+        "https://www.usa.canon.com/pro/printers/large-format-printers",
+        "https://www.usa.canon.com/business/industrial/test-measurement-metrology",
+        "https://www.usa.canon.com/business/semiconductor/etch",
+        "https://www.usa.canon.com/pro/printers/pro-ink-paper"
+      ],
+      "urls": [
+        "https://www.usa.canon.com/business/industrial/contact-industrial-products",
+        "https://www.usa.canon.com/business/industrial/custom-manufacturing",
+        "https://www.usa.canon.com/business/industrial/dc-motors",
+        "https://www.usa.canon.com/business/industrial/optomechanical-components",
+        "https://www.usa.canon.com/business/industrial/test-measurement-metrology",
+        "https://www.usa.canon.com/business/industries/government-solutions/beth-israel-worship-center-uses-canon",
+        "https://www.usa.canon.com/business/industries/government-solutions/markets-government",
+        "https://www.usa.canon.com/business/products/propelling-your-business-forward",
+        "https://www.usa.canon.com/business/products/toner-supplies/mycanon-business",
+        "https://www.usa.canon.com/business/semiconductor/etch",
+        "https://www.usa.canon.com/business/semiconductor/wafer-bonding",
+        "https://www.usa.canon.com/business/semiconductor/x-ray-sources",
+        "https://www.usa.canon.com/business/workplace-solutions/digital-transformation",
+        "https://www.usa.canon.com/printers",
+        "https://www.usa.canon.com/pro/forms/enterprise-cps",
+        "https://www.usa.canon.com/pro/printers/large-format-printers",
+        "https://www.usa.canon.com/pro/printers/pro-ink-paper",
+        "https://www.usa.canon.com/rebates",
+        "https://www.usa.canon.com/video-cameras"
+      ],
+      "description": "Industry-specific solutions page with market segments"
+    },
+    {
+      "name": "industrial-product",
+      "representativePages": [
+        "https://www.usa.canon.com/business/industrial/fh-300-20"
+      ],
+      "urls": [
+        "https://www.usa.canon.com/business/industrial/fh-300-20"
+      ],
+      "description": "Industrial product detail page with specifications"
+    },
+    {
+      "name": "category-landing",
+      "representativePages": [
+        "https://www.usa.canon.com/camera-lenses",
+        "https://www.usa.canon.com/business/products/production-printing/imagepress-v-family",
+        "https://www.usa.canon.com/business/products/software-solutions",
+        "https://www.usa.canon.com/business/workplace-solutions",
+        "https://www.usa.canon.com/business/it-and-security/it-application-development-services"
+      ],
+      "urls": [
+        "https://www.usa.canon.com/business/it-and-security/it-application-development-services",
+        "https://www.usa.canon.com/business/products/production-printing/imagepress-v-family",
+        "https://www.usa.canon.com/business/products/software-solutions",
+        "https://www.usa.canon.com/business/workplace-solutions",
+        "https://www.usa.canon.com/camera-lenses",
+        "https://www.usa.canon.com/digital-cameras"
+      ],
+      "description": "Product category landing page with subcategory navigation"
+    },
+    {
+      "name": "application-showcase",
+      "representativePages": [
+        "https://www.usa.canon.com/business/products/production-printing/applications/marketing-collateral-newsletters",
+        "https://www.usa.canon.com/business/workplace-solutions/digital-transformation/project-management",
+        "https://www.usa.canon.com/pro/forms/mycanon-pro-migration",
+        "https://www.usa.canon.com/pro/inspiration/captured-with-canon",
+        "https://www.usa.canon.com/pro/inspiration/case-studies"
+      ],
+      "urls": [
+        "https://www.usa.canon.com/business/products/digital-printing-white-paper-series",
+        "https://www.usa.canon.com/business/products/large-format-printing-scanning/CanonLargeFormatPrinterApp",
+        "https://www.usa.canon.com/business/products/large-format-printing-scanning/colorado-m-series-virtual-demo",
+        "https://www.usa.canon.com/business/products/production-printing/applications",
+        "https://www.usa.canon.com/business/products/production-printing/applications/books-manuals-catalogs",
+        "https://www.usa.canon.com/business/products/production-printing/applications/direct-mail",
+        "https://www.usa.canon.com/business/products/production-printing/applications/labels-packaging",
+        "https://www.usa.canon.com/business/products/production-printing/applications/marketing-collateral-newsletters",
+        "https://www.usa.canon.com/business/products/production-printing/applications/photo-specialty-products",
+        "https://www.usa.canon.com/business/products/production-printing/applications/transactional-transpromo",
+        "https://www.usa.canon.com/business/products/production-printing/knowledge-center",
+        "https://www.usa.canon.com/business/products/production-printing/knowledge-center/growing-your-business",
+        "https://www.usa.canon.com/business/products/production-printing/knowledge-center/industry-insight-research",
+        "https://www.usa.canon.com/business/products/production-printing/knowledge-center/inkjet-printing",
+        "https://www.usa.canon.com/business/products/production-printing/knowledge-center/professional-services",
+        "https://www.usa.canon.com/business/products/production-printing/knowledge-center/technology-solution-demonstrations",
+        "https://www.usa.canon.com/business/products/production-printing/knowledge-center/workflow-solutions",
+        "https://www.usa.canon.com/business/products/toner-supplies/home-office-print-service",
+        "https://www.usa.canon.com/business/products/toner-supplies/large-format-color-profiles",
+        "https://www.usa.canon.com/business/workplace-solutions/digital-transformation/backfile-conversion",
+        "https://www.usa.canon.com/business/workplace-solutions/digital-transformation/enterprise-transformation",
+        "https://www.usa.canon.com/business/workplace-solutions/digital-transformation/project-management",
+        "https://www.usa.canon.com/business/workplace-solutions/digital-transformation/strategic-assessments",
+        "https://www.usa.canon.com/business/workplace-solutions/digital-transformation/workflow-optimization",
+        "https://www.usa.canon.com/pro/forms/mycanon-pro-migration",
+        "https://www.usa.canon.com/pro/inspiration/behind-the-scenes",
+        "https://www.usa.canon.com/pro/inspiration/captured-with-canon",
+        "https://www.usa.canon.com/pro/inspiration/case-studies"
+      ],
+      "description": "Application showcase page highlighting use cases and solutions"
+    },
+    {
+      "name": "legal-page",
+      "representativePages": [
+        "https://www.usa.canon.com/privacy/third-party",
+        "https://www.usa.canon.com/pro/deals",
+        "https://www.usa.canon.com/contact-us",
+        "https://www.usa.canon.com/business/products/large-format-printing-scanning/LargeFormatMedia",
+        "https://www.usa.canon.com/research-development"
+      ],
+      "urls": [
+        "https://www.usa.canon.com/business/products/large-format-printing-scanning/LargeFormatMedia",
+        "https://www.usa.canon.com/contact-us",
+        "https://www.usa.canon.com/learning/inspiration/explorers-of-light",
+        "https://www.usa.canon.com/order-help/bulk-orders",
+        "https://www.usa.canon.com/order-help/orders-purchases",
+        "https://www.usa.canon.com/order-help/shipping-and-delivery",
+        "https://www.usa.canon.com/printers/inkjet-page-yields",
+        "https://www.usa.canon.com/privacy",
+        "https://www.usa.canon.com/privacy/a-send-california-privacy-policy",
+        "https://www.usa.canon.com/privacy/cookie-policy",
+        "https://www.usa.canon.com/privacy/third-party",
+        "https://www.usa.canon.com/pro/deals",
+        "https://www.usa.canon.com/pro/forms",
+        "https://www.usa.canon.com/research-development",
+        "https://www.usa.canon.com/site-map",
+        "https://www.usa.canon.com/terms-of-use"
+      ],
+      "description": "Legal and privacy information page"
+    },
+    {
+      "name": "solution-detail",
+      "representativePages": [
+        "https://www.usa.canon.com/business/workplace-solutions/production-solutions/web-to-print-ecommerce/solutions",
+        "https://www.usa.canon.com/business/products/mailing-and-fulfillment/parcel-lockers",
+        "https://www.usa.canon.com/business/workplace-solutions/production-solutions/web-to-print-ecommerce/professional-services",
+        "https://www.usa.canon.com/business/products/mailing-and-fulfillment/mailroom-software",
+        "https://www.usa.canon.com/business/products/mailing-and-fulfillment/folders-and-inserters"
+      ],
+      "urls": [
+        "https://www.usa.canon.com/business/products/mailing-and-fulfillment/folders-and-inserters",
+        "https://www.usa.canon.com/business/products/mailing-and-fulfillment/mailroom-software",
+        "https://www.usa.canon.com/business/products/mailing-and-fulfillment/parcel-lockers",
+        "https://www.usa.canon.com/business/workplace-solutions/production-solutions/web-to-print-ecommerce/professional-services",
+        "https://www.usa.canon.com/business/workplace-solutions/production-solutions/web-to-print-ecommerce/solutions",
+        "https://www.usa.canon.com/business/workplace-solutions/production-solutions/web-to-print-ecommerce/strategy"
+      ],
+      "description": "Solution detail page with features and options"
+    },
+    {
+      "name": "media-kit",
+      "representativePages": [
+        "https://www.usa.canon.com/business/products/printing-united-media-kit",
+        "https://www.usa.canon.com/business/products/new-colorado-printer",
+        "https://www.usa.canon.com/pro/CineGear-2024"
+      ],
+      "urls": [
+        "https://www.usa.canon.com/business/products/new-colorado-printer",
+        "https://www.usa.canon.com/business/products/printing-united-media-kit",
+        "https://www.usa.canon.com/pro/CineGear-2024"
+      ],
+      "description": "Media kit and press materials page"
+    },
+    {
+      "name": "product-detail",
+      "representativePages": [
+        "https://www.usa.canon.com/business/products/production-printing/imagepress-v1350"
+      ],
+      "urls": [
+        "https://www.usa.canon.com/business/products/production-printing/imagepress-v1350"
+      ],
+      "description": "Product detail page with specifications and features"
+    },
+    {
+      "name": "software-product",
+      "representativePages": [
+        "https://www.usa.canon.com/business/products/production-printing/prismaprepare-go"
+      ],
+      "urls": [
+        "https://www.usa.canon.com/business/products/production-printing/prismaprepare-go"
+      ],
+      "description": "Software product page with features and downloads"
+    },
+    {
+      "name": "video-hub",
+      "representativePages": [
+        "https://www.usa.canon.com/business/products/production-printing/video-center"
+      ],
+      "urls": [
+        "https://www.usa.canon.com/business/products/production-printing/video-center"
+      ],
+      "description": "Video center hub page with video gallery navigation"
+    },
+    {
+      "name": "video-article",
+      "representativePages": [
+        "https://www.usa.canon.com/business/products/production-printing/video-center/doug-madgwick-on-the-highly-automated-valpak-manufacturing-center",
+        "https://www.usa.canon.com/business/products/production-printing/video-center/print-is-everywhere",
+        "https://www.usa.canon.com/business/products/production-printing/video-center/move-forward-with-canon",
+        "https://www.usa.canon.com/business/products/production-printing/video-center/mirasphere-campaign-video",
+        "https://www.usa.canon.com/business/products/production-printing/video-center/sheetfed-inkjet-at-linemark-now-printing-jobs-formerly-output-on-ep-and-offset-presses"
+      ],
+      "urls": [
+        "https://www.usa.canon.com/business/products/production-printing/video-center/advantage-color-graphics-invests-in-sheetfed-inkjet",
+        "https://www.usa.canon.com/business/products/production-printing/video-center/bret-moriarty-on-inkjet-printing-of-financial-and-regulatory-documents",
+        "https://www.usa.canon.com/business/products/production-printing/video-center/canon-celebrates-10-years-of-sheetfed-inkjet",
+        "https://www.usa.canon.com/business/products/production-printing/video-center/canon-labelstream-ls2000-intro-video",
+        "https://www.usa.canon.com/business/products/production-printing/video-center/canon-prisma-workflow-suite",
+        "https://www.usa.canon.com/business/products/production-printing/video-center/canon-prostream-3000-product-video",
+        "https://www.usa.canon.com/business/products/production-printing/video-center/canon-workflow-at-ds-graphics-universal-wilde",
+        "https://www.usa.canon.com/business/products/production-printing/video-center/direct-ones-evan-stewart-on-the-toner-to-inkjet-transformation",
+        "https://www.usa.canon.com/business/products/production-printing/video-center/doug-madgwick-on-the-highly-automated-valpak-manufacturing-center",
+        "https://www.usa.canon.com/business/products/production-printing/video-center/entourage-yearbooks-printing-photo-specialty-applications-on-inkjet",
+        "https://www.usa.canon.com/business/products/production-printing/video-center/finding-success-with-inkjet-the-mailworks",
+        "https://www.usa.canon.com/business/products/production-printing/video-center/future-authors-project",
+        "https://www.usa.canon.com/business/products/production-printing/video-center/heritage-of-the-canon-colorstream-inkjet-web-press-series",
+        "https://www.usa.canon.com/business/products/production-printing/video-center/house-of-print-and-threads-calls-canon-equipment-game-changing",
+        "https://www.usa.canon.com/business/products/production-printing/video-center/house-of-printing-relies-on-canon-varioprint-ix-sheetfed-inkjet-to-flourish",
+        "https://www.usa.canon.com/business/products/production-printing/video-center/inkjet-service-programs-and-service-training-facility-offered-by-canon",
+        "https://www.usa.canon.com/business/products/production-printing/video-center/inkjet-toner-enable-dmm-inc-to-print-mission-critical-documents",
+        "https://www.usa.canon.com/business/products/production-printing/video-center/kessler-creative-produces-a-wide-variety-of-marketing-materials",
+        "https://www.usa.canon.com/business/products/production-printing/video-center/koozie-groups-jeff-ibberson-on-inkjet-in-promotional-printing",
+        "https://www.usa.canon.com/business/products/production-printing/video-center/mimeo-powers-growth-with-canon-inkjet-technology",
+        "https://www.usa.canon.com/business/products/production-printing/video-center/mirasphere-campaign-video",
+        "https://www.usa.canon.com/business/products/production-printing/video-center/move-forward-with-canon",
+        "https://www.usa.canon.com/business/products/production-printing/video-center/pci-group-grows-with-canon-inkjet",
+        "https://www.usa.canon.com/business/products/production-printing/video-center/photo-smart-suite-for-the-photo-specialty-market",
+        "https://www.usa.canon.com/business/products/production-printing/video-center/print-is-everywhere",
+        "https://www.usa.canon.com/business/products/production-printing/video-center/rpi-prints-expansion-into-book-printing-and-publishing-with-andy-cooney",
+        "https://www.usa.canon.com/business/products/production-printing/video-center/sheetfed-inkjet-at-linemark-now-printing-jobs-formerly-output-on-ep-and-offset-presses",
+        "https://www.usa.canon.com/business/products/production-printing/video-center/shift-to-inkjet-printing-at-reynolds-and-reynolds-increases-productivity-reduces-waste-and-staffing-needs",
+        "https://www.usa.canon.com/business/products/production-printing/video-center/strawbridge-studios-completes-canon-service-training-programs",
+        "https://www.usa.canon.com/business/products/production-printing/video-center/the-mpx-group-capitalizes-on-the-benefits-of-canon-varioprint-ix-sheetfed-inkjet",
+        "https://www.usa.canon.com/business/products/production-printing/video-center/the-production-inkjet-and-photo-specialty-opportunity",
+        "https://www.usa.canon.com/business/products/production-printing/video-center/why-compu-mail-opted-for-a-fleet-of-inkjet-printing-presses"
+      ],
+      "description": "Video content page with embedded video and description"
+    },
+    {
+      "name": "video-product",
+      "representativePages": [
+        "https://www.usa.canon.com/business/products/production-printing/video-center/varioprint-ix3200-sheetfed-inkjet-press",
+        "https://www.usa.canon.com/business/products/production-printing/video-center/canon-imagepress-v-family-lineup",
+        "https://www.usa.canon.com/business/products/production-printing/video-center/celebrating-20-years-of-canon-imagepress",
+        "https://www.usa.canon.com/business/products/production-printing/video-center/the-varioprint-ix3200-sheetfed-inkjet-press-can-turn-what-if-into-can-do",
+        "https://www.usa.canon.com/business/products/production-printing/video-center/varioprint-ix1700-sheetfed-inkjet-press-intro-video"
+      ],
+      "urls": [
+        "https://www.usa.canon.com/business/products/production-printing/video-center/canon-imagepress-v-family-lineup",
+        "https://www.usa.canon.com/business/products/production-printing/video-center/canon-imagepress-v1000-introduction",
+        "https://www.usa.canon.com/business/products/production-printing/video-center/canon-imagepress-v1350-introduction-video",
+        "https://www.usa.canon.com/business/products/production-printing/video-center/canon-production-print-inks-new-ink-factory",
+        "https://www.usa.canon.com/business/products/production-printing/video-center/canon-varioprint-140-series-quartz-detailed-overview",
+        "https://www.usa.canon.com/business/products/production-printing/video-center/celebrating-20-years-of-canon-imagepress",
+        "https://www.usa.canon.com/business/products/production-printing/video-center/colorstream-8000-web-fed-inkjet-press",
+        "https://www.usa.canon.com/business/products/production-printing/video-center/contra-costa-print-mail-on-working-with-canon",
+        "https://www.usa.canon.com/business/products/production-printing/video-center/do-the-math-calculating-the-economics-of-b2-and-b3-formats",
+        "https://www.usa.canon.com/business/products/production-printing/video-center/do-the-math-the-consolidation-equation",
+        "https://www.usa.canon.com/business/products/production-printing/video-center/ds-graphics-universal-wilde-choose-canon-inkjet",
+        "https://www.usa.canon.com/business/products/production-printing/video-center/fast-forward-serie-spc-grows-with-the-canon-prostream-3160",
+        "https://www.usa.canon.com/business/products/production-printing/video-center/imagepress-automation-modules",
+        "https://www.usa.canon.com/business/products/production-printing/video-center/introducing-the-canon-variopress-iv7",
+        "https://www.usa.canon.com/business/products/production-printing/video-center/jps-books-logistics-excels-with-inkjet-from-canon",
+        "https://www.usa.canon.com/business/products/production-printing/video-center/linemark-printing-invests-in-canon-sheetfed-inkjet",
+        "https://www.usa.canon.com/business/products/production-printing/video-center/must-have-accessories-for-your-imagepress-v-family-production-printer",
+        "https://www.usa.canon.com/business/products/production-printing/video-center/one-canon-everything-you-need",
+        "https://www.usa.canon.com/business/products/production-printing/video-center/the-varioprint-ix3200-sheetfed-inkjet-press-can-turn-what-if-into-can-do",
+        "https://www.usa.canon.com/business/products/production-printing/video-center/varioprint-6000-series-titan-intro",
+        "https://www.usa.canon.com/business/products/production-printing/video-center/varioprint-6000-series-titan-overview",
+        "https://www.usa.canon.com/business/products/production-printing/video-center/varioprint-6000-titan-cutsheet-toner-press-demo",
+        "https://www.usa.canon.com/business/products/production-printing/video-center/varioprint-ix1700-sheetfed-inkjet-press-intro-video",
+        "https://www.usa.canon.com/business/products/production-printing/video-center/varioprint-ix3200-detailed-press-demo",
+        "https://www.usa.canon.com/business/products/production-printing/video-center/varioprint-ix3200-sheetfed-inkjet-press"
+      ],
+      "description": "Video product showcase page with demo content"
+    },
+    {
+      "name": "products-overview",
+      "representativePages": [
+        "https://www.usa.canon.com/business/products/scanning"
+      ],
+      "urls": [
+        "https://www.usa.canon.com/business/products/scanning"
+      ],
+      "description": "Products overview page with category sections"
+    },
+    {
+      "name": "supplies-page",
+      "representativePages": [
+        "https://www.usa.canon.com/business/products/toner-supplies/supplies"
+      ],
+      "urls": [
+        "https://www.usa.canon.com/business/products/toner-supplies/supplies"
+      ],
+      "description": "Supplies and consumables page with product listings"
+    },
+    {
+      "name": "download-page",
+      "representativePages": [
+        "https://www.usa.canon.com/business/products/toner-supplies/supplies/free-media-guides"
+      ],
+      "urls": [
+        "https://www.usa.canon.com/business/products/toner-supplies/supplies/free-media-guides"
+      ],
+      "description": "Asset download page for guides and materials"
+    },
+    {
+      "name": "service-feature",
+      "representativePages": [
+        "https://www.usa.canon.com/business/workplace-solutions/amlos"
+      ],
+      "urls": [
+        "https://www.usa.canon.com/business/workplace-solutions/amlos"
+      ],
+      "description": "Service feature page with benefits and details"
+    },
+    {
+      "name": "transformation-page",
+      "representativePages": [
+        "https://www.usa.canon.com/business/workplace-solutions/digital-transformation/change-execution"
+      ],
+      "urls": [
+        "https://www.usa.canon.com/business/workplace-solutions/digital-transformation/change-execution"
+      ],
+      "description": "Digital transformation and change management page"
+    },
+    {
+      "name": "product-landing",
+      "representativePages": [
+        "https://www.usa.canon.com/ix1700"
+      ],
+      "urls": [
+        "https://www.usa.canon.com/ix1700"
+      ],
+      "description": "Product landing page with hero and key features"
+    },
+    {
+      "name": "news-landing",
+      "representativePages": [
+        "https://www.usa.canon.com/newsroom"
+      ],
+      "urls": [
+        "https://www.usa.canon.com/newsroom"
+      ],
+      "description": "Newsroom landing page with search functionality"
+    },
+    {
+      "name": "news-article",
+      "representativePages": [
+        "https://www.usa.canon.com/newsroom/2026/20260401-corporate",
+        "https://www.usa.canon.com/newsroom/2023/nab-press-kit",
+        "https://www.usa.canon.com/newsroom/2023/20231106-award",
+        "https://www.usa.canon.com/order-help/eos-webcam-terms-and-conditions",
+        "https://www.usa.canon.com/newsroom/social-media-platforms"
+      ],
+      "urls": [
+        "https://www.usa.canon.com/newsroom/2023/20230426-printer",
+        "https://www.usa.canon.com/newsroom/2023/20230502-competition",
+        "https://www.usa.canon.com/newsroom/2023/20230502-printer",
+        "https://www.usa.canon.com/newsroom/2023/20230510-trademark",
+        "https://www.usa.canon.com/newsroom/2023/20230511-camera",
+        "https://www.usa.canon.com/newsroom/2023/20230516-award",
+        "https://www.usa.canon.com/newsroom/2023/20230517-scanner",
+        "https://www.usa.canon.com/newsroom/2023/20230517-vvs",
+        "https://www.usa.canon.com/newsroom/2023/20230518-ambassador",
+        "https://www.usa.canon.com/newsroom/2023/20230523-lfp",
+        "https://www.usa.canon.com/newsroom/2023/20230523-printer",
+        "https://www.usa.canon.com/newsroom/2023/20230524-camera",
+        "https://www.usa.canon.com/newsroom/2023/20230601-integrated-report",
+        "https://www.usa.canon.com/newsroom/2023/20230602-sustainability",
+        "https://www.usa.canon.com/newsroom/2023/20230613-perovskite",
+        "https://www.usa.canon.com/newsroom/2023/20230622-award",
+        "https://www.usa.canon.com/newsroom/2023/20230622-partnership",
+        "https://www.usa.canon.com/newsroom/2023/20230629-milestone",
+        "https://www.usa.canon.com/newsroom/2023/20230705-executive",
+        "https://www.usa.canon.com/newsroom/2023/20230706-award",
+        "https://www.usa.canon.com/newsroom/2023/20230711-event",
+        "https://www.usa.canon.com/newsroom/2023/20230719-printer",
+        "https://www.usa.canon.com/newsroom/2023/20230727-printer",
+        "https://www.usa.canon.com/newsroom/2023/20230821-headquarters",
+        "https://www.usa.canon.com/newsroom/2023/20230822-printer",
+        "https://www.usa.canon.com/newsroom/2023/20230829-award",
+        "https://www.usa.canon.com/newsroom/2023/20230912-lens",
+        "https://www.usa.canon.com/newsroom/2023/20230912-ptz",
+        "https://www.usa.canon.com/newsroom/2023/20231003-lfp-printers",
+        "https://www.usa.canon.com/newsroom/2023/20231003-printers",
+        "https://www.usa.canon.com/newsroom/2023/20231011-lens",
+        "https://www.usa.canon.com/newsroom/2023/20231012-expo",
+        "https://www.usa.canon.com/newsroom/2023/20231012-labelstream",
+        "https://www.usa.canon.com/newsroom/2023/20231012-varioprint",
+        "https://www.usa.canon.com/newsroom/2023/20231024-award",
+        "https://www.usa.canon.com/newsroom/2023/20231025-scanner",
+        "https://www.usa.canon.com/newsroom/2023/20231102-firmware",
+        "https://www.usa.canon.com/newsroom/2023/20231102-lens",
+        "https://www.usa.canon.com/newsroom/2023/20231106-award",
+        "https://www.usa.canon.com/newsroom/2023/20231120-award",
+        "https://www.usa.canon.com/newsroom/2023/20231128-partnership",
+        "https://www.usa.canon.com/newsroom/2023/20231130-award",
+        "https://www.usa.canon.com/newsroom/2023/ces-press-kit",
+        "https://www.usa.canon.com/newsroom/2023/nab-press-kit",
+        "https://www.usa.canon.com/newsroom/2024/20240103-award",
+        "https://www.usa.canon.com/newsroom/2024/20240104-ces",
+        "https://www.usa.canon.com/newsroom/2024/20240104-cusa",
+        "https://www.usa.canon.com/newsroom/2024/20240122-award",
+        "https://www.usa.canon.com/newsroom/2024/20240125-gp-printers",
+        "https://www.usa.canon.com/newsroom/2024/20240125-pro-printers",
+        "https://www.usa.canon.com/newsroom/2024/20240131-patents",
+        "https://www.usa.canon.com/newsroom/2024/20240208-mirrorless",
+        "https://www.usa.canon.com/newsroom/2024/20240216-recognition",
+        "https://www.usa.canon.com/newsroom/2024/20240220-market-share",
+        "https://www.usa.canon.com/newsroom/2024/20240220-recognition",
+        "https://www.usa.canon.com/newsroom/2024/20240228-award",
+        "https://www.usa.canon.com/newsroom/2024/20240305-environmental",
+        "https://www.usa.canon.com/newsroom/2024/20240306-award",
+        "https://www.usa.canon.com/newsroom/2024/20240318-satellite",
+        "https://www.usa.canon.com/newsroom/2024/20240325-award",
+        "https://www.usa.canon.com/newsroom/2024/20240326-award",
+        "https://www.usa.canon.com/newsroom/2024/20240326-presses",
+        "https://www.usa.canon.com/newsroom/2024/20240326-printer",
+        "https://www.usa.canon.com/newsroom/2024/20240326-printers",
+        "https://www.usa.canon.com/newsroom/2024/20240328-scanners",
+        "https://www.usa.canon.com/newsroom/2024/20240405-cinc",
+        "https://www.usa.canon.com/newsroom/2024/20240409-lens",
+        "https://www.usa.canon.com/newsroom/2024/20240410-nab",
+        "https://www.usa.canon.com/newsroom/2024/20240416-epeat",
+        "https://www.usa.canon.com/newsroom/2024/20240416-selphy",
+        "https://www.usa.canon.com/newsroom/2024/20240423-cbp",
+        "https://www.usa.canon.com/newsroom/2024/20240423-japan-center-essay-contest",
+        "https://www.usa.canon.com/newsroom/2024/20240424-recognition-week",
+        "https://www.usa.canon.com/newsroom/2024/20240430-students",
+        "https://www.usa.canon.com/newsroom/2024/20240502-eol",
+        "https://www.usa.canon.com/newsroom/2024/20240503-award",
+        "https://www.usa.canon.com/newsroom/2024/20240507-rsf",
+        "https://www.usa.canon.com/newsroom/2024/20240508-yellowstone",
+        "https://www.usa.canon.com/newsroom/2024/20240515-dev-announcement",
+        "https://www.usa.canon.com/newsroom/2024/20240515-sustainability-report",
+        "https://www.usa.canon.com/newsroom/2024/20240521-monocular",
+        "https://www.usa.canon.com/newsroom/2024/20240528-lfp",
+        "https://www.usa.canon.com/newsroom/2024/20240528-printer",
+        "https://www.usa.canon.com/newsroom/2024/20240605-cinema",
+        "https://www.usa.canon.com/newsroom/2024/20240605-firmware",
+        "https://www.usa.canon.com/newsroom/2024/20240605-lens-flash",
+        "https://www.usa.canon.com/newsroom/2024/20240610-firmware",
+        "https://www.usa.canon.com/newsroom/2024/20240610-lens",
+        "https://www.usa.canon.com/newsroom/2024/20240610-vr-lens",
+        "https://www.usa.canon.com/newsroom/2024/20240618-printers",
+        "https://www.usa.canon.com/newsroom/2024/20240708-award",
+        "https://www.usa.canon.com/newsroom/2024/20240715-olympics",
+        "https://www.usa.canon.com/newsroom/2024/20240717-camera",
+        "https://www.usa.canon.com/newsroom/2024/20240719-book-fair",
+        "https://www.usa.canon.com/newsroom/2024/20240724-award",
+        "https://www.usa.canon.com/newsroom/2024/20240726-turtle-release",
+        "https://www.usa.canon.com/newsroom/2024/20240805-award",
+        "https://www.usa.canon.com/newsroom/2024/20240813-expo",
+        "https://www.usa.canon.com/newsroom/2024/20240814-expo",
+        "https://www.usa.canon.com/newsroom/2024/20240826-expo",
+        "https://www.usa.canon.com/newsroom/2024/20240829-printer",
+        "https://www.usa.canon.com/newsroom/2024/20240909-camera",
+        "https://www.usa.canon.com/newsroom/2024/20240910-expo",
+        "https://www.usa.canon.com/newsroom/2024/20240910-lfp",
+        "https://www.usa.canon.com/newsroom/2024/20240910-printer",
+        "https://www.usa.canon.com/newsroom/2024/20240910-printers",
+        "https://www.usa.canon.com/newsroom/2024/20240912-lens-printer",
+        "https://www.usa.canon.com/newsroom/2024/20240919-sol",
+        "https://www.usa.canon.com/newsroom/2024/20240924-anniversary",
+        "https://www.usa.canon.com/newsroom/2024/20240924-printer",
+        "https://www.usa.canon.com/newsroom/2024/20240925-award",
+        "https://www.usa.canon.com/newsroom/2024/20241001-tie",
+        "https://www.usa.canon.com/newsroom/2024/20241002-event",
+        "https://www.usa.canon.com/newsroom/2024/20241002-legal",
+        "https://www.usa.canon.com/newsroom/2024/20241004-semiconductor",
+        "https://www.usa.canon.com/newsroom/2024/20241008-printer",
+        "https://www.usa.canon.com/newsroom/2024/20241017-donation",
+        "https://www.usa.canon.com/newsroom/2024/20241022-student",
+        "https://www.usa.canon.com/newsroom/2024/20241025-award",
+        "https://www.usa.canon.com/newsroom/2024/20241029-award",
+        "https://www.usa.canon.com/newsroom/2024/20241030-consumer",
+        "https://www.usa.canon.com/newsroom/2024/20241030-lens",
+        "https://www.usa.canon.com/newsroom/2024/20241106-firmware",
+        "https://www.usa.canon.com/newsroom/2024/20241107-scanner",
+        "https://www.usa.canon.com/newsroom/2024/20241121-counterfeit",
+        "https://www.usa.canon.com/newsroom/2024/20241122-award",
+        "https://www.usa.canon.com/newsroom/2024/20241125-award",
+        "https://www.usa.canon.com/newsroom/2024/20241209-cropping-guide",
+        "https://www.usa.canon.com/newsroom/2024/20241216-program",
+        "https://www.usa.canon.com/newsroom/2024/20241217-certificate",
+        "https://www.usa.canon.com/newsroom/2024/20241219-program",
+        "https://www.usa.canon.com/newsroom/2024/20241220-foundation",
+        "https://www.usa.canon.com/newsroom/2025/202501023-ACS-walk",
+        "https://www.usa.canon.com/newsroom/2025/20250103-executive",
+        "https://www.usa.canon.com/newsroom/2025/20250106-award",
+        "https://www.usa.canon.com/newsroom/2025/20250114-software",
+        "https://www.usa.canon.com/newsroom/2025/20250115-sensor",
+        "https://www.usa.canon.com/newsroom/2025/20250116-patents",
+        "https://www.usa.canon.com/newsroom/2025/20250116-show",
+        "https://www.usa.canon.com/newsroom/2025/20250122-donation",
+        "https://www.usa.canon.com/newsroom/2025/20250122-lens",
+        "https://www.usa.canon.com/newsroom/2025/20250122-sensor",
+        "https://www.usa.canon.com/newsroom/2025/20250130-achievement",
+        "https://www.usa.canon.com/newsroom/2025/20250130-printer",
+        "https://www.usa.canon.com/newsroom/2025/20250213-broadcast",
+        "https://www.usa.canon.com/newsroom/2025/20250220-swingrec",
+        "https://www.usa.canon.com/newsroom/2025/20250224-market-share",
+        "https://www.usa.canon.com/newsroom/2025/20250226-celebration",
+        "https://www.usa.canon.com/newsroom/2025/20250311-award",
+        "https://www.usa.canon.com/newsroom/2025/20250312-student",
+        "https://www.usa.canon.com/newsroom/2025/20250321-student",
+        "https://www.usa.canon.com/newsroom/2025/20250326-camera",
+        "https://www.usa.canon.com/newsroom/2025/20250326-lens",
+        "https://www.usa.canon.com/newsroom/2025/20250326-sustainability",
+        "https://www.usa.canon.com/newsroom/2025/20250328-printer",
+        "https://www.usa.canon.com/newsroom/2025/20250402-NAB",
+        "https://www.usa.canon.com/newsroom/2025/20250403-NAB",
+        "https://www.usa.canon.com/newsroom/2025/20250414-award",
+        "https://www.usa.canon.com/newsroom/2025/20250416-annual-report",
+        "https://www.usa.canon.com/newsroom/2025/20250416-printer",
+        "https://www.usa.canon.com/newsroom/2025/20250422-cutters",
+        "https://www.usa.canon.com/newsroom/2025/20250423-printer",
+        "https://www.usa.canon.com/newsroom/2025/20250430-university",
+        "https://www.usa.canon.com/newsroom/2025/20250501-service",
+        "https://www.usa.canon.com/newsroom/2025/20250506-corporate",
+        "https://www.usa.canon.com/newsroom/2025/20250506-recognition",
+        "https://www.usa.canon.com/newsroom/2025/20250506-university",
+        "https://www.usa.canon.com/newsroom/2025/20250508-automate",
+        "https://www.usa.canon.com/newsroom/2025/20250512-corporate",
+        "https://www.usa.canon.com/newsroom/2025/20250514-award",
+        "https://www.usa.canon.com/newsroom/2025/20250528-sustainability",
+        "https://www.usa.canon.com/newsroom/2025/20250605-firmware",
+        "https://www.usa.canon.com/newsroom/2025/20250609-sparc",
+        "https://www.usa.canon.com/newsroom/2025/20250610-corporate",
+        "https://www.usa.canon.com/newsroom/2025/20250619-turtle",
+        "https://www.usa.canon.com/newsroom/2025/20250630-market-share",
+        "https://www.usa.canon.com/newsroom/2025/20250708-recognition",
+        "https://www.usa.canon.com/newsroom/2025/20250709-lens",
+        "https://www.usa.canon.com/newsroom/2025/20250710-book",
+        "https://www.usa.canon.com/newsroom/2025/20250715-managed-it",
+        "https://www.usa.canon.com/newsroom/2025/20250717-donation",
+        "https://www.usa.canon.com/newsroom/2025/20250722-printer",
+        "https://www.usa.canon.com/newsroom/2025/20250728-camera",
+        "https://www.usa.canon.com/newsroom/2025/20250820-award",
+        "https://www.usa.canon.com/newsroom/2025/20250904-printer",
+        "https://www.usa.canon.com/newsroom/2025/20250909-consumer",
+        "https://www.usa.canon.com/newsroom/2025/20250909-lens",
+        "https://www.usa.canon.com/newsroom/2025/20250915-partnership",
+        "https://www.usa.canon.com/newsroom/2025/20250917-sustainability",
+        "https://www.usa.canon.com/newsroom/2025/20250918-printer",
+        "https://www.usa.canon.com/newsroom/2025/20250923-printer",
+        "https://www.usa.canon.com/newsroom/2025/20250925-summit",
+        "https://www.usa.canon.com/newsroom/2025/20250930-printing-united",
+        "https://www.usa.canon.com/newsroom/2025/20251007-yankees",
+        "https://www.usa.canon.com/newsroom/2025/20251008-award",
+        "https://www.usa.canon.com/newsroom/2025/20251008-press",
+        "https://www.usa.canon.com/newsroom/2025/20251014-printing-united-expo",
+        "https://www.usa.canon.com/newsroom/2025/20251015-award",
+        "https://www.usa.canon.com/newsroom/2025/20251022-inspection-unit",
+        "https://www.usa.canon.com/newsroom/2025/20251022-lens",
+        "https://www.usa.canon.com/newsroom/2025/20251104-camera",
+        "https://www.usa.canon.com/newsroom/2025/20251106-award",
+        "https://www.usa.canon.com/newsroom/2025/20251106-consumer",
+        "https://www.usa.canon.com/newsroom/2025/20251110-cust-service",
+        "https://www.usa.canon.com/newsroom/2025/20251113-forbes",
+        "https://www.usa.canon.com/newsroom/2025/20251119-scanner",
+        "https://www.usa.canon.com/newsroom/2025/20251124-family-photo",
+        "https://www.usa.canon.com/newsroom/2025/20251124-future-authors",
+        "https://www.usa.canon.com/newsroom/2025/20251223-award",
+        "https://www.usa.canon.com/newsroom/2025/20251229-award",
+        "https://www.usa.canon.com/newsroom/2025/20251230-notredame",
+        "https://www.usa.canon.com/newsroom/2026/20260105-ces",
+        "https://www.usa.canon.com/newsroom/2026/20260108-printer",
+        "https://www.usa.canon.com/newsroom/2026/20260114-partnership",
+        "https://www.usa.canon.com/newsroom/2026/20260115-printer",
+        "https://www.usa.canon.com/newsroom/2026/20260120-patent",
+        "https://www.usa.canon.com/newsroom/2026/20260127-promotions",
+        "https://www.usa.canon.com/newsroom/2026/20260203-olympics",
+        "https://www.usa.canon.com/newsroom/2026/20260204-camera",
+        "https://www.usa.canon.com/newsroom/2026/20260204-lenses",
+        "https://www.usa.canon.com/newsroom/2026/20260205-scanner",
+        "https://www.usa.canon.com/newsroom/2026/20260209-award",
+        "https://www.usa.canon.com/newsroom/2026/20260210-software",
+        "https://www.usa.canon.com/newsroom/2026/20260210-sustainability",
+        "https://www.usa.canon.com/newsroom/2026/20260211-climate",
+        "https://www.usa.canon.com/newsroom/2026/20260211-game",
+        "https://www.usa.canon.com/newsroom/2026/20260223-industrial",
+        "https://www.usa.canon.com/newsroom/2026/20260223-marketshare",
+        "https://www.usa.canon.com/newsroom/2026/20260303-award",
+        "https://www.usa.canon.com/newsroom/2026/20260310-remanufacturing",
+        "https://www.usa.canon.com/newsroom/2026/20260311-printer",
+        "https://www.usa.canon.com/newsroom/2026/20260317-award",
+        "https://www.usa.canon.com/newsroom/2026/20260401-corporate",
+        "https://www.usa.canon.com/newsroom/2026/20260407-product",
+        "https://www.usa.canon.com/newsroom/2026/20260408-annual-report",
+        "https://www.usa.canon.com/newsroom/2026/20260409-EOL-photo",
+        "https://www.usa.canon.com/newsroom/2026/20260409-recognition",
+        "https://www.usa.canon.com/newsroom/2026/20260409-think-board",
+        "https://www.usa.canon.com/newsroom/2026/20260414-recognition",
+        "https://www.usa.canon.com/newsroom/2026/20260415-camera",
+        "https://www.usa.canon.com/newsroom/2026/20260415-lens",
+        "https://www.usa.canon.com/newsroom/2026/20260415-product",
+        "https://www.usa.canon.com/newsroom/social-media-platforms",
+        "https://www.usa.canon.com/order-help/eos-webcam-terms-and-conditions",
+        "https://www.usa.canon.com/order-help/returns-and-exchanges",
+        "https://www.usa.canon.com/order-help/terms-of-sale",
+        "https://www.usa.canon.com/parts-return-terms",
+        "https://www.usa.canon.com/printers/inkjet-page-yields/page-measure",
+        "https://www.usa.canon.com/pro/contact-a-sales-rep",
+        "https://www.usa.canon.com/pro/forms/casr",
+        "https://www.usa.canon.com/website-accessibility"
+      ],
+      "description": "Press release and news article page with headline, date, and body content"
+    },
+    {
+      "name": "help-page",
+      "representativePages": [
+        "https://www.usa.canon.com/order-help"
+      ],
+      "urls": [
+        "https://www.usa.canon.com/order-help"
+      ],
+      "description": "Help and support information page"
+    },
+    {
+      "name": "apps-landing",
+      "representativePages": [
+        "https://www.usa.canon.com/pro/applications",
+        "https://www.usa.canon.com/pro/deals/flex-zoom-bundle"
+      ],
+      "urls": [
+        "https://www.usa.canon.com/pro/applications",
+        "https://www.usa.canon.com/pro/deals/flex-zoom-bundle"
+      ],
+      "description": "Applications landing page with app listings"
+    },
+    {
+      "name": "app-detail",
+      "representativePages": [
+        "https://www.usa.canon.com/pro/applications/camera-color-matching-app"
+      ],
+      "urls": [
+        "https://www.usa.canon.com/pro/applications/camera-color-matching-app"
+      ],
+      "description": "Application detail page with features and specifications"
+    },
+    {
+      "name": "app-management",
+      "representativePages": [
+        "https://www.usa.canon.com/pro/applications/multi-camera-management-application",
+        "https://www.usa.canon.com/pro/applications/remote-camera-control-application"
+      ],
+      "urls": [
+        "https://www.usa.canon.com/pro/applications/multi-camera-management-application",
+        "https://www.usa.canon.com/pro/applications/remote-camera-control-application"
+      ],
+      "description": "Application management tool page"
+    },
+    {
+      "name": "pro-cameras",
+      "representativePages": [
+        "https://www.usa.canon.com/pro/cameras",
+        "https://www.usa.canon.com/pro/displays-projectors/projectors",
+        "https://www.usa.canon.com/pro/cameras/cinema-cameras",
+        "https://www.usa.canon.com/pro/lenses/cinema-lenses",
+        "https://www.usa.canon.com/pro/printers"
+      ],
+      "urls": [
+        "https://www.usa.canon.com/pro/cameras",
+        "https://www.usa.canon.com/pro/cameras/cinema-cameras",
+        "https://www.usa.canon.com/pro/cameras/pro-camcorders",
+        "https://www.usa.canon.com/pro/displays-projectors",
+        "https://www.usa.canon.com/pro/displays-projectors/4k-reference-displays",
+        "https://www.usa.canon.com/pro/displays-projectors/projectors",
+        "https://www.usa.canon.com/pro/lenses/broadcast-lenses",
+        "https://www.usa.canon.com/pro/lenses/cinema-lenses",
+        "https://www.usa.canon.com/pro/printers"
+      ],
+      "description": "Professional cameras category page with product listings"
+    },
+    {
+      "name": "events-page",
+      "representativePages": [
+        "https://www.usa.canon.com/pro/canon-professional-services/news-and-events"
+      ],
+      "urls": [
+        "https://www.usa.canon.com/pro/canon-professional-services/news-and-events"
+      ],
+      "description": "News and events listing page"
+    },
+    {
+      "name": "confirmation-page",
+      "representativePages": [
+        "https://www.usa.canon.com/pro/forms/thank-you"
+      ],
+      "urls": [
+        "https://www.usa.canon.com/pro/forms/thank-you"
+      ],
+      "description": "Form submission confirmation page"
+    },
+    {
+      "name": "feature-showcase",
+      "representativePages": [
+        "https://www.usa.canon.com/pro/industries/cinema/light-color-excellence"
+      ],
+      "urls": [
+        "https://www.usa.canon.com/pro/industries/cinema/light-color-excellence"
+      ],
+      "description": "Feature showcase page highlighting technology or capabilities"
+    },
+    {
+      "name": "education-page",
+      "representativePages": [
+        "https://www.usa.canon.com/pro/industries/education"
+      ],
+      "urls": [
+        "https://www.usa.canon.com/pro/industries/education"
+      ],
+      "description": "Education sector solutions page"
+    },
+    {
+      "name": "event-landing",
+      "representativePages": [
+        "https://www.usa.canon.com/pro/nab-show-2024"
+      ],
+      "urls": [
+        "https://www.usa.canon.com/pro/nab-show-2024"
+      ],
+      "description": "Trade show or event landing page"
+    },
+    {
+      "name": "brochures-page",
+      "representativePages": [
+        "https://www.usa.canon.com/pro/resources/brochures-test",
+        "https://www.usa.canon.com/pro/resources/data-sheets",
+        "https://www.usa.canon.com/pro/resources/white-papers",
+        "https://www.usa.canon.com/search"
+      ],
+      "urls": [
+        "https://www.usa.canon.com/pro/resources/brochures-test",
+        "https://www.usa.canon.com/pro/resources/data-sheets",
+        "https://www.usa.canon.com/pro/resources/white-papers",
+        "https://www.usa.canon.com/search"
+      ],
+      "description": "Brochures and marketing materials listing page"
+    },
+    {
+      "name": "brand-assets",
+      "representativePages": [
+        "https://www.usa.canon.com/pro/resources/download-official-canon-logo"
+      ],
+      "urls": [
+        "https://www.usa.canon.com/pro/resources/download-official-canon-logo"
+      ],
+      "description": "Brand assets and logo download page"
+    },
+    {
+      "name": "financing-page",
+      "representativePages": [
+        "https://www.usa.canon.com/pro/resources/financing"
+      ],
+      "urls": [
+        "https://www.usa.canon.com/pro/resources/financing"
+      ],
+      "description": "Financing options and information page"
+    },
+    {
+      "name": "lens-feature",
+      "representativePages": [
+        "https://www.usa.canon.com/pro/rf-lens-world/features/focal-length",
+        "https://www.usa.canon.com/pro/rf-lens-world/advantages/lens-lineup",
+        "https://www.usa.canon.com/pro/rf-lens-world/features",
+        "https://www.usa.canon.com/pro/rf-lens-world/l-series-lenses",
+        "https://www.usa.canon.com/pro/rf-lens-world/advantages/production-facilities"
+      ],
+      "urls": [
+        "https://www.usa.canon.com/pro/rf-lens-world/advantages/lens-lineup",
+        "https://www.usa.canon.com/pro/rf-lens-world/advantages/production-facilities",
+        "https://www.usa.canon.com/pro/rf-lens-world/advantages/technology",
+        "https://www.usa.canon.com/pro/rf-lens-world/features",
+        "https://www.usa.canon.com/pro/rf-lens-world/features/aberration",
+        "https://www.usa.canon.com/pro/rf-lens-world/features/aperture",
+        "https://www.usa.canon.com/pro/rf-lens-world/features/depth-of-field",
+        "https://www.usa.canon.com/pro/rf-lens-world/features/focal-length",
+        "https://www.usa.canon.com/pro/rf-lens-world/features/image-stabilization",
+        "https://www.usa.canon.com/pro/rf-lens-world/features/perspective",
+        "https://www.usa.canon.com/pro/rf-lens-world/l-series-lenses",
+        "https://www.usa.canon.com/pro/rf-lens-world/professional-eye"
+      ],
+      "description": "Lens technology feature page with detailed specifications"
+    },
+    {
+      "name": "shop-homepage",
+      "representativePages": [
+        "https://www.usa.canon.com/shop/"
+      ],
+      "urls": [
+        "https://www.usa.canon.com/shop/"
+      ],
+      "description": "Shop homepage with featured products and categories"
+    },
+    {
+      "name": "shop-pro-category",
+      "representativePages": [
+        "https://www.usa.canon.com/shop/pro/printers",
+        "https://www.usa.canon.com/shop/business/industrial/motion-control",
+        "https://www.usa.canon.com/shop/business/industrial",
+        "https://www.usa.canon.com/shop/pro/cameras",
+        "https://www.usa.canon.com/shop/business"
+      ],
+      "urls": [
+        "https://www.usa.canon.com/shop/business",
+        "https://www.usa.canon.com/shop/business/industrial",
+        "https://www.usa.canon.com/shop/business/industrial/motion-control",
+        "https://www.usa.canon.com/shop/pro",
+        "https://www.usa.canon.com/shop/pro/cameras",
+        "https://www.usa.canon.com/shop/pro/cameras/cinema-cameras",
+        "https://www.usa.canon.com/shop/pro/lenses",
+        "https://www.usa.canon.com/shop/pro/lenses/cinema-lenses",
+        "https://www.usa.canon.com/shop/pro/printers",
+        "https://www.usa.canon.com/shop/pro/printers/pro-ink-paper"
+      ],
+      "description": "Professional shop category page with product listings"
+    },
+    {
+      "name": "shop-product-listing",
+      "representativePages": [
+        "https://www.usa.canon.com/shop/printer-paper/photo-paper",
+        "https://www.usa.canon.com/shop/setpages/canonxpeakdesign",
+        "https://www.usa.canon.com/shop/business/printing",
+        "https://www.usa.canon.com/shop/ink-toner/ink",
+        "https://www.usa.canon.com/shop/printers/large-format-printers"
+      ],
+      "urls": [
+        "https://www.usa.canon.com/shop/business/industrial/motion-control/brushless-motors",
+        "https://www.usa.canon.com/shop/business/industrial/motion-control/coreless-motors",
+        "https://www.usa.canon.com/shop/business/industrial/motion-control/custom-design-units",
+        "https://www.usa.canon.com/shop/business/industrial/motion-control/iron-cored-motors",
+        "https://www.usa.canon.com/shop/business/industrial/motion-control/micro-stepper-motors",
+        "https://www.usa.canon.com/shop/business/printing",
+        "https://www.usa.canon.com/shop/business/printing/office-printers-copiers/remanufactured-printers",
+        "https://www.usa.canon.com/shop/camera-lenses/lens-accessories",
+        "https://www.usa.canon.com/shop/camera-lenses/lens-accessories/extenders-mount-adapters",
+        "https://www.usa.canon.com/shop/camera-lenses/lens-accessories/gelatin-filter-holders",
+        "https://www.usa.canon.com/shop/camera-lenses/lens-accessories/lens-caps",
+        "https://www.usa.canon.com/shop/camera-lenses/lens-accessories/lens-cases-straps",
+        "https://www.usa.canon.com/shop/camera-lenses/lens-accessories/lens-filters",
+        "https://www.usa.canon.com/shop/camera-lenses/lens-accessories/lens-hoods",
+        "https://www.usa.canon.com/shop/camera-lenses/lens-accessories/power-adapters-other-lens-accessories",
+        "https://www.usa.canon.com/shop/digital-cameras/camera-accessories/adapters-cables",
+        "https://www.usa.canon.com/shop/digital-cameras/camera-accessories/bags-cases",
+        "https://www.usa.canon.com/shop/digital-cameras/camera-accessories/batteries",
+        "https://www.usa.canon.com/shop/digital-cameras/camera-accessories/chargers",
+        "https://www.usa.canon.com/shop/digital-cameras/camera-accessories/grips",
+        "https://www.usa.canon.com/shop/digital-cameras/camera-accessories/other",
+        "https://www.usa.canon.com/shop/digital-cameras/camera-accessories/remote-controllers-microphones",
+        "https://www.usa.canon.com/shop/digital-cameras/camera-accessories/speedlite-transmitters",
+        "https://www.usa.canon.com/shop/digital-cameras/camera-accessories/straps-clips",
+        "https://www.usa.canon.com/shop/digital-cameras/camera-accessories/tripods",
+        "https://www.usa.canon.com/shop/digital-cameras/camera-accessories/viewing-accessories",
+        "https://www.usa.canon.com/shop/digital-cameras/camera-accessories/wireless-transmitters",
+        "https://www.usa.canon.com/shop/ink-toner",
+        "https://www.usa.canon.com/shop/ink-toner/ink",
+        "https://www.usa.canon.com/shop/ink-toner/ink/wg-ink",
+        "https://www.usa.canon.com/shop/ink-toner/toner",
+        "https://www.usa.canon.com/shop/office/office-accessories",
+        "https://www.usa.canon.com/shop/printer-paper",
+        "https://www.usa.canon.com/shop/printer-paper/multipurpose-paper",
+        "https://www.usa.canon.com/shop/printer-paper/photo-paper",
+        "https://www.usa.canon.com/shop/printer-paper/selphy-ink-paper-kits",
+        "https://www.usa.canon.com/shop/printer-paper/zink-photo-paper",
+        "https://www.usa.canon.com/shop/printers/large-format-printers",
+        "https://www.usa.canon.com/shop/printers/printer-accessories",
+        "https://www.usa.canon.com/shop/printers/printer-accessories/imageclass-paper-cassette",
+        "https://www.usa.canon.com/shop/printers/printer-accessories/ivy-accessories",
+        "https://www.usa.canon.com/shop/printers/printer-accessories/power-adapters-batteries",
+        "https://www.usa.canon.com/shop/printers/printer-accessories/selphy-paper-cassettes",
+        "https://www.usa.canon.com/shop/pro/cameras/camera-accessories/batteries",
+        "https://www.usa.canon.com/shop/pro/cameras/camera-accessories/chargers",
+        "https://www.usa.canon.com/shop/pro/cameras/dslr-cameras",
+        "https://www.usa.canon.com/shop/pro/cameras/pro-camcorders",
+        "https://www.usa.canon.com/shop/pro/cameras/speedlite-flashes",
+        "https://www.usa.canon.com/shop/pro/lenses/broadcast-lenses",
+        "https://www.usa.canon.com/shop/setpages/canonxpeakdesign",
+        "https://www.usa.canon.com/shop/setpages/select-lenses-for-eos-r50-eos-r100",
+        "https://www.usa.canon.com/shop/setpages/select-lenses-for-eos-rp-eos-r8",
+        "https://www.usa.canon.com/shop/video-cameras/video-accessories",
+        "https://www.usa.canon.com/shop/video-cameras/video-accessories/adapter-chargers",
+        "https://www.usa.canon.com/shop/video-cameras/video-accessories/batteries-cables",
+        "https://www.usa.canon.com/shop/video-cameras/video-accessories/lens-attachments",
+        "https://www.usa.canon.com/shop/video-cameras/video-accessories/microphones"
+      ],
+      "description": "Shop product listing page with filters and product grid"
+    },
+    {
+      "name": "shop-subcategory",
+      "representativePages": [
+        "https://www.usa.canon.com/shop/printers/megatank-printers",
+        "https://www.usa.canon.com/shop/business/printing/office-printers-copiers",
+        "https://www.usa.canon.com/shop/office/fax-machines"
+      ],
+      "urls": [
+        "https://www.usa.canon.com/shop/business/printing/office-printers-copiers",
+        "https://www.usa.canon.com/shop/office/fax-machines",
+        "https://www.usa.canon.com/shop/printers/megatank-printers"
+      ],
+      "description": "Shop subcategory page with product grid"
+    },
+    {
+      "name": "shop-software",
+      "representativePages": [
+        "https://www.usa.canon.com/shop/business/printing/software-solutions"
+      ],
+      "urls": [
+        "https://www.usa.canon.com/shop/business/printing/software-solutions"
+      ],
+      "description": "Software solutions shop page"
+    },
+    {
+      "name": "shop-accessories",
+      "representativePages": [
+        "https://www.usa.canon.com/shop/digital-cameras/camera-accessories",
+        "https://www.usa.canon.com/shop/business/printing/software-solutions/large-format-workflow-solutions",
+        "https://www.usa.canon.com/shop/pro/cameras/camera-accessories"
+      ],
+      "urls": [
+        "https://www.usa.canon.com/shop/business/printing/software-solutions/large-format-workflow-solutions",
+        "https://www.usa.canon.com/shop/digital-cameras/camera-accessories",
+        "https://www.usa.canon.com/shop/pro/cameras/camera-accessories"
+      ],
+      "description": "Shop accessories category page with subcategories"
+    },
+    {
+      "name": "shop-lenses",
+      "representativePages": [
+        "https://www.usa.canon.com/shop/camera-lenses"
+      ],
+      "urls": [
+        "https://www.usa.canon.com/shop/camera-lenses"
+      ],
+      "description": "Shop camera lenses landing page"
+    },
+    {
+      "name": "shop-cameras",
+      "representativePages": [
+        "https://www.usa.canon.com/shop/digital-cameras/dslr-cameras",
+        "https://www.usa.canon.com/shop/special-deals",
+        "https://www.usa.canon.com/shop/printers/compact-portable-printers",
+        "https://www.usa.canon.com/shop/video-cameras",
+        "https://www.usa.canon.com/shop/office/projectors"
+      ],
+      "urls": [
+        "https://www.usa.canon.com/shop/camera-lenses/binoculars",
+        "https://www.usa.canon.com/shop/camera-lenses/refurbished-camera-lenses",
+        "https://www.usa.canon.com/shop/consumer-catalog",
+        "https://www.usa.canon.com/shop/digital-cameras",
+        "https://www.usa.canon.com/shop/digital-cameras/dslr-cameras",
+        "https://www.usa.canon.com/shop/digital-cameras/mirrorless-cameras",
+        "https://www.usa.canon.com/shop/digital-cameras/point-and-shoot-cameras",
+        "https://www.usa.canon.com/shop/digital-cameras/refurbished-cameras",
+        "https://www.usa.canon.com/shop/office/calculators",
+        "https://www.usa.canon.com/shop/office/projectors",
+        "https://www.usa.canon.com/shop/office/scanners",
+        "https://www.usa.canon.com/shop/printers",
+        "https://www.usa.canon.com/shop/printers/compact-portable-printers",
+        "https://www.usa.canon.com/shop/printers/inkjet-printers",
+        "https://www.usa.canon.com/shop/special-deals",
+        "https://www.usa.canon.com/shop/special-deals/backpacks-bags",
+        "https://www.usa.canon.com/shop/video-cameras",
+        "https://www.usa.canon.com/shop/video-cameras/advanced-video-cameras",
+        "https://www.usa.canon.com/shop/video-cameras/portable-compact-video-cameras",
+        "https://www.usa.canon.com/shop/video-cameras/refurbished-video-cameras",
+        "https://www.usa.canon.com/shop/video-cameras/video-creator-kits"
+      ],
+      "description": "Shop cameras product listing page"
+    },
+    {
+      "name": "shop-deals",
+      "representativePages": [
+        "https://www.usa.canon.com/shop/deals/printer-deals/inkjet-printers",
+        "https://www.usa.canon.com/shop/deals/camera-deals/point-and-shoot-cameras",
+        "https://www.usa.canon.com/shop/deals/camera-deals/refurbished-cameras",
+        "https://www.usa.canon.com/shop/deals/lens-deals/lenses",
+        "https://www.usa.canon.com/shop/deals/office-deals/calculators"
+      ],
+      "urls": [
+        "https://www.usa.canon.com/shop/deals",
+        "https://www.usa.canon.com/shop/deals/camera-deals",
+        "https://www.usa.canon.com/shop/deals/camera-deals/cinema-cameras",
+        "https://www.usa.canon.com/shop/deals/camera-deals/eos-cameras",
+        "https://www.usa.canon.com/shop/deals/camera-deals/point-and-shoot-cameras",
+        "https://www.usa.canon.com/shop/deals/camera-deals/ptz-cameras",
+        "https://www.usa.canon.com/shop/deals/camera-deals/refurbished-cameras",
+        "https://www.usa.canon.com/shop/deals/lens-deals",
+        "https://www.usa.canon.com/shop/deals/lens-deals/binoculars-monoculars",
+        "https://www.usa.canon.com/shop/deals/lens-deals/lenses",
+        "https://www.usa.canon.com/shop/deals/lens-deals/refurbished-lenses",
+        "https://www.usa.canon.com/shop/deals/office-deals",
+        "https://www.usa.canon.com/shop/deals/office-deals/calculators",
+        "https://www.usa.canon.com/shop/deals/office-deals/document-scanners",
+        "https://www.usa.canon.com/shop/deals/office-deals/other-office-products",
+        "https://www.usa.canon.com/shop/deals/office-deals/specialty-printers",
+        "https://www.usa.canon.com/shop/deals/printer-deals",
+        "https://www.usa.canon.com/shop/deals/printer-deals/compact-portable-printers",
+        "https://www.usa.canon.com/shop/deals/printer-deals/free-paper-with-select-printers",
+        "https://www.usa.canon.com/shop/deals/printer-deals/inkjet-printers",
+        "https://www.usa.canon.com/shop/deals/printer-deals/laser-printers",
+        "https://www.usa.canon.com/shop/deals/printer-deals/megatank-printers",
+        "https://www.usa.canon.com/shop/deals/video-deals"
+      ],
+      "description": "Shop deals and promotions page"
+    },
+    {
+      "name": "shop-consumables",
+      "representativePages": [
+        "https://www.usa.canon.com/shop/deals/ink-toner-paper-deals/ink-toner",
+        "https://www.usa.canon.com/shop/deals/ink-toner-paper-deals",
+        "https://www.usa.canon.com/shop/deals/ink-toner-paper-deals/paper",
+        "https://www.usa.canon.com/shop/deals/video-deals/camcorders",
+        "https://www.usa.canon.com/shop/deals/video-deals/refurbished-camcorders"
+      ],
+      "urls": [
+        "https://www.usa.canon.com/shop/deals/ink-toner-paper-deals",
+        "https://www.usa.canon.com/shop/deals/ink-toner-paper-deals/ink-toner",
+        "https://www.usa.canon.com/shop/deals/ink-toner-paper-deals/paper",
+        "https://www.usa.canon.com/shop/deals/video-deals/camcorders",
+        "https://www.usa.canon.com/shop/deals/video-deals/refurbished-camcorders"
+      ],
+      "description": "Shop consumables and supplies deals page"
+    },
+    {
+      "name": "shop-accessory-detail",
+      "representativePages": [
+        "https://www.usa.canon.com/shop/digital-cameras/camera-accessories/dioptric-lenses"
+      ],
+      "urls": [
+        "https://www.usa.canon.com/shop/digital-cameras/camera-accessories/dioptric-lenses"
+      ],
+      "description": "Shop accessory product listing detail page"
+    },
+    {
+      "name": "shop-office",
+      "representativePages": [
+        "https://www.usa.canon.com/shop/office"
+      ],
+      "urls": [
+        "https://www.usa.canon.com/shop/office"
+      ],
+      "description": "Shop office equipment category page"
+    },
+    {
+      "name": "shop-printers",
+      "representativePages": [
+        "https://www.usa.canon.com/shop/printers/laser-printers"
+      ],
+      "urls": [
+        "https://www.usa.canon.com/shop/printers/laser-printers"
+      ],
+      "description": "Shop printers category page with product listings"
+    },
+    {
+      "name": "shop-mirrorless",
+      "representativePages": [
+        "https://www.usa.canon.com/shop/pro/cameras/mirrorless-cameras",
+        "https://www.usa.canon.com/shop/pro/lenses/rf-lenses"
+      ],
+      "urls": [
+        "https://www.usa.canon.com/shop/pro/cameras/mirrorless-cameras",
+        "https://www.usa.canon.com/shop/pro/lenses/rf-lenses"
+      ],
+      "description": "Shop mirrorless cameras product listing page"
+    },
+    {
+      "name": "support-hub",
+      "representativePages": [
+        "https://www.usa.canon.com/support"
+      ],
+      "urls": [
+        "https://www.usa.canon.com/support"
+      ],
+      "description": "Support hub page with product search and resources"
+    }
+  ]
+}
