@@ -2,18 +2,12 @@
 .columns-content-split > div {
   display: flex;
   flex-direction: column;
+  gap: var(--spacing-m);
 }
 
 .columns-content-split img {
   width: 100%;
-}
-
-.columns-content-split > div > div {
-  order: unset;
-}
-
-.columns-content-split > div > .columns-content-split-img-col {
-  order: unset;
+  height: auto;
 }
 
 .columns-content-split > div > .columns-content-split-img-col img {
@@ -40,23 +34,30 @@
   margin-bottom: var(--spacing-s);
 }
 
-@media (width >= 900px) {
+@media (width >= 600px) {
   .columns-content-split > div {
     align-items: center;
-    flex-direction: unset;
+    flex-direction: row;
     gap: var(--spacing-l);
   }
 
-  .columns-content-split > div > div {
-    flex: 1;
-    order: unset;
+  /* Text column: 70% */
+  .columns-content-split > div > div:not(.columns-content-split-img-col) {
+    flex: 7 1 0%;
   }
 
-  .columns-content-split > div > div:first-child {
-    flex: 2;
-  }
-
+  /* Image column: 30% */
   .columns-content-split > div > .columns-content-split-img-col {
-    flex: 1;
+    flex: 3 1 0%;
+  }
+
+  /* When image is first child (left), text second (right) - keep DOM order */
+  /* When text is first child (left), image second (right) - keep DOM order */
+  /* The original Canon layout is always: text left, image right */
+}
+
+@media (width >= 900px) {
+  .columns-content-split > div {
+    gap: var(--spacing-xl);
   }
 }
