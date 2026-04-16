@@ -5,81 +5,77 @@
       "urls": [
         "https://www.usa.canon.com/shop/p/eos-r50-rf-s18-45mm-f4-5-6-3-is-stm-lens-kit?color=Black&type=New"
       ],
-      "description": "Canon product detail page with product information, specifications, and related accessories",
+      "description": "Canon product detail page with tabbed content sections",
       "blocks": [
         {
           "name": "product-details",
-          "instances": [
-            ".wrap-media-product-info"
-          ]
-        },
-        {
-          "name": "embed",
-          "instances": [
-            "#pdp-description .video-container",
-            "#pdp-description [data-content-type='video']"
-          ]
-        },
-        {
-          "name": "cards",
-          "instances": [
-            "#pdp-description .gallery-placeholder"
-          ]
-        },
-        {
-          "name": "columns",
-          "instances": [
-            "#pdp-description .feature-columns",
-            "#pdp-description .two-column"
-          ]
-        },
-        {
-          "name": "accordion",
-          "instances": [
-            "#pdp-description [data-role='collapsible']"
-          ]
+          "instances": [".wrap-media-product-info"]
         }
       ],
       "sections": [
         {
-          "id": "section-1",
+          "id": "section-product",
           "name": "Product Details",
           "selector": ".wrap-media-product-info",
           "style": null,
-          "blocks": [
-            "product-details"
-          ],
+          "blocks": ["product-details"],
           "defaultContent": []
         },
         {
-          "id": "section-2",
+          "id": "section-tab-overview",
           "name": "Overview",
           "selector": "#pdp-description",
-          "style": null,
-          "blocks": [
-            "embed",
-            "cards",
-            "columns",
-            "accordion"
-          ],
-          "defaultContent": [
-            "#pdp-description h2",
-            "#pdp-description h3",
-            "#pdp-description h4",
-            "#pdp-description p",
-            "#pdp-description img"
-          ]
+          "style": "tab",
+          "blocks": [],
+          "defaultContent": []
         },
         {
-          "id": "section-3",
+          "id": "section-tab-specs",
+          "name": "Specifications",
+          "selector": "#pdp-tech-spec-data",
+          "style": "tab",
+          "blocks": [],
+          "defaultContent": []
+        },
+        {
+          "id": "section-tab-compatibility",
+          "name": "Compatibility",
+          "selector": "#pdp-accessories",
+          "style": "tab",
+          "blocks": [],
+          "defaultContent": []
+        },
+        {
+          "id": "section-tab-reviews",
+          "name": "Reviews",
+          "selector": "#pdp-reviews",
+          "style": "tab",
+          "blocks": [],
+          "defaultContent": []
+        },
+        {
+          "id": "section-tab-resources",
+          "name": "Resources",
+          "selector": "#pdp-resources",
+          "style": "tab",
+          "blocks": [],
+          "defaultContent": []
+        },
+        {
+          "id": "section-tab-support",
+          "name": "Support",
+          "selector": "#pdp-support",
+          "style": "tab",
+          "blocks": [],
+          "defaultContent": []
+        },
+        {
+          "id": "section-disclaimer",
           "name": "Disclaimer",
           "selector": "#description-disclaimer",
           "style": null,
           "blocks": [],
-          "defaultContent": [
-            "#description-disclaimer ol",
-            "#description-disclaimer li"
-          ]
+          "defaultContent": []
         }
       ]
     }

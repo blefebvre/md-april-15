@@ -1,25 +1,8 @@
 var CustomImportScript = (() => {
   var __defProp = Object.defineProperty;
-  var __defProps = Object.defineProperties;
   var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-  var __getOwnPropDescs = Object.getOwnPropertyDescriptors;
   var __getOwnPropNames = Object.getOwnPropertyNames;
-  var __getOwnPropSymbols = Object.getOwnPropertySymbols;
   var __hasOwnProp = Object.prototype.hasOwnProperty;
-  var __propIsEnum = Object.prototype.propertyIsEnumerable;
-  var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
-  var __spreadValues = (a, b) => {
-    for (var prop in b || (b = {}))
-      if (__hasOwnProp.call(b, prop))
-        __defNormalProp(a, prop, b[prop]);
-    if (__getOwnPropSymbols)
-      for (var prop of __getOwnPropSymbols(b)) {
-        if (__propIsEnum.call(b, prop))
-          __defNormalProp(a, prop, b[prop]);
-      }
-    return a;
-  };
-  var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
   var __export = (target, all) => {
     for (var name in all)
       __defProp(target, name, { get: all[name], enumerable: true });
@@ -39,358 +22,397 @@ var CustomImportScript = (() => {
   __export(import_product_page_exports, {
     default: () => import_product_page_default
   });
-
-  // tools/importer/parsers/product-details.js
-  function parse(element, { document }) {
-    const cells = [];
-    const block = WebImporter.Blocks.createBlock(document, { name: "product-details", cells });
-    element.replaceWith(block);
+  var DM_PATTERN = /^https?:\/\/s7[a-z0-9]*\.scene7\.com\/is\/image\//;
+  function dmLink(document, src, alt) {
+    if (!src) return null;
+    const a = document.createElement("a");
+    a.href = src.split("?")[0];
+    a.textContent = alt || "";
+    return a;
   }
-
-  // tools/importer/parsers/embed.js
-  function parse2(element, { document }) {
-    var _a;
-    const iframe = element.querySelector("iframe[src]");
-    const videoEl = element.querySelector("video source[src], video[src]");
-    const dataUrl = element.getAttribute("data-video-url") || ((_a = element.querySelector("[data-video-url]")) == null ? void 0 : _a.getAttribute("data-video-url"));
-    const href = element.querySelector('a[href*="youtube"], a[href*="youtu.be"], a[href*="vimeo"]');
-    let videoUrl = null;
-    if (iframe) {
-      videoUrl = iframe.getAttribute("src");
-    } else if (videoEl) {
-      videoUrl = videoEl.getAttribute("src");
-    } else if (dataUrl) {
-      videoUrl = dataUrl;
-    } else if (href) {
-      videoUrl = href.getAttribute("href");
-    }
-    const cells = [];
-    if (videoUrl) {
-      const link = document.createElement("a");
-      link.href = videoUrl;
-      link.textContent = videoUrl;
-      cells.push([link]);
-    }
-    const block = WebImporter.Blocks.createBlock(document, { name: "embed", cells });
-    element.replaceWith(block);
+  function imgSrc(img) {
+    const dataSrc = img.getAttribute("data-src");
+    const src = dataSrc || img.getAttribute("src") || "";
+    return src.includes("canon-image-default") ? dataSrc || "" : src;
   }
-
-  // tools/importer/parsers/cards.js
-  function parse3(element, { document }) {
-    const cells = [];
-    const images = element.querySelectorAll("img");
-    const buttons = element.querySelectorAll("button[data-gallery-role], a[data-gallery-role]");
-    if (buttons.length > 0) {
-      buttons.forEach((btn) => {
-        const img = btn.querySelector("img");
-        if (img) {
-          const cardCell = [img];
-          const caption = img.getAttribute("alt") || "";
-          if (caption) {
-            const p = document.createElement("p");
-            p.textContent = caption;
-            cardCell.push(p);
+  function buildOverviewSection(document, descEl) {
+    const frag = document.createDocumentFragment();
+    const h2 = document.createElement("h2");
+    h2.textContent = "Overview";
+    frag.append(h2);
+    const colCtrl = descEl.querySelector(".column-control");
+    if (!colCtrl) {
+      const p = document.createElement("p");
+      p.textContent = descEl.textContent.trim().substring(0, 500);
+      frag.append(p);
+      return frag;
+    }
+    const rows = colCtrl.querySelectorAll(":scope > .row");
+    rows.forEach((row) => {
+      const cols = row.querySelectorAll(':scope > [class*="col-"]');
+      const headings = row.querySelectorAll("h2, h3, h4");
+      const paragraphs = row.querySelectorAll("p");
+      const images = row.querySelectorAll("img[src]");
+      const videos = row.querySelectorAll('iframe[src*="youtube"], [data-video-url]');
+      if (row.textContent.trim().length < 10 && images.length === 0 && videos.length === 0) return;
+      videos.forEach((video) => {
+        const src = video.getAttribute("src") || video.getAttribute("data-video-url") || "";
+        if (src.includes("youtube")) {
+          const embedBlock = WebImporter.Blocks.createBlock(document, {
+            name: "embed",
+            cells: [[(() => {
+              const a = document.createElement("a");
+              a.href = src;
+              a.textContent = src;
+              return a;
+            })()]]
+          });
+          frag.append(embedBlock);
+        }
+      });
+      if (images.length >= 3 && headings.length === 0 && cols.length === 1) {
+        const heading = document.createElement("h2");
+        const prevRow = row.previousElementSibling;
+        const prevH2 = prevRow == null ? void 0 : prevRow.querySelector("h2");
+        if (prevH2) {
+          heading.textContent = prevH2.textContent.trim();
+          frag.append(heading);
+        }
+        const cells = [];
+        images.forEach((img) => {
+          const src = imgSrc(img);
+          if (src && DM_PATTERN.test(src)) {
+            const link = dmLink(document, src, img.alt);
+            if (link) cells.push([link]);
           }
-          cells.push(cardCell);
+        });
+        if (cells.length > 0) {
+          const cardsBlock = WebImporter.Blocks.createBlock(document, { name: "cards", cells });
+          frag.append(cardsBlock);
         }
-      });
-    } else if (images.length > 0) {
-      images.forEach((img) => {
-        const cardCell = [img];
-        const caption = img.getAttribute("alt") || "";
-        if (caption) {
-          const p = document.createElement("p");
-          p.textContent = caption;
-          cardCell.push(p);
+        return;
+      }
+      if (cols.length === 2) {
+        const cells = [];
+        const colPairs = [];
+        for (let i = 0; i < cols.length; i++) {
+          const col = cols[i];
+          const colHeadings = col.querySelectorAll("h3, h4");
+          const colParas = col.querySelectorAll("p");
+          const colImgs = col.querySelectorAll("img[src]");
+          const hasText = colHeadings.length > 0 || colParas.length > 0 && col.textContent.trim().length > 30;
+          const hasImg = colImgs.length > 0;
+          if (hasImg && hasText) {
+            const cell = document.createElement("div");
+            colImgs.forEach((img) => {
+              const src = imgSrc(img);
+              if (src && DM_PATTERN.test(src)) {
+                const p = document.createElement("p");
+                p.append(dmLink(document, src, img.alt));
+                cell.append(p);
+              }
+            });
+            colHeadings.forEach((h) => {
+              const el = document.createElement(h.tagName.toLowerCase());
+              el.textContent = h.textContent.trim();
+              cell.append(el);
+            });
+            colParas.forEach((p) => {
+              if (p.textContent.trim().length > 10) {
+                const newP = document.createElement("p");
+                newP.textContent = p.textContent.trim();
+                cell.append(newP);
+              }
+            });
+            colPairs.push(cell);
+          } else if (hasImg) {
+            const cell = document.createElement("div");
+            const img = colImgs[0];
+            const src = imgSrc(img);
+            if (src && DM_PATTERN.test(src)) {
+              cell.append(dmLink(document, src, img.alt));
+            }
+            colPairs.push(cell);
+          } else if (hasText) {
+            const cell = document.createElement("div");
+            colHeadings.forEach((h) => {
+              const el = document.createElement(h.tagName.toLowerCase());
+              el.textContent = h.textContent.trim();
+              cell.append(el);
+            });
+            colParas.forEach((p) => {
+              if (p.textContent.trim().length > 10) {
+                const newP = document.createElement("p");
+                newP.textContent = p.textContent.trim();
+                cell.append(newP);
+              }
+            });
+            colPairs.push(cell);
+          }
         }
-        cells.push(cardCell);
-      });
-    }
-    const block = WebImporter.Blocks.createBlock(document, { name: "cards", cells });
-    element.replaceWith(block);
-  }
-
-  // tools/importer/parsers/columns.js
-  function parse4(element, { document }) {
-    const cells = [];
-    const columnChildren = element.querySelectorAll(":scope > div, :scope > section");
-    if (columnChildren.length >= 2) {
-      const row = [];
-      columnChildren.forEach((col) => {
-        const cellContent = document.createElement("div");
-        const img = col.querySelector("img");
-        const heading = col.querySelector("h2, h3, h4");
-        const desc = col.querySelector("p");
-        if (img) cellContent.appendChild(img.cloneNode(true));
-        if (heading) cellContent.appendChild(heading.cloneNode(true));
-        if (desc) cellContent.appendChild(desc.cloneNode(true));
-        row.push(cellContent);
-      });
-      cells.push(row);
-    } else {
-      const img = element.querySelector("img");
-      const heading = element.querySelector("h2, h3, h4");
-      const desc = element.querySelector("p");
-      const col1 = document.createElement("div");
-      if (img) col1.appendChild(img.cloneNode(true));
-      const col2 = document.createElement("div");
-      if (heading) col2.appendChild(heading.cloneNode(true));
-      if (desc) col2.appendChild(desc.cloneNode(true));
-      cells.push([col1, col2]);
-    }
-    const block = WebImporter.Blocks.createBlock(document, { name: "columns", cells });
-    element.replaceWith(block);
-  }
-
-  // tools/importer/parsers/accordion.js
-  function parse5(element, { document }) {
-    const cells = [];
-    const triggers = element.querySelectorAll('[data-role="trigger"], [role="tab"], button[aria-expanded]');
-    if (triggers.length > 0) {
-      triggers.forEach((trigger) => {
-        const heading = trigger.querySelector("h2, h3, h4, span") || trigger;
-        const title = heading.textContent.trim();
-        const content = trigger.nextElementSibling || element.querySelector('[data-role="content"]') || element.querySelector('[role="tabpanel"]');
-        const titleEl = document.createElement("p");
-        titleEl.textContent = title;
-        if (content) {
-          const contentClone = content.cloneNode(true);
-          cells.push([titleEl, contentClone]);
-        } else {
-          cells.push([titleEl]);
+        if (colPairs.length >= 2) {
+          cells.push(colPairs);
+          const colBlock = WebImporter.Blocks.createBlock(document, { name: "columns", cells });
+          frag.append(colBlock);
         }
-      });
-    } else {
-      const heading = element.querySelector("h2, h3, h4");
-      const content = element.querySelector('[data-role="content"], .content, [role="tabpanel"]');
-      const titleEl = document.createElement("p");
-      titleEl.textContent = heading ? heading.textContent.trim() : "Accordion Item";
-      if (content) {
-        cells.push([titleEl, content.cloneNode(true)]);
-      } else {
-        cells.push([titleEl]);
+        return;
+      }
+      if (cols.length <= 1) {
+        const rowHeadings = Array.from(headings);
+        const rowImages = Array.from(images).filter((img) => {
+          const src = imgSrc(img);
+          return src && DM_PATTERN.test(src);
+        });
+        const h2s = rowHeadings.filter((h) => h.tagName === "H2");
+        if (h2s.length > 0 && rowHeadings.length === h2s.length && rowImages.length === 0) {
+          h2s.forEach((h) => {
+            const el = document.createElement("h2");
+            el.textContent = h.textContent.trim();
+            frag.append(el);
+          });
+          return;
+        }
+        const featureHeadings = rowHeadings.filter((h) => h.tagName === "H3" || h.tagName === "H4");
+        if (featureHeadings.length > 0 && rowImages.length > 0) {
+          let currentFeatureIdx = 0;
+          featureHeadings.forEach((fh, idx) => {
+            const textDiv = document.createElement("div");
+            const hEl = document.createElement(fh.tagName.toLowerCase());
+            hEl.textContent = fh.textContent.trim();
+            textDiv.append(hEl);
+            let sibling = fh.nextElementSibling;
+            while (sibling && !["H2", "H3", "H4"].includes(sibling.tagName)) {
+              if (sibling.tagName === "P" && sibling.textContent.trim().length > 10) {
+                const pEl = document.createElement("p");
+                pEl.textContent = sibling.textContent.trim();
+                textDiv.append(pEl);
+              }
+              sibling = sibling.nextElementSibling;
+            }
+            const img = rowImages[currentFeatureIdx] || rowImages[rowImages.length - 1];
+            if (img) {
+              const src = imgSrc(img);
+              const imgDiv = document.createElement("div");
+              imgDiv.append(dmLink(document, src, img.alt));
+              const cells = idx % 2 === 0 ? [[textDiv, imgDiv]] : [[imgDiv, textDiv]];
+              const colBlock = WebImporter.Blocks.createBlock(document, { name: "columns", cells });
+              frag.append(colBlock);
+              currentFeatureIdx++;
+            } else {
+              frag.append(textDiv);
+            }
+          });
+          return;
+        }
+        if (featureHeadings.length > 0) {
+          featureHeadings.forEach((h) => {
+            const el = document.createElement(h.tagName.toLowerCase());
+            el.textContent = h.textContent.trim();
+            frag.append(el);
+          });
+          paragraphs.forEach((p) => {
+            if (p.textContent.trim().length > 20) {
+              const newP = document.createElement("p");
+              newP.textContent = p.textContent.trim();
+              frag.append(newP);
+            }
+          });
+        }
+      }
+    });
+    const disclaimerSection = descEl.querySelector(".wrap-disclaimer, #description-disclaimer");
+    const accordion = descEl.querySelector('[data-role="collapsible"], .cms-accordion');
+    if (accordion) {
+      const title = accordion.querySelector('h3, [data-role="trigger"]');
+      const content = accordion.querySelector('[data-role="content"], .content');
+      if (title && content) {
+        const cells = [[
+          (() => {
+            const p = document.createElement("p");
+            p.textContent = title.textContent.trim();
+            return p;
+          })(),
+          content.cloneNode(true)
+        ]];
+        const accBlock = WebImporter.Blocks.createBlock(document, { name: "accordion", cells });
+        frag.append(accBlock);
       }
     }
-    const block = WebImporter.Blocks.createBlock(document, { name: "accordion", cells });
-    element.replaceWith(block);
+    return frag;
   }
-
-  // tools/importer/transformers/canon-cleanup.js
-  var H = { before: "beforeTransform", after: "afterTransform" };
-  function transform(hookName, element, payload) {
-    if (hookName === H.before) {
-      WebImporter.DOMUtils.remove(element, [
-        "#onetrust-consent-sdk",
-        ".modal-popup",
-        ".amsearch-overlay-block",
-        '[class*="cookie"]',
-        "#drift-widget",
-        "script",
-        "noscript"
-      ]);
-    }
-    if (hookName === H.after) {
-      WebImporter.DOMUtils.remove(element, [
+  function createTabSection(document, title, content) {
+    const section = document.createElement("div");
+    section.append(content);
+    const metaBlock = WebImporter.Blocks.createBlock(document, {
+      name: "Section Metadata",
+      cells: [
+        ["style", "tab"],
+        ["tab-title", title]
+      ]
+    });
+    section.append(metaBlock);
+    return section;
+  }
+  var import_product_page_default = {
+    transform: (payload) => {
+      var _a, _b, _c, _d, _e;
+      const { document, url, params } = payload;
+      const main = document.body;
+      const removeSels = [
         "header",
         "footer",
         '[role="banner"]',
         '[role="contentinfo"]',
-        ".breadcrumbs",
         "nav",
-        "ol.items",
+        ".breadcrumbs",
         ".tabsContainer",
         "#pdp-discontinued",
         ".page-anchors-top",
         ".ambanners",
         "#upsell-modal-component",
-        "iframe",
-        "link",
+        ".amsearch-overlay-block",
+        "script",
+        "noscript",
         "style",
-        'input[type="hidden"]'
-      ]);
-      element.querySelectorAll("[data-track]").forEach((el) => el.removeAttribute("data-track"));
-      element.querySelectorAll("[onclick]").forEach((el) => el.removeAttribute("onclick"));
-      element.querySelectorAll('img[src*="scene7.com"]').forEach((img) => {
-        const src = img.getAttribute("src");
-        if (src && !src.includes("fmt=")) {
-          img.setAttribute("src", src + "?fmt=jpg");
-        }
-      });
-      element.querySelectorAll("img[data-src]").forEach((img) => {
-        const dataSrc = img.getAttribute("data-src");
-        if (dataSrc) {
-          img.setAttribute("src", dataSrc.includes("scene7.com") && !dataSrc.includes("fmt=") ? dataSrc + "?fmt=jpg" : dataSrc);
-        }
-      });
-    }
-  }
-
-  // tools/importer/transformers/canon-sections.js
-  var H2 = { after: "afterTransform" };
-  function transform2(hookName, element, payload) {
-    if (hookName === H2.after) {
-      const { template } = payload || {};
-      if (!template || !template.sections || template.sections.length < 2) return;
-      const { document } = element.ownerDocument ? { document: element.ownerDocument } : { document };
-      const sections = [...template.sections].reverse();
-      sections.forEach((section) => {
-        const selectors = Array.isArray(section.selector) ? section.selector : [section.selector];
-        let sectionEl = null;
-        for (const sel of selectors) {
-          sectionEl = element.querySelector(sel);
-          if (sectionEl) break;
-        }
-        if (!sectionEl) return;
-        if (section.style) {
-          const metaBlock = WebImporter.Blocks.createBlock(document, {
-            name: "Section Metadata",
-            cells: { style: section.style }
+        "link",
+        'input[type="hidden"]',
+        ".modal-popup"
+      ];
+      WebImporter.DOMUtils.remove(main, removeSels);
+      const result = document.createElement("div");
+      const productInfo = main.querySelector(".wrap-media-product-info");
+      if (productInfo) {
+        const pdBlock = WebImporter.Blocks.createBlock(document, { name: "product-details", cells: [] });
+        result.append(pdBlock);
+      }
+      result.append(document.createElement("hr"));
+      const descSection = main.querySelector("#pdp-description, .pdp-akeneo-description");
+      if (descSection) {
+        const overviewContent = buildOverviewSection(document, descSection);
+        const overviewSection = createTabSection(document, "Overview", overviewContent);
+        result.append(overviewSection);
+        result.append(document.createElement("hr"));
+      }
+      const specsSection = main.querySelector("#pdp-tech-spec-data");
+      if (specsSection) {
+        const specsFrag = document.createDocumentFragment();
+        const h2 = document.createElement("h2");
+        h2.textContent = "Specifications";
+        specsFrag.append(h2);
+        const p = document.createElement("p");
+        p.textContent = "For full technical specifications, please visit the Canon USA product page.";
+        specsFrag.append(p);
+        const specSection = createTabSection(document, "Specifications", specsFrag);
+        result.append(specSection);
+        result.append(document.createElement("hr"));
+      }
+      const accSection = main.querySelector("#pdp-accessories");
+      if (accSection) {
+        const compFrag = document.createDocumentFragment();
+        const h2 = document.createElement("h2");
+        h2.textContent = "Compatibility";
+        compFrag.append(h2);
+        const links = accSection.querySelectorAll("a.product-item-link");
+        if (links.length > 0) {
+          const h3 = document.createElement("h3");
+          h3.textContent = "Compatible Accessories";
+          compFrag.append(h3);
+          const ul = document.createElement("ul");
+          links.forEach((a) => {
+            const li = document.createElement("li");
+            const link = document.createElement("a");
+            link.href = a.href;
+            link.textContent = a.textContent.trim();
+            li.append(link);
+            ul.append(li);
           });
-          sectionEl.after(metaBlock);
+          compFrag.append(ul);
         }
-        if (section.id !== template.sections[0].id) {
-          const hr = document.createElement("hr");
-          sectionEl.before(hr);
-        }
-      });
-    }
-  }
-
-  // tools/importer/import-product-page.js
-  var parsers = {
-    "product-details": parse,
-    "embed": parse2,
-    "cards": parse3,
-    "columns": parse4,
-    "accordion": parse5
-  };
-  var PAGE_TEMPLATE = {
-    name: "product-page",
-    description: "Canon product detail page with product information, specifications, and related accessories",
-    urls: [
-      "https://www.usa.canon.com/shop/p/eos-r50-rf-s18-45mm-f4-5-6-3-is-stm-lens-kit?color=Black&type=New"
-    ],
-    blocks: [
-      {
-        name: "product-details",
-        instances: [".wrap-media-product-info"]
-      },
-      {
-        name: "embed",
-        instances: ["#pdp-description .video-container", "#pdp-description [data-content-type='video']"]
-      },
-      {
-        name: "cards",
-        instances: ["#pdp-description .gallery-placeholder"]
-      },
-      {
-        name: "columns",
-        instances: ["#pdp-description .feature-columns", "#pdp-description .two-column"]
-      },
-      {
-        name: "accordion",
-        instances: ["#pdp-description [data-role='collapsible']"]
+        const compTabSection = createTabSection(document, "Compatibility", compFrag);
+        result.append(compTabSection);
+        result.append(document.createElement("hr"));
       }
-    ],
-    sections: [
-      {
-        id: "section-1",
-        name: "Product Details",
-        selector: ".wrap-media-product-info",
-        style: null,
-        blocks: ["product-details"],
-        defaultContent: []
-      },
-      {
-        id: "section-2",
-        name: "Overview",
-        selector: "#pdp-description",
-        style: null,
-        blocks: ["embed", "cards", "columns", "accordion"],
-        defaultContent: ["#pdp-description h2", "#pdp-description h3", "#pdp-description h4", "#pdp-description p", "#pdp-description img"]
-      },
-      {
-        id: "section-3",
-        name: "Disclaimer",
-        selector: "#description-disclaimer",
-        style: null,
-        blocks: [],
-        defaultContent: ["#description-disclaimer ol", "#description-disclaimer li"]
+      const reviewsSection = main.querySelector("#pdp-reviews");
+      if (reviewsSection) {
+        const revFrag = document.createDocumentFragment();
+        const h2 = document.createElement("h2");
+        h2.textContent = "Reviews";
+        revFrag.append(h2);
+        const p = document.createElement("p");
+        p.textContent = "How is your Canon product performing for you?";
+        revFrag.append(p);
+        const revTabSection = createTabSection(document, "Reviews", revFrag);
+        result.append(revTabSection);
+        result.append(document.createElement("hr"));
       }
-    ]
-  };
-  var transformers = [
-    transform,
-    ...PAGE_TEMPLATE.sections && PAGE_TEMPLATE.sections.length > 1 ? [transform2] : []
-  ];
-  function executeTransformers(hookName, element, payload) {
-    const enhancedPayload = __spreadProps(__spreadValues({}, payload), {
-      template: PAGE_TEMPLATE
-    });
-    transformers.forEach((transformerFn) => {
-      try {
-        transformerFn.call(null, hookName, element, enhancedPayload);
-      } catch (e) {
-        console.error(`Transformer failed at ${hookName}:`, e);
+      const resSection = main.querySelector("#pdp-resources");
+      if (resSection) {
+        const resFrag = document.createDocumentFragment();
+        const h2 = document.createElement("h2");
+        h2.textContent = "Resources";
+        resFrag.append(h2);
+        const reTabSection = createTabSection(document, "Resources", resFrag);
+        result.append(reTabSection);
+        result.append(document.createElement("hr"));
       }
-    });
-  }
-  function findBlocksOnPage(document, template) {
-    const pageBlocks = [];
-    template.blocks.forEach((blockDef) => {
-      blockDef.instances.forEach((selector) => {
-        const elements = document.querySelectorAll(selector);
-        if (elements.length === 0) {
-          console.warn(`Block "${blockDef.name}" selector not found: ${selector}`);
-        }
-        elements.forEach((element) => {
-          pageBlocks.push({
-            name: blockDef.name,
-            selector,
-            element,
-            section: blockDef.section || null
+      const supSection = main.querySelector("#pdp-support");
+      if (supSection) {
+        const supFrag = document.createDocumentFragment();
+        const h2 = document.createElement("h2");
+        h2.textContent = "Support";
+        supFrag.append(h2);
+        const supLinks = supSection.querySelectorAll("a[href]");
+        if (supLinks.length > 0) {
+          const ul = document.createElement("ul");
+          const seen = /* @__PURE__ */ new Set();
+          supLinks.forEach((a) => {
+            const text = a.textContent.trim();
+            if (text && !seen.has(text) && text.length > 3) {
+              seen.add(text);
+              const li = document.createElement("li");
+              const link = document.createElement("a");
+              link.href = a.href;
+              link.textContent = text;
+              li.append(link);
+              ul.append(li);
+            }
           });
-        });
-      });
-    });
-    console.log(`Found ${pageBlocks.length} block instances on page`);
-    return pageBlocks;
-  }
-  var import_product_page_default = {
-    transform: (payload) => {
-      const { document, url, html, params } = payload;
-      const main = document.body;
-      executeTransformers("beforeTransform", main, payload);
-      const pageBlocks = findBlocksOnPage(document, PAGE_TEMPLATE);
-      pageBlocks.forEach((block) => {
-        const parser = parsers[block.name];
-        if (parser) {
-          try {
-            parser(block.element, { document, url, params });
-          } catch (e) {
-            console.error(`Failed to parse ${block.name} (${block.selector}):`, e);
-          }
-        } else {
-          console.warn(`No parser found for block: ${block.name}`);
+          supFrag.append(ul);
         }
-      });
-      executeTransformers("afterTransform", main, payload);
-      const hr = document.createElement("hr");
-      main.appendChild(hr);
-      WebImporter.rules.createMetadata(main, document);
-      WebImporter.rules.transformBackgroundImages(main, document);
-      WebImporter.rules.adjustImageUrls(main, url, params.originalURL);
+        const supTabSection = createTabSection(document, "Support", supFrag);
+        result.append(supTabSection);
+      }
+      result.append(document.createElement("hr"));
+      const disclaimer = main.querySelector("#description-disclaimer, .wrap-disclaimer");
+      if (disclaimer) {
+        const listItems = disclaimer.querySelectorAll("li");
+        if (listItems.length > 0) {
+          const h3 = document.createElement("h3");
+          h3.textContent = "Product Disclaimer";
+          result.append(h3);
+          const ol = document.createElement("ol");
+          listItems.forEach((li) => {
+            const newLi = document.createElement("li");
+            newLi.textContent = li.textContent.trim();
+            ol.append(newLi);
+          });
+          result.append(ol);
+        }
+      }
+      result.append(document.createElement("hr"));
+      const title = ((_c = (_b = (_a = document.querySelector("title")) == null ? void 0 : _a.textContent) == null ? void 0 : _b.trim()) == null ? void 0 : _c.replace(" | Canon U.S.A.", "")) || "";
+      const desc = ((_d = document.querySelector('meta[name="description"]')) == null ? void 0 : _d.content) || "";
+      const ogImage = ((_e = document.querySelector('meta[property="og:image"]')) == null ? void 0 : _e.content) || "";
+      WebImporter.rules.createMetadata(result, document);
       const path = WebImporter.FileUtils.sanitizePath(
         new URL(params.originalURL).pathname.replace(/\/$/, "").replace(/\.html$/, "")
       );
+      main.innerHTML = "";
+      main.append(result);
       return [{
         element: main,
         path,
-        report: {
-          title: document.title,
-          template: PAGE_TEMPLATE.name,
-          blocks: pageBlocks.map((b) => b.name)
-        }
+        report: { title, template: "product-page" }
       }];
     }
   };

@@ -28,6 +28,7 @@
     "stylelint-config-standard": "40.0.0"
   },
   "dependencies": {
+    "jsdom": "^29.0.2",
     "playwright": "^1.59.1"
   }
 }
