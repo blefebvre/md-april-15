@@ -1,0 +1,14 @@
+{
+  "status": "success",
+  "url": "https://www.usa.canon.com/business/it-and-security/five-pillars-of-security/document-security",
+  "path": "business/it-and-security/five-pillars-of-security/document-security",
+  "timestamp": "2026-04-16T18:31:21.836Z",
+  "title": "Document Security | Canon U.S.A., Inc.",
+  "template": "security-pillar-page",
+  "blocks": [
+    "hero-security",
+    "tabs-pillar-nav",
+    "columns-content-split",
+    "cards-bumper"
+  ]
+}

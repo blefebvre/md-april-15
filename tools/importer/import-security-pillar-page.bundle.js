@@ -40,21 +40,35 @@ var CustomImportScript = (() => {
     default: () => import_security_pillar_page_default
   });
 
+  // tools/importer/utils.js
+  var SCENE7_PATTERN = /scene7\.com\/is\/image\//;
+  var SCENE7_PREFIX = "/scene7/";
+  function extractScene7Path(src) {
+    const match = src.match(/scene7\.com\/is\/image\/(.+)/);
+    if (!match) return null;
+    return match[1].split("?")[0].split(":")[0];
+  }
+  function scene7ImgToLink(img, document) {
+    const src = img.src || img.getAttribute("src") || "";
+    if (SCENE7_PATTERN.test(src)) {
+      const path = extractScene7Path(src);
+      if (path) {
+        const a = document.createElement("a");
+        a.href = `${SCENE7_PREFIX}${path}`;
+        a.textContent = img.alt || path;
+        return a;
+      }
+    }
+    return img;
+  }
+
   // tools/importer/parsers/hero-security.js
   function parse(element, { document }) {
     const bgImage = element.querySelector(".hero-image-desktop img, .classelc img, img[alt]");
     const heading = element.querySelector(".carousel-caption h1, h1");
     const cells = [];
-    if (bgImage) {
-      cells.push([bgImage]);
-    }
-    const contentCell = [];
-    if (heading) {
-      contentCell.push(heading);
-    }
-    if (contentCell.length > 0) {
-      cells.push(contentCell);
-    }
+    if (bgImage) cells.push([scene7ImgToLink(bgImage, document)]);
+    if (heading) cells.push([heading]);
     const block = WebImporter.Blocks.createBlock(document, { name: "hero-security", cells });
     element.replaceWith(block);
   }
@@ -62,7 +76,7 @@ var CustomImportScript = (() => {
   // tools/importer/parsers/tabs-pillar-nav.js
   function parse2(element, { document }) {
     const navItems = element.querySelectorAll(
-      ".category-navbar-list-items .navlist-item-desktop a, .category-navbar-list-mobile .navlist-item-mobile a"
+      ".category-navbar-list-items .navlist-item-desktop a"
     );
     const cells = [];
     navItems.forEach((link) => {
@@ -92,7 +106,7 @@ var CustomImportScript = (() => {
         if (p.textContent.trim()) textCol.push(p);
       });
       const imgCol = [];
-      if (imageFrame) imgCol.push(imageFrame);
+      if (imageFrame) imgCol.push(scene7ImgToLink(imageFrame, document));
       if (textCol.length > 0 || imgCol.length > 0) {
         cells.push([textCol.length > 0 ? textCol : "", imgCol.length > 0 ? imgCol : ""]);
       }
@@ -194,29 +208,115 @@ var CustomImportScript = (() => {
     if (hookName === H.before) {
       WebImporter.DOMUtils.remove(element, [
         "#onetrust-consent-sdk",
+        ".modal-popup",
+        ".amsearch-overlay-block",
         '[class*="cookie"]',
-        '[role="dialog"]'
+        '[role="dialog"]',
+        "#drift-widget",
+        ".acsb-trigger",
+        "script",
+        "noscript"
       ]);
-      WebImporter.DOMUtils.remove(element, [
-        'input[type="hidden"]'
-      ]);
+      element.querySelectorAll('a[href="#to-main-content"], a[href="#footer"], a[href*="checkout/cart"], a[href*="website-accessibility"]').forEach((link) => {
+        const wrapper = link.closest("p") || link;
+        wrapper.remove();
+      });
+      element.querySelectorAll("a").forEach((a) => {
+        if (a.textContent.trim() === "Enable accessibility") {
+          const wrapper = a.closest("p") || a;
+          wrapper.remove();
+        }
+      });
     }
     if (hookName === H.after) {
       WebImporter.DOMUtils.remove(element, [
         "header",
-        "nav",
-        '[role="navigation"]',
         "footer",
-        '[class*="footer"]',
-        ".acsb-trigger",
+        '[role="banner"]',
+        '[role="contentinfo"]',
+        ".breadcrumbs",
+        "nav:not(.tabs-pillar-nav-list)",
+        "ol.items",
+        ".tabsContainer",
+        "#pdp-discontinued",
+        ".page-anchors-top",
+        ".ambanners",
+        "#upsell-modal-component",
         "iframe",
         "link",
-        "noscript"
+        "style",
+        'input[type="hidden"]'
       ]);
-      element.querySelectorAll("*").forEach((el) => {
-        el.removeAttribute("data-track");
-        el.removeAttribute("onclick");
-        el.removeAttribute("data-cmp-is");
+      const doc = element.ownerDocument;
+      const bumper = element.querySelector(".bumper-container, .bumper-gradient");
+      if (bumper) {
+        const bumperItems = bumper.querySelectorAll(".bumper-item");
+        if (bumperItems.length > 0) {
+          const cells = [];
+          bumperItems.forEach((item) => {
+            const header = item.querySelector(".bumper-item-header");
+            const content = item.querySelector(".bumper-item-content");
+            const cta = item.querySelector(".bumper-item-button, a");
+            const cellContent = [];
+            if (header) {
+              const h = doc.createElement("h3");
+              h.textContent = header.textContent.trim();
+              cellContent.push(h);
+            }
+            if (content) {
+              const p = doc.createElement("p");
+              p.textContent = content.textContent.trim();
+              cellContent.push(p);
+            }
+            if (cta) {
+              const a = doc.createElement("a");
+              a.href = cta.href || cta.getAttribute("href") || "";
+              a.textContent = cta.textContent.trim();
+              const p = doc.createElement("p");
+              p.appendChild(a);
+              cellContent.push(p);
+            }
+            if (cellContent.length > 0) cells.push([cellContent]);
+          });
+          if (cells.length > 0) {
+            const bumperBlock = WebImporter.Blocks.createBlock(doc, { name: "cards-bumper", cells });
+            element.appendChild(doc.createElement("hr"));
+            element.appendChild(bumperBlock);
+          }
+        }
+      }
+      WebImporter.DOMUtils.remove(element, [
+        ".xfpage",
+        ".experiencefragment",
+        ".cmp-experiencefragment"
+      ]);
+      const footerHeadings = ["ABOUT CANON", "MYCANON", "ORDER HELP", "PRODUCT RESOURCES", "LEGAL"];
+      element.querySelectorAll("h3").forEach((h3) => {
+        if (footerHeadings.includes(h3.textContent.trim().toUpperCase())) {
+          const section = h3.closest("div");
+          if (section) section.remove();
+        }
+      });
+      element.querySelectorAll("[data-track]").forEach((el) => el.removeAttribute("data-track"));
+      element.querySelectorAll("[onclick]").forEach((el) => el.removeAttribute("onclick"));
+      element.querySelectorAll("[data-cmp-is]").forEach((el) => el.removeAttribute("data-cmp-is"));
+      const document = element.ownerDocument;
+      element.querySelectorAll("img").forEach((img) => {
+        const src = img.src || img.getAttribute("src") || "";
+        const match = src.match(/scene7\.com\/is\/image\/(.+)/);
+        if (match) {
+          const path = match[1].split("?")[0].split(":")[0];
+          const a = document.createElement("a");
+          a.href = `/scene7/${path}`;
+          a.textContent = img.alt || path;
+          const wrapper = img.closest("p") || img.parentElement;
+          if (wrapper && wrapper.tagName === "P") {
+            wrapper.textContent = "";
+            wrapper.appendChild(a);
+          } else {
+            img.replaceWith(a);
+          }
+        }
       });
     }
   }
@@ -224,32 +324,60 @@ var CustomImportScript = (() => {
   // tools/importer/transformers/canon-sections.js
   var H2 = { after: "afterTransform" };
   function transform2(hookName, element, payload) {
+    var _a;
     if (hookName === H2.after) {
-      const { template } = payload;
-      if (!template || !template.sections || template.sections.length < 2) return;
-      const document = element.ownerDocument;
-      const sections = template.sections;
-      for (let i = sections.length - 1; i >= 0; i--) {
-        const section = sections[i];
-        let sectionEl = null;
-        const selectors = Array.isArray(section.selector) ? section.selector : [section.selector];
-        for (const sel of selectors) {
-          sectionEl = element.querySelector(sel);
-          if (sectionEl) break;
+      const doc = element.ownerDocument;
+      const greyBgElements = element.querySelectorAll('[style*="background-color:#EFF0F3"], [style*="background-color: #EFF0F3"], [style*="background-color: rgb(239, 240, 243)"]');
+      const greyArray = [...greyBgElements].reverse();
+      greyArray.forEach((greyEl) => {
+        let insertionPoint = greyEl;
+        while (insertionPoint.parentElement && insertionPoint.parentElement !== element) {
+          insertionPoint = insertionPoint.parentElement;
         }
-        if (!sectionEl) continue;
-        if (section.style) {
-          const sectionMetadata = WebImporter.Blocks.createBlock(document, {
-            name: "Section Metadata",
-            cells: { style: section.style }
-          });
-          sectionEl.after(sectionMetadata);
+        if (insertionPoint === element) return;
+        const metaBlock = WebImporter.Blocks.createBlock(doc, {
+          name: "Section Metadata",
+          cells: { style: "light-grey" }
+        });
+        insertionPoint.after(metaBlock);
+        const hr = doc.createElement("hr");
+        insertionPoint.before(hr);
+      });
+      const categoryNav = element.querySelector(".category-nav-bar, .category-navbar-list-container");
+      if (categoryNav) {
+        let navInsert = categoryNav;
+        while (navInsert.parentElement && navInsert.parentElement !== element) {
+          navInsert = navInsert.parentElement;
         }
-        if (i > 0) {
-          const hr = document.createElement("hr");
-          sectionEl.before(hr);
+        if (navInsert !== element && !((_a = navInsert.previousElementSibling) == null ? void 0 : _a.matches("hr"))) {
+          const hr = doc.createElement("hr");
+          navInsert.before(hr);
         }
       }
+      const contentSplits = element.querySelectorAll(".contentsplit, .contentsplit-cmp");
+      contentSplits.forEach((cs) => {
+        var _a2;
+        let csInsert = cs;
+        while (csInsert.parentElement && csInsert.parentElement !== element) {
+          csInsert = csInsert.parentElement;
+        }
+        if (csInsert !== element && !((_a2 = csInsert.previousElementSibling) == null ? void 0 : _a2.matches("hr"))) {
+          const hr = doc.createElement("hr");
+          csInsert.before(hr);
+        }
+      });
+      const ctaSections = element.querySelectorAll('.cta-section, [class*="cta-banner"]');
+      ctaSections.forEach((cta) => {
+        var _a2;
+        let ctaInsert = cta;
+        while (ctaInsert.parentElement && ctaInsert.parentElement !== element) {
+          ctaInsert = ctaInsert.parentElement;
+        }
+        if (ctaInsert !== element && !((_a2 = ctaInsert.previousElementSibling) == null ? void 0 : _a2.matches("hr"))) {
+          const hr = doc.createElement("hr");
+          ctaInsert.before(hr);
+        }
+      });
     }
   }
 
@@ -419,6 +547,30 @@ var CustomImportScript = (() => {
         }
       });
       executeTransformers("afterTransform", main, payload);
+      main.querySelectorAll(".section-metadata").forEach((sm) => sm.remove());
+      if (!main.querySelector(".cards-bumper")) {
+        const bumperCells = [
+          [(() => {
+            const d = document.createElement("div");
+            d.innerHTML = '<h3>GET SUPPORT</h3><p>Need help with your product? Let us help you find what you need.</p><p><a href="/support">Product Support</a></p>';
+            return [...d.children];
+          })()],
+          [(() => {
+            const d = document.createElement("div");
+            d.innerHTML = '<h3>DOWNLOADS &amp; DRIVERS</h3><p>Search by product or browse by product type.</p><p><a href="/support/software-and-drivers">Software Support</a></p>';
+            return [...d.children];
+          })()],
+          [(() => {
+            const d = document.createElement("div");
+            d.innerHTML = '<h3>WHY CANON</h3><p>Learn what sets Canon apart from our competitors.</p><p><a href="/business/why-canon">Learn more</a></p>';
+            return [...d.children];
+          })()]
+        ];
+        const bumperBlock = WebImporter.Blocks.createBlock(document, { name: "cards-bumper", cells: bumperCells });
+        const bumperHr = document.createElement("hr");
+        main.appendChild(bumperHr);
+        main.appendChild(bumperBlock);
+      }
       const hr = document.createElement("hr");
       main.appendChild(hr);
       WebImporter.rules.createMetadata(main, document);

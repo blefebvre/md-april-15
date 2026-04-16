@@ -1,0 +1,16 @@
+{
+  "status": "success",
+  "url": "https://www.usa.canon.com/business/it-and-security/five-pillars-of-security/print-security",
+  "path": "business/it-and-security/five-pillars-of-security/print-security",
+  "timestamp": "2026-04-16T18:31:30.450Z",
+  "title": "Print Security | Canon U.S.A., Inc.",
+  "template": "security-pillar-page",
+  "blocks": [
+    "hero-security",
+    "tabs-pillar-nav",
+    "columns-content-split",
+    "columns-content-split",
+    "columns-content-split",
+    "cards-bumper"
+  ]
+}
