@@ -114,7 +114,9 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
 export default async function decorate(block) {
   // load nav as fragment
   const navPath = '/nav';
-  const fragment = await loadFragment(navPath);
+  let fragment = await loadFragment(navPath);
+  // TODO: remove /content fallback before production
+  if (!fragment) fragment = await loadFragment('/content/nav');
   if (!fragment) return;
 
   // decorate nav DOM
@@ -129,23 +131,17 @@ export default async function decorate(block) {
     if (section) section.classList.add(`nav-${c}`);
   });
 
-  const navBrand = nav.querySelector('.nav-brand');
-  const brandLink = navBrand.querySelector('.button');
-  if (brandLink) {
-    brandLink.className = '';
-    brandLink.closest('.button-container').className = '';
-  }
+  // Strip button classes from all nav sections
+  nav.querySelectorAll('.button').forEach((button) => {
+    button.className = '';
+    const buttonContainer = button.closest('.button-container');
+    if (buttonContainer) {
+      buttonContainer.className = '';
+    }
+  });
 
   const navSections = nav.querySelector('.nav-sections');
   if (navSections) {
-    navSections.querySelectorAll('.button').forEach((button) => {
-      button.className = '';
-      const buttonContainer = button.closest('.button-container');
-      if (buttonContainer) {
-        buttonContainer.className = '';
-      }
-    });
-
     navSections.querySelectorAll(':scope .default-content-wrapper > ul > li').forEach((navSection) => {
       if (navSection.querySelector('ul')) navSection.classList.add('nav-drop');
       navSection.addEventListener('click', () => {
@@ -157,6 +153,12 @@ export default async function decorate(block) {
       });
     });
   }
+
+  // search bar (desktop only, visual placeholder)
+  const search = document.createElement('div');
+  search.className = 'nav-search';
+  search.innerHTML = '<span class="nav-search-icon">&#x1F50D;</span><span class="nav-search-text">Search products, support and more</span>';
+  nav.append(search);
 
   // hamburger for mobile
   const hamburger = document.createElement('div');
