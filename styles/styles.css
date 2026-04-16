@@ -385,6 +385,7 @@ main .section.red {
   text-align: center;
 }
 
+/* stylelint-disable-next-line no-descending-specificity */
 main .section.red h2,
 main .section.red h3,
 main .section.red h4,
