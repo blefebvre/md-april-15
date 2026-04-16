@@ -54,7 +54,10 @@ async function loadFonts() {
  * @returns {string|null} Clean Scene7 URL or null if not a match
  */
 function extractDMUrl(raw) {
-  const match = raw.match(/(https?:\/\/s7[a-z0-9]*\.scene7\.com\/is\/image\/[^\s\u201C\u201D\u201E\u201F"]+)/);
+  // Decode any URL-encoded characters first, then match
+  let decoded;
+  try { decoded = decodeURIComponent(raw); } catch { decoded = raw; }
+  const match = decoded.match(/(https?:\/\/s7[a-z0-9]*\.scene7\.com\/is\/image\/[A-Za-z0-9/_-]+)/);
   return match ? match[1] : null;
 }
 
