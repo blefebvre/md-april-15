@@ -385,13 +385,14 @@ main .section.red {
   text-align: center;
 }
 
-/* stylelint-disable-next-line no-descending-specificity */
+/* stylelint-disable no-descending-specificity */
 main .section.red h2,
 main .section.red h3,
 main .section.red h4,
 main .section.red p {
   color: var(--canon-white);
 }
+/* stylelint-enable no-descending-specificity */
 
 main .section.red a:any-link {
   color: var(--canon-white);
