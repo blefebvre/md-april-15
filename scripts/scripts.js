@@ -136,6 +136,31 @@ function buildAutoBlocks(main) {
     }
 
     buildDynamicMediaImages(main);
+
+    // Clean up broken Canon placeholder images and orphaned captions
+    main.querySelectorAll('img').forEach((img) => {
+      const src = img.getAttribute('src') || img.src || '';
+      if (src.includes('canon-image-default') || src === 'about:error' || src === '') {
+        // Remove the image and its wrapper
+        const wrapper = img.closest('picture') || img.closest('a') || img;
+        const parent = wrapper.parentElement;
+        wrapper.remove();
+        // If parent is now empty, remove it too
+        if (parent && !parent.textContent.trim() && !parent.querySelector('img, picture, a')) {
+          parent.remove();
+        }
+      }
+    });
+
+    // Remove empty list items (from photo gallery placeholders)
+    main.querySelectorAll('li').forEach((li) => {
+      if (!li.textContent.trim() && !li.querySelector('img, picture')) li.remove();
+    });
+    // Remove empty lists
+    main.querySelectorAll('ul, ol').forEach((list) => {
+      if (list.children.length === 0) list.remove();
+    });
+
     buildHeroBlock(main);
   } catch (error) {
     // eslint-disable-next-line no-console
