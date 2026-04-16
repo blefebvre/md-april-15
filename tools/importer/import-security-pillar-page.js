@@ -206,27 +206,9 @@ export default {
     // 4. Execute afterTransform transformers (final cleanup + section breaks)
     executeTransformers('afterTransform', main, payload);
 
-    // 4.5. Promote <hr> elements to be direct children of main
-    // The helix importer only recognizes <hr> as section breaks when they
-    // are direct children of the root element. Transformers may insert them
-    // inside nested divs - promote them by splitting parent containers.
-    main.querySelectorAll('hr').forEach((existingHr) => {
-      if (existingHr.parentElement !== main) {
-        // Move the hr to be a direct child of main, splitting content
-        const parent = existingHr.parentElement;
-        // Move all siblings after the hr into a new container
-        const after = document.createElement('div');
-        let next = existingHr.nextSibling;
-        while (next) {
-          const move = next;
-          next = next.nextSibling;
-          after.appendChild(move);
-        }
-        // Insert hr and the after-content after the parent
-        parent.after(after);
-        parent.after(existingHr);
-      }
-    });
+    // 4.5. Clean up misplaced section-metadata from transformers
+    // Sections will be handled by post-processing script (fix-sections.js)
+    main.querySelectorAll('.section-metadata').forEach((sm) => sm.remove());
 
     // 4.6. Ensure bumper cards exist (common across all Canon security pillar pages)
     if (!main.querySelector('.cards-bumper')) {
