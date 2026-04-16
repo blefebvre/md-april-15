@@ -43,8 +43,6 @@ async function loadFonts() {
   }
 }
 
-const DM_PATTERN = /^https?:\/\/s7[a-z0-9]*\.scene7\.com\/is\/image\//;
-
 /**
  * Extracts a clean Scene7/Dynamic Media URL from a potentially corrupted href.
  * DA editor may wrap URLs in curly quotes, producing hrefs like:
