@@ -21,8 +21,8 @@ function buildHeroBlock(main) {
   const picture = main.querySelector('picture');
   // eslint-disable-next-line no-bitwise
   if (h1 && picture && (h1.compareDocumentPosition(picture) & Node.DOCUMENT_POSITION_PRECEDING)) {
-    // Check if h1 or picture is already inside a hero block
-    if (h1.closest('.hero') || picture.closest('.hero')) {
+    // Check if h1 or picture is already inside a hero block (including variants)
+    if (h1.closest('[class^="hero"]') || picture.closest('[class^="hero"]')) {
       return; // Don't create a duplicate hero block
     }
     const section = document.createElement('div');
@@ -46,17 +46,28 @@ async function loadFonts() {
 const DM_PATTERN = /^https?:\/\/s7[a-z0-9]*\.scene7\.com\/is\/image\//;
 
 /**
+ * Cleans a URL that may have been wrapped in curly/smart quotes by DA.
+ * @param {string} url The URL to clean
+ * @returns {string} Cleaned URL
+ */
+function cleanDMUrl(url) {
+  return url.replace(/[\u201C\u201D\u201E\u201F\u2033\u2036"]/g, '');
+}
+
+/**
  * Converts Dynamic Media / Scene7 links to picture elements.
  * Authored as: <a href="https://s7d1.scene7.com/is/image/canon/...">Alt text</a>
  * Becomes: <picture><source><img src="..." alt="..."></picture>
+ * Handles curly quotes added by DA editor around URLs.
  * @param {Element} main The container element
  */
 function buildDynamicMediaImages(main) {
   main.querySelectorAll('a[href]').forEach((a) => {
-    if (!DM_PATTERN.test(a.href)) return;
+    const cleanedHref = cleanDMUrl(a.href);
+    if (!DM_PATTERN.test(cleanedHref)) return;
 
     const alt = a.textContent.trim();
-    const src = a.href;
+    const src = cleanedHref;
 
     const picture = document.createElement('picture');
     const srcWebp = `${src}?fmt=webp&wid=1200`;
