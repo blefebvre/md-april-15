@@ -360,6 +360,18 @@ main > .section > .default-content-wrapper picture + p {
   color: var(--canon-grey);
 }
 
+/* Hide broken/placeholder images that failed to load */
+main img[src*="canon-image-default"],
+main img[src="about:error"] {
+  display: none;
+}
+
+/* Photo gallery section - hide empty link wrappers around broken images */
+main a:has(> img[src*="canon-image-default"]),
+main a:has(> img[src="about:error"]) {
+  display: none;
+}
+
 /* section metadata - light grey */
 main .section.light-grey {
   background-color: var(--canon-light-grey);
