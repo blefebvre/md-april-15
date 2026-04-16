@@ -342,14 +342,11 @@ main > .section:first-of-type {
   }
 }
 
-/* center-aligned default content sections (matching Canon original) */
-main > .section > .default-content-wrapper {
-  text-align: center;
-}
-
+/* Default content images centered */
 /* stylelint-disable-next-line no-descending-specificity */
 main > .section > .default-content-wrapper img {
   display: block;
+  max-width: 100%;
   margin: var(--spacing-m) auto;
 }
 
@@ -357,6 +354,7 @@ main > .section > .default-content-wrapper img {
 main .section.light-grey {
   background-color: var(--canon-light-grey);
   margin: 0;
+  text-align: center;
   padding: var(--spacing-l) 0;
 }
 
