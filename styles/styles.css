@@ -314,7 +314,7 @@ main img {
 
 /* sections */
 main > .section {
-  margin: 40px 0;
+  margin: 24px 0;
 }
 
 main > .section > div {
@@ -333,18 +333,21 @@ main > .section:first-of-type {
   }
 }
 
+/* center-aligned default content sections (matching Canon original) */
+main > .section > .default-content-wrapper {
+  text-align: center;
+}
+
+main > .section > .default-content-wrapper img {
+  display: block;
+  margin: var(--spacing-m) auto;
+}
+
 /* section metadata - light grey */
 main .section.light-grey {
   background-color: var(--canon-light-grey);
   margin: 0;
   padding: var(--spacing-l) 0;
-}
-
-main .section.light-grey h2,
-main .section.light-grey h3,
-main .section.light-grey h4,
-main .section.light-grey p {
-  text-align: center;
 }
 
 /* section metadata - light */
