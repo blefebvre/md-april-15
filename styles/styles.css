@@ -28,10 +28,10 @@
   --heading-font-family: "Source Sans 3", source-sans-fallback, sans-serif;
 
   /* body sizes */
-  --body-font-size-m: 16px;
+  --body-font-size-m: 18px;
   --body-font-size-s: 14px;
   --body-font-size-xs: 12px;
-  --body-font-size-l: 18px;
+  --body-font-size-l: 20px;
 
   /* heading sizes - mobile first */
   --heading-font-size-xxl: 36px;
@@ -123,8 +123,8 @@ h6 {
 
 h1 {
   font-size: var(--heading-font-size-xxl);
-  font-weight: 300;
-  letter-spacing: 6.4px;
+  font-weight: 400;
+  text-align: center;
 }
 
 h2 { font-size: var(--heading-font-size-xl); }
