@@ -41,19 +41,16 @@
     gap: var(--spacing-l);
   }
 
-  /* Text column: 70% */
+  /* Image column: 30%, forced to the left */
+  .columns-content-split > div > .columns-content-split-img-col {
+    flex: 3 1 0%;
+    order: -1;
+  }
+
+  /* Text column: 70%, stays on the right */
   .columns-content-split > div > div:not(.columns-content-split-img-col) {
     flex: 7 1 0%;
   }
-
-  /* Image column: 30% */
-  .columns-content-split > div > .columns-content-split-img-col {
-    flex: 3 1 0%;
-  }
-
-  /* When image is first child (left), text second (right) - keep DOM order */
-  /* When text is first child (left), image second (right) - keep DOM order */
-  /* The original Canon layout is always: text left, image right */
 }
 
 @media (width >= 900px) {
