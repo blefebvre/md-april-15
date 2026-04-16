@@ -127,7 +127,10 @@ h1 {
   text-align: center;
 }
 
-h2 { font-size: var(--heading-font-size-xl); }
+h2 {
+  font-size: var(--heading-font-size-xl);
+  text-align: center;
+}
 
 h3 {
   font-size: var(--heading-font-size-l);
@@ -342,12 +345,19 @@ main > .section:first-of-type {
   }
 }
 
-/* Default content images centered */
+/* Default content images and captions centered */
 /* stylelint-disable-next-line no-descending-specificity */
 main > .section > .default-content-wrapper img {
   display: block;
   max-width: 100%;
   margin: var(--spacing-m) auto;
+}
+
+/* Image captions (paragraph after an image) */
+main > .section > .default-content-wrapper picture + p {
+  text-align: center;
+  font-style: italic;
+  color: var(--canon-grey);
 }
 
 /* section metadata - light grey */
