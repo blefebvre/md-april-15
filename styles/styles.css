@@ -314,6 +314,7 @@ main > .section > .default-content-wrapper picture img {
   width: 24px;
 }
 
+/* stylelint-disable-next-line no-descending-specificity */
 .icon img {
   height: 100%;
   width: 100%;
@@ -345,6 +346,7 @@ main > .section > .default-content-wrapper {
   text-align: center;
 }
 
+/* stylelint-disable-next-line no-descending-specificity */
 main > .section > .default-content-wrapper img {
   display: block;
   margin: var(--spacing-m) auto;
