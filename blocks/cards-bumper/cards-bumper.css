@@ -1,0 +1,75 @@
+/* Cards Bumper - Canon support CTA cards with gradient background */
+.cards-bumper-container .cards-bumper-wrapper {
+  max-width: unset;
+  padding: 0;
+}
+
+.cards-bumper-container {
+  background: var(--bumper-gradient);
+}
+
+.cards-bumper > ul {
+  list-style: none;
+  margin: 0;
+  padding: var(--spacing-l) var(--spacing-m);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-m);
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (width >= 600px) {
+  .cards-bumper > ul {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.cards-bumper > ul > li {
+  border: none;
+  background-color: transparent;
+  color: var(--canon-white);
+  padding: var(--spacing-s);
+}
+
+.cards-bumper .cards-bumper-card-body {
+  margin: 0;
+}
+
+.cards-bumper .cards-bumper-card-body h3 {
+  color: var(--canon-white);
+  font-size: var(--body-font-size-s);
+  font-weight: 600;
+  text-transform: uppercase;
+  margin: 0 0 var(--spacing-xs);
+}
+
+.cards-bumper .cards-bumper-card-body p {
+  color: var(--canon-white);
+  font-size: var(--body-font-size-m);
+  line-height: 1.5;
+  margin: 0 0 var(--spacing-s);
+}
+
+.cards-bumper .cards-bumper-card-body a {
+  display: inline-block;
+  color: var(--canon-white);
+  border: 1px solid var(--canon-white);
+  padding: 10px 20px;
+  font-weight: 700;
+  font-size: var(--body-font-size-s);
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all var(--transition-speed) var(--transition-ease);
+}
+
+.cards-bumper .cards-bumper-card-body a:hover {
+  background-color: var(--canon-white);
+  color: var(--canon-red);
+  text-decoration: none;
+}
+
+.cards-bumper .cards-bumper-card-image {
+  display: none;
+}

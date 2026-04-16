@@ -1,0 +1,67 @@
+/* Tabs Pillar Nav - Canon five pillars navigation bar */
+.tabs-pillar-nav-container .tabs-pillar-nav-wrapper {
+  max-width: unset;
+  padding: 0;
+}
+
+.tabs-pillar-nav-container {
+  background-color: var(--canon-black);
+}
+
+.tabs-pillar-nav .tabs-pillar-nav-list {
+  display: flex;
+  gap: 0;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 48px 24px 32px;
+  font-size: var(--body-font-size-s);
+  overflow-x: auto;
+  justify-content: center;
+}
+
+@media (width >= 900px) {
+  .tabs-pillar-nav .tabs-pillar-nav-list {
+    font-size: 18px;
+    padding: 48px 32px 32px;
+  }
+}
+
+.tabs-pillar-nav .tabs-pillar-nav-list button {
+  flex: 0 0 max-content;
+  margin: 0 16px;
+  border: none;
+  border-radius: 0;
+  padding: 8px 4px;
+  background-color: transparent;
+  color: var(--canon-white);
+  font-family: var(--body-font-family);
+  font-weight: 400;
+  text-transform: uppercase;
+  line-height: 1.5;
+  text-align: center;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: opacity 0.2s;
+  border-bottom: 2px solid transparent;
+}
+
+.tabs-pillar-nav .tabs-pillar-nav-list button p {
+  margin: 0;
+}
+
+.tabs-pillar-nav .tabs-pillar-nav-list button:hover {
+  opacity: 0.8;
+}
+
+.tabs-pillar-nav .tabs-pillar-nav-list button[aria-selected='true'] {
+  border-bottom-color: var(--canon-red);
+  font-weight: 700;
+}
+
+.tabs-pillar-nav .tabs-pillar-nav-panel {
+  display: none;
+}
+
+.tabs-pillar-nav .tabs-pillar-nav-panel[aria-hidden='false'] {
+  display: none;
+}

@@ -1,0 +1,16 @@
+{
+  "status": "success",
+  "url": "https://www.usa.canon.com/business/it-and-security/five-pillars-of-security/device-security",
+  "path": "business/it-and-security/five-pillars-of-security/device-security",
+  "timestamp": "2026-04-16T15:20:02.821Z",
+  "title": "Device Security | Canon U.S.A., Inc.",
+  "template": "security-pillar-page",
+  "blocks": [
+    "hero-security",
+    "tabs-pillar-nav",
+    "columns-content-split",
+    "columns-content-split",
+    "accordion-resources",
+    "cards-bumper"
+  ]
+}

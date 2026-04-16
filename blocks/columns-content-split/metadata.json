@@ -1,0 +1,31 @@
+{
+  "variantName": "columns-content-split",
+  "baseBlock": "columns",
+  "version": "1.0.0",
+  "created": "2026-04-16T14:53:00.000Z",
+  "sourceContext": {
+    "originUrl": "https://www.usa.canon.com/business/it-and-security/five-pillars-of-security/device-security",
+    "originPage": "Security pillar detail page",
+    "blockPosition": "middle"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "spacious",
+    "purpose": "content-split",
+    "imagePattern": "large"
+  },
+  "contentPattern": {
+    "structure": "text column + image column",
+    "buttonCount": 0,
+    "imageCount": 1
+  },
+  "reuseGuidance": {
+    "suitableFor": ["70/30 content splits", "text and image side-by-side", "feature descriptions with logos"],
+    "notSuitableFor": ["equal-width columns", "multi-row grids", "card layouts"]
+  },
+  "usage": {
+    "pagesUsing": ["/business/it-and-security/five-pillars-of-security/device-security"],
+    "reuseCount": 1,
+    "lastUsed": "2026-04-16T14:53:00.000Z"
+  }
+}

@@ -1,0 +1,84 @@
+/* Accordion Resources - Canon downloadable resources section */
+.accordion-resources {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.accordion-resources details {
+  border: 1px solid #dadada;
+  margin-bottom: 0;
+}
+
+.accordion-resources details + details {
+  border-top: 0;
+}
+
+.accordion-resources details p {
+  margin-bottom: 0.8em;
+}
+
+.accordion-resources details summary {
+  position: relative;
+  padding: 16px 46px 16px 16px;
+  cursor: pointer;
+  list-style: none;
+  overflow: auto;
+  font-size: var(--body-font-size-m);
+  font-weight: 600;
+  transition: background-color 0.2s;
+}
+
+.accordion-resources details[open] summary {
+  background-color: var(--canon-light-grey);
+}
+
+.accordion-resources details summary:focus,
+.accordion-resources details summary:hover {
+  background-color: var(--canon-light-grey);
+}
+
+.accordion-resources details summary::-webkit-details-marker {
+  display: none;
+}
+
+.accordion-resources details summary::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: 18px;
+  transform: translateY(-50%) rotate(135deg);
+  width: 8px;
+  height: 8px;
+  border: 2px solid;
+  border-width: 2px 2px 0 0;
+  transition: transform 0.2s;
+}
+
+.accordion-resources details[open] summary::after {
+  transform: translateY(-50%) rotate(-45deg);
+}
+
+.accordion-resources details .accordion-resources-item-body {
+  padding: 16px;
+}
+
+.accordion-resources details[open] .accordion-resources-item-body {
+  border-top: 1px solid #dadada;
+  background-color: var(--background-color);
+}
+
+.accordion-resources details .accordion-resources-item-body a {
+  display: block;
+  padding: 12px 0;
+  color: var(--canon-red);
+  font-weight: 400;
+  border-bottom: 1px solid #eee;
+}
+
+.accordion-resources details .accordion-resources-item-body a:hover {
+  color: var(--canon-red-dark);
+}
+
+.accordion-resources details .accordion-resources-item-body a:last-child {
+  border-bottom: none;
+}

@@ -1,0 +1,62 @@
+/* Hero Security - Canon device security hero banner */
+.hero-security-container .hero-security-wrapper {
+  max-width: unset;
+  padding: 0;
+}
+
+.hero-security {
+  position: relative;
+  padding: 60px 24px;
+  min-height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+}
+
+.hero-security h1,
+.hero-security h2,
+.hero-security h3,
+.hero-security h4,
+.hero-security h5,
+.hero-security h6,
+.hero-security p {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  color: var(--canon-white);
+  position: relative;
+  z-index: 1;
+}
+
+.hero-security h1 {
+  font-weight: 300;
+  letter-spacing: 6.4px;
+  margin: 0;
+}
+
+.hero-security.no-image * {
+  color: var(--text-color);
+}
+
+.hero-security picture {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  object-fit: cover;
+  box-sizing: border-box;
+}
+
+.hero-security img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+@media (width >= 900px) {
+  .hero-security {
+    padding: 80px 32px;
+    min-height: 288px;
+  }
+}

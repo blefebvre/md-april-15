@@ -1,0 +1,31 @@
+{
+  "variantName": "accordion-resources",
+  "baseBlock": "accordion",
+  "version": "1.0.0",
+  "created": "2026-04-16T14:53:00.000Z",
+  "sourceContext": {
+    "originUrl": "https://www.usa.canon.com/business/it-and-security/five-pillars-of-security/device-security",
+    "originPage": "Security pillar detail page",
+    "blockPosition": "bottom"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "spacious",
+    "purpose": "resources-downloads",
+    "imagePattern": "noimg"
+  },
+  "contentPattern": {
+    "structure": "heading + expandable panels with download links",
+    "buttonCount": 0,
+    "imageCount": 0
+  },
+  "reuseGuidance": {
+    "suitableFor": ["resource download sections", "document libraries", "collapsible content sections"],
+    "notSuitableFor": ["FAQ sections", "product specs", "navigation menus"]
+  },
+  "usage": {
+    "pagesUsing": ["/business/it-and-security/five-pillars-of-security/device-security"],
+    "reuseCount": 1,
+    "lastUsed": "2026-04-16T14:53:00.000Z"
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "variantName": "hero-security",
+  "baseBlock": "hero",
+  "version": "1.0.0",
+  "created": "2026-04-16T14:53:00.000Z",
+  "sourceContext": {
+    "originUrl": "https://www.usa.canon.com/business/it-and-security/five-pillars-of-security/device-security",
+    "originPage": "Security pillar detail page",
+    "blockPosition": "top"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "minimal",
+    "purpose": "security-hero",
+    "imagePattern": "large"
+  },
+  "contentPattern": {
+    "structure": "background-image + heading",
+    "buttonCount": 0,
+    "imageCount": 1
+  },
+  "reuseGuidance": {
+    "suitableFor": ["security pillar pages", "category landing pages", "feature overview pages"],
+    "notSuitableFor": ["product detail pages", "blog articles", "pages with CTA buttons in hero"]
+  },
+  "usage": {
+    "pagesUsing": ["/business/it-and-security/five-pillars-of-security/device-security"],
+    "reuseCount": 1,
+    "lastUsed": "2026-04-16T14:53:00.000Z"
+  }
+}
