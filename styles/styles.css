@@ -372,3 +372,64 @@ main .section.dark h4 {
 main .section.dark a:any-link {
   color: var(--canon-white);
 }
+
+/* tabs */
+.tabs-container {
+  max-width: 1200px;
+  margin: var(--spacing-l) auto;
+  padding: 0 var(--spacing-m);
+}
+
+.tabs-nav {
+  display: flex;
+  border-bottom: 2px solid var(--canon-border);
+  overflow-x: auto;
+  gap: 0;
+}
+
+.tabs-tab {
+  padding: var(--spacing-s) var(--spacing-m);
+  border: none;
+  border-bottom: 3px solid transparent;
+  background: none;
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-s);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--canon-grey);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color var(--transition-base), border-color var(--transition-base);
+  margin-bottom: -2px;
+}
+
+.tabs-tab:hover {
+  color: var(--text-color);
+}
+
+.tabs-tab.active {
+  color: var(--canon-red);
+  border-bottom-color: var(--canon-red);
+}
+
+.tabs-panels .tabs-panel {
+  display: none;
+  margin: 0;
+  padding: var(--spacing-l) 0;
+}
+
+.tabs-panels .tabs-panel.active {
+  display: block;
+}
+
+.tabs-panels .tabs-panel > div {
+  max-width: 100%;
+  padding: 0;
+}
+
+@media (width >= 900px) {
+  .tabs-container {
+    padding: 0 var(--spacing-l);
+  }
+}

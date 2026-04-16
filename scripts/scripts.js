@@ -146,6 +146,69 @@ function decorateButtons(main) {
 }
 
 /**
+ * Groups consecutive sections with class "tab" into a tabbed container.
+ * Each tab section must have section-metadata with style=tab and tab-title.
+ * @param {Element} main The main element
+ */
+function buildTabs(main) {
+  const sections = [...main.querySelectorAll(':scope > .section.tab')];
+  if (sections.length === 0) return;
+
+  // Group consecutive tab sections
+  const groups = [];
+  let current = [];
+  sections.forEach((section) => {
+    const prev = current.length ? current[current.length - 1] : null;
+    if (prev && prev.nextElementSibling === section) {
+      current.push(section);
+    } else {
+      if (current.length) groups.push(current);
+      current = [section];
+    }
+  });
+  if (current.length) groups.push(current);
+
+  groups.forEach((group) => {
+    const tabContainer = document.createElement('div');
+    tabContainer.className = 'tabs-container';
+
+    const tabNav = document.createElement('div');
+    tabNav.className = 'tabs-nav';
+
+    const tabPanels = document.createElement('div');
+    tabPanels.className = 'tabs-panels';
+
+    // Place container in the DOM before moving sections
+    group[0].before(tabContainer);
+    tabContainer.append(tabNav, tabPanels);
+
+    group.forEach((section, i) => {
+      const title = section.getAttribute('data-tab-title') || `Tab ${i + 1}`;
+
+      const btn = document.createElement('button');
+      btn.className = `tabs-tab${i === 0 ? ' active' : ''}`;
+      btn.textContent = title;
+      btn.setAttribute('aria-selected', i === 0 ? 'true' : 'false');
+      btn.addEventListener('click', () => {
+        tabNav.querySelectorAll('.tabs-tab').forEach((t) => {
+          t.classList.remove('active');
+          t.setAttribute('aria-selected', 'false');
+        });
+        tabPanels.querySelectorAll('.tabs-panel').forEach((p) => p.classList.remove('active'));
+        btn.classList.add('active');
+        btn.setAttribute('aria-selected', 'true');
+        tabPanels.children[i].classList.add('active');
+      });
+      tabNav.append(btn);
+
+      section.classList.add('tabs-panel');
+      if (i === 0) section.classList.add('active');
+      tabPanels.append(section);
+    });
+  });
+}
+
+/**
  * Decorates the main element.
  * @param {Element} main The main element
  */
@@ -154,6 +217,7 @@ export function decorateMain(main) {
   decorateIcons(main);
   buildAutoBlocks(main);
   decorateSections(main);
+  buildTabs(main);
   decorateBlocks(main);
   decorateButtons(main);
 }
