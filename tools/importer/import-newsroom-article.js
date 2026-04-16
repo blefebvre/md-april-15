@@ -54,6 +54,26 @@ export default {
       });
     });
 
+    // 2.5. Merge consecutive cards blocks into one
+    // The social media page has 9 separate card containers that each become
+    // individual cards blocks. Merge them into a single unified cards block.
+    const cardsTables = [...main.querySelectorAll('table')].filter((t) => {
+      const firstCell = t.querySelector('tr td, tr th');
+      return firstCell && firstCell.textContent.trim().toLowerCase() === 'cards';
+    });
+    if (cardsTables.length > 1) {
+      const firstTable = cardsTables[0];
+      const tbody = firstTable.querySelector('tbody') || firstTable;
+      for (let i = 1; i < cardsTables.length; i++) {
+        const otherTbody = cardsTables[i].querySelector('tbody') || cardsTables[i];
+        // Copy all rows except the header (first row with "Cards")
+        [...otherTbody.rows].forEach((row, idx) => {
+          if (idx > 0) tbody.appendChild(row.cloneNode(true));
+        });
+        cardsTables[i].remove();
+      }
+    }
+
     // 3. Remove misplaced section-metadata
     main.querySelectorAll('.section-metadata').forEach((sm) => sm.remove());
 
