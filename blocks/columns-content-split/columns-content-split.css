@@ -9,11 +9,11 @@
 }
 
 .columns-content-split > div > div {
-  order: 1;
+  order: unset;
 }
 
 .columns-content-split > div > .columns-content-split-img-col {
-  order: 0;
+  order: unset;
 }
 
 .columns-content-split > div > .columns-content-split-img-col img {

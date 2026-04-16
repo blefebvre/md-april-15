@@ -1,49 +1,26 @@
-// eslint-disable-next-line import/no-unresolved
-import { toClassName } from '../../scripts/aem.js';
-
 export default async function decorate(block) {
-  // build tablist
-  const tablist = document.createElement('div');
-  tablist.className = 'tabs-pillar-nav-list';
-  tablist.setAttribute('role', 'tablist');
+  // Build a horizontal nav bar from the tab rows
+  // Each row has: col1 = label text, col2 = link
+  const nav = document.createElement('nav');
+  nav.className = 'tabs-pillar-nav-list';
+  nav.setAttribute('role', 'navigation');
+  nav.setAttribute('aria-label', 'Five Pillars of Security');
 
-  // decorate tabs and tabpanels
-  const tabs = [...block.children].map((child) => child.firstElementChild);
-  tabs.forEach((tab, i) => {
-    const id = toClassName(tab.textContent);
+  [...block.children].forEach((row) => {
+    const cols = [...row.children];
+    const linkCell = cols[1];
+    const link = linkCell?.querySelector('a');
 
-    // decorate tabpanel
-    const tabpanel = block.children[i];
-    tabpanel.className = 'tabs-pillar-nav-panel';
-    tabpanel.id = `tabpanel-${id}`;
-    tabpanel.setAttribute('aria-hidden', !!i);
-    tabpanel.setAttribute('aria-labelledby', `tab-${id}`);
-    tabpanel.setAttribute('role', 'tabpanel');
-
-    // build tab button
-    const button = document.createElement('button');
-    button.className = 'tabs-pillar-nav-tab';
-    button.id = `tab-${id}`;
-
-    button.innerHTML = tab.innerHTML;
-
-    button.setAttribute('aria-controls', `tabpanel-${id}`);
-    button.setAttribute('aria-selected', !i);
-    button.setAttribute('role', 'tab');
-    button.setAttribute('type', 'button');
-    button.addEventListener('click', () => {
-      block.querySelectorAll('[role=tabpanel]').forEach((panel) => {
-        panel.setAttribute('aria-hidden', true);
-      });
-      tablist.querySelectorAll('button').forEach((btn) => {
-        btn.setAttribute('aria-selected', false);
-      });
-      tabpanel.setAttribute('aria-hidden', false);
-      button.setAttribute('aria-selected', true);
-    });
-    tablist.append(button);
-    tab.remove();
+    if (link) {
+      link.className = 'tabs-pillar-nav-link';
+      // Mark active based on current page URL match
+      if (window.location.href.includes(new URL(link.href).pathname)) {
+        link.classList.add('active');
+      }
+      nav.append(link);
+    }
   });
 
-  block.prepend(tablist);
+  block.textContent = '';
+  block.append(nav);
 }
