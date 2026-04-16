@@ -138,6 +138,21 @@ var CustomImportScript = (() => {
       element.querySelectorAll("[data-track]").forEach((el) => el.removeAttribute("data-track"));
       element.querySelectorAll("[onclick]").forEach((el) => el.removeAttribute("onclick"));
       element.querySelectorAll("[data-cmp-is]").forEach((el) => el.removeAttribute("data-cmp-is"));
+      element.querySelectorAll("a > img").forEach((img) => {
+        const src = img.getAttribute("src") || "";
+        if (src.includes("canon-image-default")) {
+          const link = img.closest("a");
+          const damHref = (link == null ? void 0 : link.getAttribute("href")) || "";
+          const damPath = damHref.replace(/^\/content\/dam\//, "");
+          if (damPath !== damHref) {
+            const alt = img.alt || "";
+            link.removeAttribute("class");
+            link.setAttribute("href", `/dam/${damPath}`);
+            link.textContent = alt || damPath.split("/").pop();
+            img.remove();
+          }
+        }
+      });
       const document = element.ownerDocument;
       element.querySelectorAll("img").forEach((img) => {
         const src = img.src || img.getAttribute("src") || "";

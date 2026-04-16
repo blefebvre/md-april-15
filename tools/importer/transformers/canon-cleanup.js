@@ -127,18 +127,20 @@ export default function transform(hookName, element, payload) {
     element.querySelectorAll('[data-cmp-is]').forEach((el) => el.removeAttribute('data-cmp-is'));
 
     // Fix placeholder images: when <a href="/content/dam/..."><img src="canon-image-default.webp">
-    // replace with <img src="full-dam-url">
-    const doc2 = element.ownerDocument;
+    // Convert to /dam/ marker path link (DA-safe, resolved by client autoblock)
     element.querySelectorAll('a > img').forEach((img) => {
       const src = img.getAttribute('src') || '';
       if (src.includes('canon-image-default')) {
         const link = img.closest('a');
         const damHref = link?.getAttribute('href') || '';
-        if (damHref.includes('/content/dam/') || damHref.includes('canon-assets')) {
-          const fullUrl = damHref.startsWith('http') ? damHref : `https://www.usa.canon.com${damHref}`;
-          img.src = fullUrl;
-          img.setAttribute('src', fullUrl);
-          link.replaceWith(img);
+        // Strip /content/dam/ prefix, keep rest as /dam/ marker path
+        const damPath = damHref.replace(/^\/content\/dam\//, '');
+        if (damPath !== damHref) {
+          const alt = img.alt || '';
+          link.removeAttribute('class');
+          link.setAttribute('href', `/dam/${damPath}`);
+          link.textContent = alt || damPath.split('/').pop();
+          img.remove();
         }
       }
     });

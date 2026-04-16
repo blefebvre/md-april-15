@@ -75,12 +75,16 @@ function buildDynamicMediaImages(main) {
   main.querySelectorAll('a[href]').forEach((a) => {
     const rawHref = a.getAttribute('href') || '';
 
-    // Check for /dam/ marker paths (Canon DAM assets with parentheses in path)
+    // Check for /dam/ marker paths (Canon DAM assets)
     const damMatch = rawHref.match(/\/dam\/(.+)/);
     if (damMatch) {
       const damPath = damMatch[1];
       const alt = a.textContent.trim();
-      const fullUrl = `https://www.usa.canon.com/content/dam/canon-assets-(no-crop-applied)/${damPath}`;
+      // If path already has canon-assets, prepend /content/dam/ directly
+      // Otherwise prepend the full canon-assets-(no-crop-applied) path
+      const fullUrl = damPath.includes('canon-assets')
+        ? `https://www.usa.canon.com/content/dam/${damPath}`
+        : `https://www.usa.canon.com/content/dam/canon-assets-(no-crop-applied)/${damPath}`;
       const picture = document.createElement('picture');
       picture.innerHTML = `<img src="${fullUrl}" alt="${alt}" loading="lazy">`;
       const parent = a.parentElement;
