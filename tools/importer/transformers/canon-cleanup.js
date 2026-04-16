@@ -51,5 +51,24 @@ export default function transform(hookName, element, payload) {
     // Remove data-tracking attributes
     element.querySelectorAll('[data-track]').forEach((el) => el.removeAttribute('data-track'));
     element.querySelectorAll('[onclick]').forEach((el) => el.removeAttribute('onclick'));
+
+    // Fix Scene7 image URLs: add ?fmt=jpg extension so DA can identify them as images
+    // Scene7 URLs like s7d1.scene7.com/is/image/canon/... have no file extension
+    element.querySelectorAll('img[src*="scene7.com"]').forEach((img) => {
+      const src = img.getAttribute('src');
+      if (src && !src.includes('fmt=')) {
+        img.setAttribute('src', src + '?fmt=jpg');
+      }
+    });
+
+    // Fix lazy-loaded images: replace placeholder src with data-src
+    element.querySelectorAll('img[data-src]').forEach((img) => {
+      const dataSrc = img.getAttribute('data-src');
+      if (dataSrc) {
+        img.setAttribute('src', dataSrc.includes('scene7.com') && !dataSrc.includes('fmt=')
+          ? dataSrc + '?fmt=jpg'
+          : dataSrc);
+      }
+    });
   }
 }

@@ -210,6 +210,18 @@ var CustomImportScript = (() => {
       ]);
       element.querySelectorAll("[data-track]").forEach((el) => el.removeAttribute("data-track"));
       element.querySelectorAll("[onclick]").forEach((el) => el.removeAttribute("onclick"));
+      element.querySelectorAll('img[src*="scene7.com"]').forEach((img) => {
+        const src = img.getAttribute("src");
+        if (src && !src.includes("fmt=")) {
+          img.setAttribute("src", src + "?fmt=jpg");
+        }
+      });
+      element.querySelectorAll("img[data-src]").forEach((img) => {
+        const dataSrc = img.getAttribute("data-src");
+        if (dataSrc) {
+          img.setAttribute("src", dataSrc.includes("scene7.com") && !dataSrc.includes("fmt=") ? dataSrc + "?fmt=jpg" : dataSrc);
+        }
+      });
     }
   }
 
