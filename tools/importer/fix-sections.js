@@ -1,7 +1,14 @@
 #!/usr/bin/env node
 /**
  * Post-process imported Canon security pillar pages.
- * Splits the single big content div into proper EDS sections.
+ * Splits content into proper EDS sections with section-metadata.
+ *
+ * Handles:
+ * - Callout text (bold "5 Pillars" paragraph) → light-grey section
+ * - "How Canon Can Help" / dark background sections → dark section
+ * - "Let's talk" / CTA sections → light-grey section
+ * - Missing Scene7 images → converts remaining <img> with canon-image-default to /scene7/ links
+ * - Removes empty divs
  */
 import { readFileSync, writeFileSync } from 'fs';
 import { JSDOM } from 'jsdom';
@@ -12,67 +19,125 @@ if (!files.length) {
   process.exit(1);
 }
 
+function createSectionMeta(doc, style) {
+  const meta = doc.createElement('div');
+  meta.className = 'section-metadata';
+  meta.innerHTML = `<div><div>style</div><div>${style}</div></div>`;
+  return meta;
+}
+
+function splitAtElement(el, parentDiv) {
+  // Splits parentDiv at el: everything from el onward goes into a new div
+  const newDiv = el.ownerDocument.createElement('div');
+  let node = el;
+  while (node) {
+    const next = node.nextSibling;
+    newDiv.appendChild(node);
+    node = next;
+  }
+  parentDiv.after(newDiv);
+  return newDiv;
+}
+
 files.forEach((file) => {
   const html = readFileSync(file, 'utf-8');
   const dom = new JSDOM(`<body>${html}</body>`);
   const doc = dom.window.document;
   const body = doc.body;
 
-  // Find the big content div (the one with hero-security, tabs, etc.)
-  const contentDiv = body.querySelector('div:not(:empty)');
-  if (!contentDiv) return;
+  // Remove ALL existing section-metadata
+  body.querySelectorAll('.section-metadata').forEach((sm) => sm.remove());
 
-  // Find the callout paragraph
+  // Remove empty top-level divs
+  [...body.children].forEach((child) => {
+    if (child.tagName === 'DIV' && !child.innerHTML.trim()) child.remove();
+  });
+
+  // Find the big content div
+  const contentDiv = body.querySelector('div:not(:empty)');
+  if (!contentDiv) {
+    console.log(`${file}: no content div found, skipping`);
+    return;
+  }
+
+  let changes = [];
+
+  // 1. Split at callout paragraph ("5 Pillars of Security presents...")
   let calloutP = null;
-  contentDiv.querySelectorAll('p').forEach((p) => {
+  contentDiv.querySelectorAll(':scope > p').forEach((p) => {
     if (!calloutP && p.querySelector('strong') && (p.textContent || '').includes('5 Pillar')) {
       calloutP = p;
     }
   });
 
-  // Remove ALL existing section-metadata (transformer creates them in wrong places)
-  body.querySelectorAll('.section-metadata').forEach((sm) => sm.remove());
+  if (calloutP) {
+    const calloutSection = splitAtElement(calloutP, contentDiv);
 
-  if (!calloutP) {
-    console.log(`${file}: no callout found, skipping section split`);
-    return;
+    // Find where the callout text ends (next heading or block starts the body)
+    const firstHeadingAfter = calloutSection.querySelector('h2, h3, h4, [class*="columns"], [class*="accordion"]');
+    if (firstHeadingAfter) {
+      // Split body content from callout
+      splitAtElement(firstHeadingAfter, calloutSection);
+    }
+
+    // Add light-grey to the callout section
+    calloutSection.appendChild(createSectionMeta(doc, 'light-grey'));
+    changes.push('callout→light-grey');
   }
 
-  // Collect everything after the callout
-  const afterCallout = [];
-  let next = calloutP.nextSibling;
-  while (next) {
-    afterCallout.push(next);
-    next = next.nextSibling;
-  }
+  // 2. Find "How Canon Can Help" heading and make it a dark section
+  body.querySelectorAll('h2').forEach((h2) => {
+    const text = h2.textContent || '';
+    if (text.includes('How Canon Can Help')) {
+      const parent = h2.parentElement;
+      if (parent && parent.tagName === 'DIV') {
+        // Check if there's content after this section to split
+        const nextH2 = h2.nextElementSibling;
+        // Find the end of this section (next major heading or block)
+        let endEl = null;
+        let sibling = parent.nextElementSibling;
+        // The "How Canon Can Help" section is typically its own div already
+        // Just add dark section-metadata
+        parent.appendChild(createSectionMeta(doc, 'dark'));
+        changes.push('canon-help→dark');
+      }
+    }
+  });
 
-  // Remove callout and after-content from the big div
-  calloutP.remove();
-  afterCallout.forEach((n) => n.remove());
+  // 3. Find "Let's talk" / CTA heading and make it a styled section
+  body.querySelectorAll('h3, h2').forEach((h) => {
+    const text = h.textContent || '';
+    if (text.includes("step up your security") || text.includes("Let's talk")) {
+      const parent = h.parentElement;
+      if (parent && parent.tagName === 'DIV' && !parent.querySelector('.section-metadata')) {
+        parent.appendChild(createSectionMeta(doc, 'light-grey'));
+        changes.push('cta→light-grey');
+      }
+    }
+  });
 
-  // Create callout section with light-grey
-  const calloutDiv = doc.createElement('div');
-  calloutDiv.appendChild(calloutP);
-  const metaDiv = doc.createElement('div');
-  metaDiv.className = 'section-metadata';
-  metaDiv.innerHTML = '<div><div>style</div><div>light-grey</div></div>';
-  calloutDiv.appendChild(metaDiv);
+  // 4. Fix remaining Canon default placeholder images
+  // Some images point to canon-image-default.webp (lazy-load placeholder)
+  // These should have been Scene7 images but weren't loaded due to bot protection
+  body.querySelectorAll('img').forEach((img) => {
+    const src = img.getAttribute('src') || '';
+    if (src.includes('canon-image-default')) {
+      // Remove the placeholder image (it's broken anyway)
+      const wrapper = img.closest('p') || img.parentElement;
+      if (wrapper) wrapper.remove();
+      changes.push('removed-placeholder-img');
+    }
+  });
 
-  // Create body section with remaining content
-  const bodyDiv = doc.createElement('div');
-  afterCallout.forEach((n) => bodyDiv.appendChild(n));
+  // 5. Remove empty top-level divs (cleanup after splits)
+  [...body.children].forEach((child) => {
+    if (child.tagName === 'DIV' && !child.innerHTML.trim()) child.remove();
+  });
 
-  // Remove any section-metadata that ended up in the body section
-  bodyDiv.querySelectorAll('.section-metadata').forEach((sm) => sm.remove());
-
-  // Insert after the content div: [contentDiv] [calloutDiv] [bodyDiv]
-  contentDiv.after(bodyDiv);
-  contentDiv.after(calloutDiv);
-
-  // Write back - extract just the inner divs
+  // Write back
   const output = [...body.children].map((c) => c.outerHTML).join('\n');
   writeFileSync(file, output);
-  
+
   const divCount = [...body.children].length;
-  console.log(`${file}: split into ${divCount} sections, callout with light-grey`);
+  console.log(`${file}: ${divCount} sections [${changes.join(', ')}]`);
 });
