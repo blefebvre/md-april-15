@@ -63,5 +63,25 @@ export default function transform(hookName, element, payload) {
     element.querySelectorAll('[data-track]').forEach((el) => el.removeAttribute('data-track'));
     element.querySelectorAll('[onclick]').forEach((el) => el.removeAttribute('onclick'));
     element.querySelectorAll('[data-cmp-is]').forEach((el) => el.removeAttribute('data-cmp-is'));
+
+    // Convert remaining Scene7/Dynamic Media <img> to <a> links for DA compatibility
+    // DA corrupts external image URLs with curly quotes; links are preserved correctly
+    const document = element.ownerDocument;
+    element.querySelectorAll('img').forEach((img) => {
+      const src = img.src || img.getAttribute('src') || '';
+      if (src.includes('scene7.com/is/image')) {
+        const cleanSrc = src.split('?')[0].split(':')[0];
+        const a = document.createElement('a');
+        a.href = cleanSrc;
+        a.textContent = img.alt || '';
+        const wrapper = img.closest('p') || img.parentElement;
+        if (wrapper.tagName === 'P') {
+          wrapper.textContent = '';
+          wrapper.appendChild(a);
+        } else {
+          img.replaceWith(a);
+        }
+      }
+    });
   }
 }

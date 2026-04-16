@@ -9,9 +9,9 @@
  * Selectors from captured DOM: .category-navbar-list-items, .navlist-item-desktop a
  */
 export default function parse(element, { document }) {
-  // Extract navigation items from the desktop nav bar
+  // Extract navigation items from the desktop nav bar only (avoid mobile duplicates)
   const navItems = element.querySelectorAll(
-    '.category-navbar-list-items .navlist-item-desktop a, .category-navbar-list-mobile .navlist-item-mobile a'
+    '.category-navbar-list-items .navlist-item-desktop a'
   );
 
   const cells = [];

@@ -2,10 +2,26 @@
 /* global WebImporter */
 
 /**
+ * Converts a Scene7 img to an anchor link for DA compatibility.
+ * Non-Scene7 images are returned as-is.
+ */
+function imgToLink(img, document) {
+  const src = img.src || img.getAttribute('src') || '';
+  if (src.includes('scene7.com')) {
+    const cleanSrc = src.split('?')[0].split(':')[0];
+    const a = document.createElement('a');
+    a.href = cleanSrc;
+    a.textContent = img.alt || '';
+    return a;
+  }
+  return img;
+}
+
+/**
  * Parser: columns-content-split
  * Base block: columns
  * Source: https://www.usa.canon.com/business/it-and-security/five-pillars-of-security/device-security
- * Structure: 1 row with 2 columns. Col1 = text content, Col2 = image
+ * Structure: 1 row with 2 columns. Col1 = text content, Col2 = image (as link for Scene7)
  * Selectors from captured DOM: .contentsplit-cmp, .cs-content-wrapper, .image-frame img
  * Also handles 2-column layout: .column-control-cmp.column-count-2
  */
@@ -17,7 +33,6 @@ export default function parse(element, { document }) {
   const imageFrame = element.querySelector('.image-frame img, .image-wrapper img, .image img');
 
   if (contentWrapper || imageFrame) {
-    // Content split: text column + image column
     const textCol = [];
     const contentEl = contentWrapper || element;
     const heading = contentEl.querySelector('h2, h3');
@@ -29,7 +44,7 @@ export default function parse(element, { document }) {
     });
 
     const imgCol = [];
-    if (imageFrame) imgCol.push(imageFrame);
+    if (imageFrame) imgCol.push(imgToLink(imageFrame, document));
 
     if (textCol.length > 0 || imgCol.length > 0) {
       cells.push([textCol.length > 0 ? textCol : '', imgCol.length > 0 ? imgCol : '']);
