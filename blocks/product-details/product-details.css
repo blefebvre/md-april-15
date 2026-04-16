@@ -1,0 +1,10 @@
+/* Product Details block - placeholder */
+.product-details {
+  padding: var(--spacing-l) 0;
+  border-bottom: 1px solid var(--canon-border);
+  min-height: 100px;
+  background-color: var(--light-color);
+  text-align: center;
+  color: var(--canon-grey);
+  font-size: var(--body-font-size-s);
+}

@@ -3,17 +3,24 @@
   margin: 0;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(257px, 1fr));
-  gap: 24px;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--spacing-m);
 }
 
 .cards > ul > li {
-  border: 1px solid #dadada;
+  border: 1px solid var(--canon-border);
+  border-radius: 4px;
   background-color: var(--background-color);
+  overflow: hidden;
+  transition: box-shadow var(--transition-base);
+}
+
+.cards > ul > li:hover {
+  box-shadow: 0 4px 12px rgb(0 0 0 / 10%);
 }
 
 .cards .cards-card-body {
-  margin: 16px;
+  margin: var(--spacing-s);
 }
 
 .cards .cards-card-image {

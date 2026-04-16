@@ -4,6 +4,7 @@ header .nav-wrapper {
   width: 100%;
   z-index: 2;
   position: fixed;
+  border-bottom: 1px solid var(--canon-border);
 }
 
 header nav {
@@ -55,7 +56,14 @@ header nav p {
 }
 
 header nav a:any-link {
-  color: currentcolor;
+  color: var(--text-color);
+  text-decoration: none;
+  transition: color var(--transition-base);
+}
+
+header nav a:hover {
+  color: var(--canon-red);
+  text-decoration: none;
 }
 
 /* hamburger */
@@ -148,6 +156,11 @@ header .nav-brand {
   line-height: 1;
 }
 
+header nav .nav-brand a {
+  color: var(--canon-red);
+  font-weight: 700;
+}
+
 header nav .nav-brand img {
   width: 128px;
   height: auto;
@@ -174,7 +187,7 @@ header nav .nav-sections ul {
 }
 
 header nav .nav-sections ul > li {
-  font-weight: 500;
+  font-weight: 600;
 }
 
 header nav .nav-sections ul > li > ul {
@@ -242,10 +255,13 @@ header nav .nav-sections ul > li > ul > li {
     display: block;
     position: absolute;
     left: -24px;
-    width: 200px;
+    width: 220px;
     top: 150%;
     padding: 16px;
-    background-color: var(--light-color);
+    background-color: var(--background-color);
+    border: 1px solid var(--canon-border);
+    border-radius: 4px;
+    box-shadow: 0 4px 12px rgb(0 0 0 / 10%);
     white-space: initial;
   }
 
@@ -258,7 +274,7 @@ header nav .nav-sections ul > li > ul > li {
     height: 0;
     border-left: 8px solid transparent;
     border-right: 8px solid transparent;
-    border-bottom: 8px solid var(--light-color);
+    border-bottom: 8px solid var(--background-color);
   }
 
   header nav .nav-sections .default-content-wrapper > ul > li > ul > li {
@@ -269,4 +285,9 @@ header nav .nav-sections ul > li > ul > li {
 /* tools */
 header nav .nav-tools {
   grid-area: tools;
+}
+
+header nav .nav-tools a {
+  font-size: var(--body-font-size-s);
+  font-weight: 600;
 }
