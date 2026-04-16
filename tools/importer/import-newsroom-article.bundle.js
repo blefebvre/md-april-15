@@ -159,11 +159,73 @@ var CustomImportScript = (() => {
     }
   }
 
+  // tools/importer/utils.js
+  var SCENE7_PATTERN = /scene7\.com\/is\/image\//;
+  var SCENE7_PREFIX = "/scene7/";
+  function extractScene7Path(src) {
+    const match = src.match(/scene7\.com\/is\/image\/(.+)/);
+    if (!match) return null;
+    return match[1].split("?")[0].split(":")[0];
+  }
+  function scene7ImgToLink(img, document) {
+    const src = img.src || img.getAttribute("src") || "";
+    if (SCENE7_PATTERN.test(src)) {
+      const path = extractScene7Path(src);
+      if (path) {
+        const a = document.createElement("a");
+        a.href = `${SCENE7_PREFIX}${path}`;
+        a.textContent = img.alt || path;
+        return a;
+      }
+    }
+    return img;
+  }
+
+  // tools/importer/parsers/cards-social.js
+  function parse(element, { document }) {
+    const cardDivs = element.querySelectorAll(".filter-div");
+    const cells = [];
+    cardDivs.forEach((card) => {
+      const img = card.querySelector("img");
+      const h3 = card.querySelector("h3");
+      const desc = card.querySelector('.title-description, [class*="description"]');
+      const link = card.querySelector("a[href]");
+      const imgCell = img ? scene7ImgToLink(img, document) : "";
+      const textCell = [];
+      if (h3) textCell.push(h3);
+      if (desc) {
+        const p = document.createElement("p");
+        p.textContent = desc.textContent.trim();
+        textCell.push(p);
+      }
+      if (link) {
+        const a = document.createElement("a");
+        a.href = link.href;
+        a.textContent = link.textContent.trim();
+        const p = document.createElement("p");
+        p.appendChild(a);
+        textCell.push(p);
+      }
+      if (textCell.length > 0) {
+        cells.push([imgCell, textCell]);
+      }
+    });
+    if (cells.length > 0) {
+      const block = WebImporter.Blocks.createBlock(document, { name: "cards", cells });
+      element.replaceWith(block);
+    }
+  }
+
   // tools/importer/import-newsroom-article.js
+  var parsers = {
+    "cards-social": parse
+  };
   var PAGE_TEMPLATE = {
     name: "newsroom-article",
     description: "Canon newsroom press release article",
-    blocks: []
+    blocks: [
+      { name: "cards-social", instances: [".content-div.blacktext"] }
+    ]
   };
   var transformers = [transform];
   function executeTransformers(hookName, element, payload) {
@@ -182,6 +244,20 @@ var CustomImportScript = (() => {
       const main = document.body;
       executeTransformers("beforeTransform", main, payload);
       executeTransformers("afterTransform", main, payload);
+      PAGE_TEMPLATE.blocks.forEach((blockDef) => {
+        blockDef.instances.forEach((selector) => {
+          main.querySelectorAll(selector).forEach((el) => {
+            const parser = parsers[blockDef.name];
+            if (parser) {
+              try {
+                parser(el, { document, url, params });
+              } catch (e) {
+                console.error(`Failed to parse ${blockDef.name}:`, e);
+              }
+            }
+          });
+        });
+      });
       main.querySelectorAll(".section-metadata").forEach((sm) => sm.remove());
       const hasBumper = main.querySelector(".cards-bumper") || main.textContent.includes("GET SUPPORT");
       if (!hasBumper) {

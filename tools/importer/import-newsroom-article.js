@@ -4,11 +4,21 @@
 // TRANSFORMER IMPORTS
 import canonCleanupTransformer from './transformers/canon-cleanup.js';
 
+// PARSER IMPORTS
+import cardsSocialParser from './parsers/cards-social.js';
+
+// PARSER REGISTRY
+const parsers = {
+  'cards-social': cardsSocialParser,
+};
+
 // PAGE TEMPLATE
 const PAGE_TEMPLATE = {
   name: 'newsroom-article',
   description: 'Canon newsroom press release article',
-  blocks: [],
+  blocks: [
+    { name: 'cards-social', instances: ['.content-div.blacktext'] },
+  ],
 };
 
 // TRANSFORMER REGISTRY
@@ -31,7 +41,20 @@ export default {
     executeTransformers('beforeTransform', main, payload);
     executeTransformers('afterTransform', main, payload);
 
-    // 2. Remove misplaced section-metadata
+    // 2. Parse blocks
+    PAGE_TEMPLATE.blocks.forEach((blockDef) => {
+      blockDef.instances.forEach((selector) => {
+        main.querySelectorAll(selector).forEach((el) => {
+          const parser = parsers[blockDef.name];
+          if (parser) {
+            try { parser(el, { document, url, params }); }
+            catch (e) { console.error(`Failed to parse ${blockDef.name}:`, e); }
+          }
+        });
+      });
+    });
+
+    // 3. Remove misplaced section-metadata
     main.querySelectorAll('.section-metadata').forEach((sm) => sm.remove());
 
     // 3. Add bumper cards (newsroom uses different bumper: GET SUPPORT / NEED IT FIRST / LEARN WITH CANON)
