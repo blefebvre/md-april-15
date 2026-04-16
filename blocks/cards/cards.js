@@ -4,8 +4,12 @@ const SCENE7_BASE = 'https://s7d1.scene7.com/is/image/';
 
 export default function decorate(block) {
   // Convert /scene7/ links to images before restructuring
-  block.querySelectorAll('a[href^="/scene7/"]').forEach((a) => {
-    const path = a.getAttribute('href').slice(8); // Remove '/scene7/'
+  // DA resolves relative /scene7/ to absolute https://domain/scene7/
+  block.querySelectorAll('a[href*="/scene7/"]').forEach((a) => {
+    const href = a.getAttribute('href') || a.href;
+    const match = href.match(/\/scene7\/(.+)/);
+    if (!match) return;
+    const path = match[1];
     const alt = a.textContent.trim();
     const img = document.createElement('img');
     img.src = `${SCENE7_BASE}${path}?fmt=png-alpha`;
