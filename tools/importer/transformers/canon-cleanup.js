@@ -83,18 +83,20 @@ export default function transform(hookName, element, payload) {
     element.querySelectorAll('[onclick]').forEach((el) => el.removeAttribute('onclick'));
     element.querySelectorAll('[data-cmp-is]').forEach((el) => el.removeAttribute('data-cmp-is'));
 
-    // Convert remaining Scene7/Dynamic Media <img> to <a> links for DA compatibility
-    // DA corrupts external image URLs with curly quotes; links are preserved correctly
+    // Convert remaining Scene7/Dynamic Media <img> to DA-safe <a> links
+    // Uses relative /scene7/ marker path that DA won't corrupt
+    // The autoblock in scripts.js resolves these to full Scene7 URLs at render time
     const document = element.ownerDocument;
     element.querySelectorAll('img').forEach((img) => {
       const src = img.src || img.getAttribute('src') || '';
-      if (src.includes('scene7.com/is/image')) {
-        const cleanSrc = src.split('?')[0].split(':')[0];
+      const match = src.match(/scene7\.com\/is\/image\/(.+)/);
+      if (match) {
+        const path = match[1].split('?')[0].split(':')[0];
         const a = document.createElement('a');
-        a.href = cleanSrc;
-        a.textContent = img.alt || '';
+        a.href = `/scene7/${path}`;
+        a.textContent = img.alt || path;
         const wrapper = img.closest('p') || img.parentElement;
-        if (wrapper.tagName === 'P') {
+        if (wrapper && wrapper.tagName === 'P') {
           wrapper.textContent = '';
           wrapper.appendChild(a);
         } else {
