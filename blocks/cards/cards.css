@@ -1,29 +1,59 @@
+/* Cards block - Canon social media / general card grid */
 .cards > ul {
   list-style: none;
   margin: 0;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: var(--spacing-s);
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: var(--spacing-m);
 }
 
 .cards > ul > li {
+  border: 1px solid var(--canon-light-grey);
   border-radius: 0;
   background-color: var(--background-color);
   overflow: hidden;
+  text-align: center;
+  padding: var(--spacing-m);
 }
 
 .cards .cards-card-body {
-  display: none;
+  margin: 0;
+}
+
+.cards .cards-card-body h3 {
+  font-size: var(--body-font-size-m);
+  font-weight: 700;
+  margin: var(--spacing-xs) 0;
+}
+
+.cards .cards-card-body p {
+  font-size: var(--body-font-size-s);
+  line-height: 1.5;
+  color: var(--text-color);
+  margin: var(--spacing-xs) 0;
+}
+
+.cards .cards-card-body a {
+  color: var(--text-color);
+  font-size: var(--body-font-size-s);
+  text-decoration: none;
+}
+
+.cards .cards-card-body a:hover {
+  color: var(--canon-red);
+  text-decoration: underline;
 }
 
 .cards .cards-card-image {
   line-height: 0;
+  display: flex;
+  justify-content: center;
+  padding: var(--spacing-s) 0;
 }
 
 .cards > ul > li img {
-  width: 100%;
-  aspect-ratio: 1 / 1;
-  object-fit: cover;
-  cursor: pointer;
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
 }
