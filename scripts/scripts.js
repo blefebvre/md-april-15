@@ -80,9 +80,9 @@ function buildDynamicMediaImages(main) {
     const alt = a.textContent.trim();
 
     const picture = document.createElement('picture');
-    const srcWebp = `${src}?fmt=webp&wid=1200`;
-    const srcFallback = `${src}?fmt=jpg&wid=1200`;
-    picture.innerHTML = `<source type="image/webp" srcset="${srcWebp}"><img src="${srcFallback}" alt="${alt}" loading="lazy" width="1200">`;
+    const srcWebp = `${src}?fmt=webp-alpha`;
+    const srcFallback = `${src}?fmt=png-alpha`;
+    picture.innerHTML = `<source type="image/webp" srcset="${srcWebp}"><img src="${srcFallback}" alt="${alt}" loading="lazy">`;
 
     const parent = a.parentElement;
     if (parent.tagName === 'P' && parent.textContent.trim() === alt) {
