@@ -376,7 +376,7 @@ main .section.dark a:any-link {
 /* tabs */
 .tabs-container {
   max-width: 1200px;
-  margin: var(--spacing-l) auto;
+  margin: 0 auto;
   padding: 0 var(--spacing-m);
 }
 
@@ -385,16 +385,21 @@ main .section.dark a:any-link {
   border-bottom: 2px solid var(--canon-border);
   overflow-x: auto;
   gap: 0;
+  position: sticky;
+  top: 0;
+  background: var(--background-color);
+  z-index: 1;
 }
 
 .tabs-tab {
+  flex: 1;
   padding: var(--spacing-s) var(--spacing-m);
   border: none;
   border-bottom: 3px solid transparent;
   background: none;
   font-family: var(--body-font-family);
   font-size: var(--body-font-size-s);
-  font-weight: 600;
+  font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 1px;
   color: var(--canon-grey);
@@ -402,6 +407,7 @@ main .section.dark a:any-link {
   white-space: nowrap;
   transition: color var(--transition-base), border-color var(--transition-base);
   margin-bottom: -2px;
+  text-align: center;
 }
 
 .tabs-tab:hover {
@@ -409,14 +415,14 @@ main .section.dark a:any-link {
 }
 
 .tabs-tab.active {
-  color: var(--canon-red);
+  color: var(--text-color);
   border-bottom-color: var(--canon-red);
 }
 
 .tabs-panels .tabs-panel {
   display: none;
   margin: 0;
-  padding: var(--spacing-l) 0;
+  padding: var(--spacing-xl) 0 var(--spacing-l);
 }
 
 .tabs-panels .tabs-panel.active {
@@ -424,12 +430,73 @@ main .section.dark a:any-link {
 }
 
 .tabs-panels .tabs-panel > div {
-  max-width: 100%;
+  max-width: none;
   padding: 0;
 }
+
+.tabs-panels .tabs-panel > .default-content-wrapper {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* stylelint-disable no-descending-specificity */
+
+/* overview tab content styling */
+.tabs-panels .tabs-panel h2 {
+  font-size: 36px;
+  font-weight: 400;
+  margin-top: var(--spacing-xxl);
+  margin-bottom: var(--spacing-m);
+}
+
+.tabs-panels .tabs-panel h2:first-child {
+  margin-top: 0;
+}
+
+.tabs-panels .tabs-panel h3 {
+  font-size: 24px;
+  font-weight: 600;
+  margin-top: var(--spacing-xl);
+  margin-bottom: var(--spacing-s);
+}
+
+.tabs-panels .tabs-panel h4 {
+  font-size: 24px;
+  font-weight: 600;
+  margin-top: var(--spacing-xl);
+  margin-bottom: 8px;
+}
+
+.tabs-panels .tabs-panel p {
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--text-color);
+  margin-top: 0;
+  margin-bottom: var(--spacing-s);
+}
+
+.tabs-panels .tabs-panel picture,
+.tabs-panels .tabs-panel img {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: var(--spacing-m) 0;
+}
+
+/* let blocks stretch wider within tab panels */
+.tabs-panels .tabs-panel .embed-wrapper,
+.tabs-panels .tabs-panel .columns-wrapper,
+.tabs-panels .tabs-panel .cards-wrapper {
+  max-width: 100%;
+}
+/* stylelint-enable no-descending-specificity */
 
 @media (width >= 900px) {
   .tabs-container {
     padding: 0 var(--spacing-l);
+  }
+
+  .tabs-panels .tabs-panel h2 {
+    font-size: 46px;
   }
 }

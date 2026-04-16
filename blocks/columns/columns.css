@@ -1,12 +1,13 @@
 .columns > div {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-m);
+  gap: var(--spacing-l);
 }
 
 .columns img {
   width: 100%;
-  border-radius: 4px;
+  height: auto;
+  display: block;
 }
 
 .columns > div > div {
@@ -22,12 +23,15 @@
 }
 
 .columns h4 {
-  margin-top: 0.5em;
+  margin-top: var(--spacing-s);
+  margin-bottom: 8px;
+  font-size: 20px;
 }
 
 .columns p {
-  color: var(--dark-color);
-  line-height: 1.6;
+  color: var(--text-color);
+  line-height: 1.5;
+  font-size: 16px;
 }
 
 @media (width >= 900px) {
