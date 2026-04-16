@@ -376,6 +376,39 @@ main .section.highlight {
   padding: var(--spacing-l) 0;
 }
 
+/* section metadata - red (CTA banners) */
+main .section.red {
+  background-color: var(--canon-red);
+  color: var(--canon-white);
+  margin: 0;
+  padding: var(--spacing-l) 0;
+  text-align: center;
+}
+
+main .section.red h2,
+main .section.red h3,
+main .section.red h4,
+main .section.red p {
+  color: var(--canon-white);
+}
+
+main .section.red a:any-link {
+  color: var(--canon-white);
+  border: 1px solid var(--canon-white);
+  padding: 10px 24px;
+  text-decoration: none;
+  font-weight: 700;
+  text-transform: uppercase;
+  display: inline-block;
+  margin-top: var(--spacing-s);
+  transition: all var(--transition-speed) var(--transition-ease);
+}
+
+main .section.red a:hover {
+  background-color: var(--canon-white);
+  color: var(--canon-red);
+}
+
 /* section metadata - dark */
 main .section.dark {
   background-color: var(--canon-black);

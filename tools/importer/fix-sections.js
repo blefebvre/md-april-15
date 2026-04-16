@@ -152,7 +152,7 @@ files.forEach((file) => {
           ctaSection.appendChild(node);
           node = next;
         }
-        ctaSection.appendChild(createSectionMeta(doc, 'light-grey'));
+        ctaSection.appendChild(createSectionMeta(doc, 'red'));
 
         // Insert CTA section, move remaining content after it
         if (node) {
@@ -165,7 +165,7 @@ files.forEach((file) => {
           parent.after(remainDiv);
         }
         parent.after(ctaSection);
-        changes.push('cta→light-grey');
+        changes.push('cta→red');
       }
     }
   });
