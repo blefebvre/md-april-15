@@ -1,6 +1,6 @@
 /* Tabs Pillar Nav - Canon five pillars horizontal navigation bar */
 .tabs-pillar-nav-container {
-  background-color: var(--canon-black);
+  background-color: transparent;
 }
 
 .tabs-pillar-nav-container .tabs-pillar-nav-wrapper {
@@ -9,6 +9,7 @@
 }
 
 .tabs-pillar-nav {
+  background-color: var(--canon-black);
   padding: 0;
 }
 
