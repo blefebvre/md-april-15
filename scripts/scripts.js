@@ -43,6 +43,37 @@ async function loadFonts() {
   }
 }
 
+const DM_PATTERN = /^https?:\/\/s7[a-z0-9]*\.scene7\.com\/is\/image\//;
+
+/**
+ * Converts Dynamic Media / Scene7 links to picture elements.
+ * Authored as: <a href="https://s7d1.scene7.com/is/image/canon/...">Alt text</a>
+ * Becomes: <picture><source><img src="..." alt="..."></picture>
+ * @param {Element} main The container element
+ */
+function buildDynamicMediaImages(main) {
+  main.querySelectorAll('a[href]').forEach((a) => {
+    if (!DM_PATTERN.test(a.href)) return;
+
+    const alt = a.textContent.trim();
+    const src = a.href;
+
+    const picture = document.createElement('picture');
+    const srcWebp = `${src}?fmt=webp&wid=1200`;
+    const srcFallback = `${src}?fmt=jpg&wid=1200`;
+    picture.innerHTML = `<source type="image/webp" srcset="${srcWebp}"><img src="${srcFallback}" alt="${alt}" loading="lazy" width="1200">`;
+
+    const parent = a.parentElement;
+    if (parent.tagName === 'P' && parent.textContent.trim() === alt) {
+      parent.replaceWith(picture);
+    } else if (parent.tagName === 'DIV' && parent.textContent.trim() === alt) {
+      parent.replaceWith(picture);
+    } else {
+      a.replaceWith(picture);
+    }
+  });
+}
+
 /**
  * Builds all synthetic blocks in a container element.
  * @param {Element} main The container element
@@ -67,6 +98,7 @@ function buildAutoBlocks(main) {
       });
     }
 
+    buildDynamicMediaImages(main);
     buildHeroBlock(main);
   } catch (error) {
     // eslint-disable-next-line no-console
