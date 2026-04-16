@@ -59,6 +59,25 @@ export default function transform(hookName, element, payload) {
       'input[type="hidden"]',
     ]);
 
+    // Remove Canon footer experience fragments (security pillar pages)
+    // The footer on these pages is an .xfpage div, not a <footer> tag
+    WebImporter.DOMUtils.remove(element, [
+      '.xfpage',
+      '.experiencefragment',
+      '.cmp-experiencefragment',
+    ]);
+
+    // Remove duplicate footer content that may have been captured
+    // Canon footer sections have headings like "ABOUT CANON", "MYCANON", etc.
+    const footerHeadings = ['ABOUT CANON', 'MYCANON', 'ORDER HELP', 'PRODUCT RESOURCES', 'LEGAL'];
+    element.querySelectorAll('h3').forEach((h3) => {
+      if (footerHeadings.includes(h3.textContent.trim().toUpperCase())) {
+        // Remove the section containing this footer heading
+        const section = h3.closest('div');
+        if (section) section.remove();
+      }
+    });
+
     // Remove data-tracking attributes
     element.querySelectorAll('[data-track]').forEach((el) => el.removeAttribute('data-track'));
     element.querySelectorAll('[onclick]').forEach((el) => el.removeAttribute('onclick'));
