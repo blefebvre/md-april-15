@@ -22,6 +22,10 @@
   display: block;
 }
 
+.columns h3 {
+  margin-top: 0;
+}
+
 .columns h4 {
   margin-top: var(--spacing-s);
   margin-bottom: 8px;
@@ -36,7 +40,7 @@
 
 @media (width >= 900px) {
   .columns > div {
-    align-items: flex-start;
+    align-items: center;
     flex-direction: unset;
     gap: var(--spacing-l);
   }

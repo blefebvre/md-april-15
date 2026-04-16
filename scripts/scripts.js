@@ -66,8 +66,6 @@ function buildDynamicMediaImages(main) {
     const parent = a.parentElement;
     if (parent.tagName === 'P' && parent.textContent.trim() === alt) {
       parent.replaceWith(picture);
-    } else if (parent.tagName === 'DIV' && parent.textContent.trim() === alt) {
-      parent.replaceWith(picture);
     } else {
       a.replaceWith(picture);
     }
