@@ -126,6 +126,23 @@ export default function transform(hookName, element, payload) {
     element.querySelectorAll('[onclick]').forEach((el) => el.removeAttribute('onclick'));
     element.querySelectorAll('[data-cmp-is]').forEach((el) => el.removeAttribute('data-cmp-is'));
 
+    // Fix placeholder images: when <a href="/content/dam/..."><img src="canon-image-default.webp">
+    // replace with <img src="full-dam-url">
+    const doc2 = element.ownerDocument;
+    element.querySelectorAll('a > img').forEach((img) => {
+      const src = img.getAttribute('src') || '';
+      if (src.includes('canon-image-default')) {
+        const link = img.closest('a');
+        const damHref = link?.getAttribute('href') || '';
+        if (damHref.includes('/content/dam/') || damHref.includes('canon-assets')) {
+          const fullUrl = damHref.startsWith('http') ? damHref : `https://www.usa.canon.com${damHref}`;
+          img.src = fullUrl;
+          img.setAttribute('src', fullUrl);
+          link.replaceWith(img);
+        }
+      }
+    });
+
     // Convert remaining Scene7/Dynamic Media <img> to DA-safe <a> links
     // Uses relative /scene7/ marker path that DA won't corrupt
     // The autoblock in scripts.js resolves these to full Scene7 URLs at render time
