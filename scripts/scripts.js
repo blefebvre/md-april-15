@@ -46,12 +46,18 @@ async function loadFonts() {
 const DM_PATTERN = /^https?:\/\/s7[a-z0-9]*\.scene7\.com\/is\/image\//;
 
 /**
- * Cleans a URL that may have been wrapped in curly/smart quotes by DA.
- * @param {string} url The URL to clean
- * @returns {string} Cleaned URL
+ * Extracts a clean Scene7/Dynamic Media URL from a potentially corrupted href.
+ * DA editor may wrap URLs in curly quotes, producing hrefs like:
+ *   \u201Dhttps://s7d1.scene7.com/is/image/canon/foo\u201D
+ * The browser resolves this relative to the page, so a.href becomes:
+ *   https://da.live/%E2%80%9Dhttps://s7d1.scene7.com/...%E2%80%9D
+ * This function extracts just the Scene7 URL.
+ * @param {string} raw The raw href attribute value or resolved href
+ * @returns {string|null} Clean Scene7 URL or null if not a match
  */
-function cleanDMUrl(url) {
-  return url.replace(/[\u201C\u201D\u201E\u201F\u2033\u2036"]/g, '');
+function extractDMUrl(raw) {
+  const match = raw.match(/(https?:\/\/s7[a-z0-9]*\.scene7\.com\/is\/image\/[^\s\u201C\u201D\u201E\u201F"]+)/);
+  return match ? match[1] : null;
 }
 
 /**
@@ -63,11 +69,12 @@ function cleanDMUrl(url) {
  */
 function buildDynamicMediaImages(main) {
   main.querySelectorAll('a[href]').forEach((a) => {
-    const cleanedHref = cleanDMUrl(a.href);
-    if (!DM_PATTERN.test(cleanedHref)) return;
+    // Try raw attribute first, fall back to resolved href
+    const rawHref = a.getAttribute('href') || a.href;
+    const src = extractDMUrl(rawHref) || extractDMUrl(a.href);
+    if (!src) return;
 
     const alt = a.textContent.trim();
-    const src = cleanedHref;
 
     const picture = document.createElement('picture');
     const srcWebp = `${src}?fmt=webp&wid=1200`;
