@@ -85,32 +85,86 @@ files.forEach((file) => {
     changes.push('callout→light-grey');
   }
 
-  // 2. Find "How Canon Can Help" heading and make it a dark section
+  // 2. Find "How Canon Can Help" heading and split it into its own dark section
   body.querySelectorAll('h2').forEach((h2) => {
     const text = h2.textContent || '';
     if (text.includes('How Canon Can Help')) {
       const parent = h2.parentElement;
       if (parent && parent.tagName === 'DIV') {
-        // Check if there's content after this section to split
-        const nextH2 = h2.nextElementSibling;
-        // Find the end of this section (next major heading or block)
-        let endEl = null;
-        let sibling = parent.nextElementSibling;
-        // The "How Canon Can Help" section is typically its own div already
-        // Just add dark section-metadata
-        parent.appendChild(createSectionMeta(doc, 'dark'));
+        // Split at this h2: create a new section for "How Canon Can Help"
+        const darkSection = doc.createElement('div');
+
+        // Move the h2 and following content until next h2/h3/block into darkSection
+        let node = h2;
+        while (node) {
+          const next = node.nextSibling;
+          const isNextSection = node !== h2 && node.nodeType === 1 && (
+            node.matches('h2, h3') ||
+            node.classList?.contains('accordion-resources') ||
+            node.classList?.contains('section-metadata')
+          );
+          if (isNextSection) break;
+          darkSection.appendChild(node);
+          node = next;
+        }
+
+        darkSection.appendChild(createSectionMeta(doc, 'dark'));
+        // Insert the dark section in place
+        if (node) {
+          node.before(darkSection);
+        } else {
+          parent.appendChild(darkSection);
+        }
+        // Now split the dark section out of its parent to be a top-level div
+        parent.after(darkSection);
+        // Move remaining content after darkSection back
+        if (node) {
+          const remainDiv = doc.createElement('div');
+          while (node) {
+            const next = node.nextSibling;
+            remainDiv.appendChild(node);
+            node = next;
+          }
+          if (remainDiv.childNodes.length > 0) darkSection.after(remainDiv);
+        }
         changes.push('canon-help→dark');
       }
     }
   });
 
-  // 3. Find "Let's talk" / CTA heading and make it a styled section
+  // 3. Find "Let's talk" / CTA heading and split it into its own section
   body.querySelectorAll('h3, h2').forEach((h) => {
     const text = h.textContent || '';
     if (text.includes("step up your security") || text.includes("Let's talk")) {
       const parent = h.parentElement;
-      if (parent && parent.tagName === 'DIV' && !parent.querySelector('.section-metadata')) {
-        parent.appendChild(createSectionMeta(doc, 'light-grey'));
+      if (parent && parent.tagName === 'DIV' && !h.closest('.section-metadata')) {
+        // Split: move the CTA heading + next link/paragraph into its own section
+        const ctaSection = doc.createElement('div');
+        let node = h;
+        while (node) {
+          const next = node.nextSibling;
+          // Stop at disclaimer paragraph or tracking images or section-metadata
+          const isEnd = node !== h && node.nodeType === 1 && (
+            node.matches('.section-metadata, .accordion-resources, .cards-bumper') ||
+            (node.tagName === 'P' && (node.textContent || '').includes('Many variables can impact'))
+          );
+          if (isEnd) break;
+          ctaSection.appendChild(node);
+          node = next;
+        }
+        ctaSection.appendChild(createSectionMeta(doc, 'light-grey'));
+
+        // Insert CTA section, move remaining content after it
+        if (node) {
+          const remainDiv = doc.createElement('div');
+          while (node) {
+            const next = node.nextSibling;
+            remainDiv.appendChild(node);
+            node = next;
+          }
+          parent.after(remainDiv);
+        }
+        parent.after(ctaSection);
         changes.push('cta→light-grey');
       }
     }
