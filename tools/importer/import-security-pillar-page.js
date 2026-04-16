@@ -206,6 +206,53 @@ export default {
     // 4. Execute afterTransform transformers (final cleanup + section breaks)
     executeTransformers('afterTransform', main, payload);
 
+    // 4.5. Promote <hr> elements to be direct children of main
+    // The helix importer only recognizes <hr> as section breaks when they
+    // are direct children of the root element. Transformers may insert them
+    // inside nested divs - promote them by splitting parent containers.
+    main.querySelectorAll('hr').forEach((existingHr) => {
+      if (existingHr.parentElement !== main) {
+        // Move the hr to be a direct child of main, splitting content
+        const parent = existingHr.parentElement;
+        // Move all siblings after the hr into a new container
+        const after = document.createElement('div');
+        let next = existingHr.nextSibling;
+        while (next) {
+          const move = next;
+          next = next.nextSibling;
+          after.appendChild(move);
+        }
+        // Insert hr and the after-content after the parent
+        parent.after(after);
+        parent.after(existingHr);
+      }
+    });
+
+    // 4.6. Ensure bumper cards exist (common across all Canon security pillar pages)
+    if (!main.querySelector('.cards-bumper')) {
+      const bumperCells = [
+        [(() => {
+          const d = document.createElement('div');
+          d.innerHTML = '<h3>GET SUPPORT</h3><p>Need help with your product? Let us help you find what you need.</p><p><a href="/support">Product Support</a></p>';
+          return [...d.children];
+        })()],
+        [(() => {
+          const d = document.createElement('div');
+          d.innerHTML = '<h3>DOWNLOADS &amp; DRIVERS</h3><p>Search by product or browse by product type.</p><p><a href="/support/software-and-drivers">Software Support</a></p>';
+          return [...d.children];
+        })()],
+        [(() => {
+          const d = document.createElement('div');
+          d.innerHTML = '<h3>WHY CANON</h3><p>Learn what sets Canon apart from our competitors.</p><p><a href="/business/why-canon">Learn more</a></p>';
+          return [...d.children];
+        })()],
+      ];
+      const bumperBlock = WebImporter.Blocks.createBlock(document, { name: 'cards-bumper', cells: bumperCells });
+      const bumperHr = document.createElement('hr');
+      main.appendChild(bumperHr);
+      main.appendChild(bumperBlock);
+    }
+
     // 5. Apply WebImporter built-in rules
     const hr = document.createElement('hr');
     main.appendChild(hr);

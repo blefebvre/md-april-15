@@ -301,6 +301,13 @@ main img {
   height: auto;
 }
 
+/* Constrain Scene7 images rendered from autoblock to reasonable sizes */
+main > .section > .default-content-wrapper picture img {
+  max-width: 600px;
+  margin: var(--spacing-m) auto;
+  display: block;
+}
+
 .icon {
   display: inline-block;
   height: 24px;

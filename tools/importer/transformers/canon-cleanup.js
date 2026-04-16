@@ -59,8 +59,51 @@ export default function transform(hookName, element, payload) {
       'input[type="hidden"]',
     ]);
 
-    // Remove Canon footer experience fragments (security pillar pages)
-    // The footer on these pages is an .xfpage div, not a <footer> tag
+    // Save bumper cards from experience fragments before removing them
+    // The bumper (.bumper-container) is inside .xfpage but is authorable content
+    const doc = element.ownerDocument;
+    const bumper = element.querySelector('.bumper-container, .bumper-gradient');
+    if (bumper) {
+      // Extract bumper items before xfpage is removed
+      const bumperItems = bumper.querySelectorAll('.bumper-item');
+      if (bumperItems.length > 0) {
+        // Build a cards-bumper block from the bumper items
+        const cells = [];
+        bumperItems.forEach((item) => {
+          const header = item.querySelector('.bumper-item-header');
+          const content = item.querySelector('.bumper-item-content');
+          const cta = item.querySelector('.bumper-item-button, a');
+          const cellContent = [];
+          if (header) {
+            const h = doc.createElement('h3');
+            h.textContent = header.textContent.trim();
+            cellContent.push(h);
+          }
+          if (content) {
+            const p = doc.createElement('p');
+            p.textContent = content.textContent.trim();
+            cellContent.push(p);
+          }
+          if (cta) {
+            const a = doc.createElement('a');
+            a.href = cta.href || cta.getAttribute('href') || '';
+            a.textContent = cta.textContent.trim();
+            const p = doc.createElement('p');
+            p.appendChild(a);
+            cellContent.push(p);
+          }
+          if (cellContent.length > 0) cells.push([cellContent]);
+        });
+        if (cells.length > 0) {
+          const bumperBlock = WebImporter.Blocks.createBlock(doc, { name: 'cards-bumper', cells });
+          // Insert bumper block at the end of main content (before footer)
+          element.appendChild(doc.createElement('hr'));
+          element.appendChild(bumperBlock);
+        }
+      }
+    }
+
+    // Remove Canon footer experience fragments
     WebImporter.DOMUtils.remove(element, [
       '.xfpage',
       '.experiencefragment',

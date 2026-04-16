@@ -3,62 +3,82 @@
 
 /**
  * Transformer: Canon USA sections.
- * Adds section breaks (<hr>) and section-metadata blocks between sections.
- * Handles sections that share a parent container by splitting the parent.
- * Selectors from captured DOM of usa.canon.com pages.
- * Runs in afterTransform only.
+ * Pattern-based approach: detects section boundaries from DOM patterns
+ * common across all Canon security pillar pages.
+ * Runs in afterTransform only (after blocks are parsed, before metadata hr).
  */
 const H = { after: 'afterTransform' };
 
 export default function transform(hookName, element, payload) {
   if (hookName === H.after) {
-    const { template } = payload || {};
-    if (!template || !template.sections || template.sections.length < 2) return;
+    const doc = element.ownerDocument;
 
-    const document = element.ownerDocument;
-    const sections = template.sections;
+    // Strategy: Detect grey background sections and major content boundaries
+    // Canon pillar pages use inline style background-color:#EFF0F3 for grey sections
+    // and have distinct content areas separated by column-control divs
 
-    // Process sections in reverse order to avoid shifting DOM positions
-    for (let i = sections.length - 1; i >= 0; i--) {
-      const section = sections[i];
+    // 1. Find all elements with grey background and add section breaks + metadata
+    const greyBgElements = element.querySelectorAll('[style*="background-color:#EFF0F3"], [style*="background-color: #EFF0F3"], [style*="background-color: rgb(239, 240, 243)"]');
 
-      // Find the section element using the selector(s)
-      const selectors = Array.isArray(section.selector) ? section.selector : [section.selector];
-      let sectionEl = null;
-      for (const sel of selectors) {
-        try {
-          sectionEl = element.querySelector(sel);
-        } catch (e) {
-          // Invalid selector, skip
-        }
-        if (sectionEl) break;
-      }
-
-      if (!sectionEl) continue;
-
-      // If the section element is deeply nested, we need to find or create
-      // a good insertion point at the main content level
-      let insertionPoint = sectionEl;
-
+    // Process in reverse to avoid DOM shifting
+    const greyArray = [...greyBgElements].reverse();
+    greyArray.forEach((greyEl) => {
       // Walk up to find the nearest child of main/element
+      let insertionPoint = greyEl;
       while (insertionPoint.parentElement && insertionPoint.parentElement !== element) {
         insertionPoint = insertionPoint.parentElement;
       }
+      if (insertionPoint === element) return;
 
-      // Add section-metadata block if section has a style
-      if (section.style) {
-        const metaBlock = WebImporter.Blocks.createBlock(document, {
-          name: 'Section Metadata',
-          cells: { style: section.style },
-        });
-        insertionPoint.after(metaBlock);
+      // Add section-metadata for light-grey style
+      const metaBlock = WebImporter.Blocks.createBlock(doc, {
+        name: 'Section Metadata',
+        cells: { style: 'light-grey' },
+      });
+      insertionPoint.after(metaBlock);
+
+      // Add hr before this section
+      const hr = doc.createElement('hr');
+      insertionPoint.before(hr);
+    });
+
+    // 2. Add section break before the category nav bar (tabs)
+    const categoryNav = element.querySelector('.category-nav-bar, .category-navbar-list-container');
+    if (categoryNav) {
+      let navInsert = categoryNav;
+      while (navInsert.parentElement && navInsert.parentElement !== element) {
+        navInsert = navInsert.parentElement;
       }
-
-      // Add <hr> before this section (except the first section)
-      if (i > 0) {
-        const hr = document.createElement('hr');
-        insertionPoint.before(hr);
+      if (navInsert !== element && !navInsert.previousElementSibling?.matches('hr')) {
+        const hr = doc.createElement('hr');
+        navInsert.before(hr);
       }
     }
+
+    // 3. Add section break before the contentsplit (intro columns)
+    const contentSplits = element.querySelectorAll('.contentsplit, .contentsplit-cmp');
+    contentSplits.forEach((cs) => {
+      let csInsert = cs;
+      while (csInsert.parentElement && csInsert.parentElement !== element) {
+        csInsert = csInsert.parentElement;
+      }
+      if (csInsert !== element && !csInsert.previousElementSibling?.matches('hr')) {
+        const hr = doc.createElement('hr');
+        csInsert.before(hr);
+      }
+    });
+
+    // 4. Add section break before CTA sections (e.g. "Let's talk" with contact button)
+    const ctaSections = element.querySelectorAll('.cta-section, [class*="cta-banner"]');
+    ctaSections.forEach((cta) => {
+      let ctaInsert = cta;
+      while (ctaInsert.parentElement && ctaInsert.parentElement !== element) {
+        ctaInsert = ctaInsert.parentElement;
+      }
+      if (ctaInsert !== element && !ctaInsert.previousElementSibling?.matches('hr')) {
+        const hr = doc.createElement('hr');
+        ctaInsert.before(hr);
+      }
+    });
   }
 }
