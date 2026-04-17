@@ -159,13 +159,17 @@ header nav[aria-expanded='true'] .nav-hamburger-icon::after {
 /* brand - Canon logo area */
 header .nav-brand {
   grid-area: brand;
-  line-height: 1;
+  line-height: 0;
 }
 
 header nav .nav-brand a {
-  color: var(--canon-red);
-  font-weight: 700;
-  font-size: 28px;
+  display: inline-block;
+  line-height: 0;
+}
+
+header nav .nav-brand img {
+  height: 24px;
+  width: auto;
 }
 
 @media (width >= 900px) {
@@ -174,15 +178,9 @@ header nav .nav-brand a {
     align-items: center;
   }
 
-  header nav .nav-brand a {
-    font-size: 36px;
-    letter-spacing: -0.5px;
+  header nav .nav-brand img {
+    height: 32px;
   }
-}
-
-header nav .nav-brand img {
-  width: 128px;
-  height: auto;
 }
 
 /* tools - top-right utility area */

@@ -131,6 +131,16 @@ export default async function decorate(block) {
     if (section) section.classList.add(`nav-${c}`);
   });
 
+  // Replace brand text with Canon logo SVG
+  const brandLink = nav.querySelector('.nav-brand a');
+  if (brandLink) {
+    const logo = document.createElement('img');
+    logo.src = 'https://www.usa.canon.com/etc.clientlibs/canon/clientlibs/clientlib-base/resources/images/header/canon-logo-red.svg';
+    logo.alt = 'Canon';
+    brandLink.textContent = '';
+    brandLink.append(logo);
+  }
+
   // Strip button classes from all nav sections
   nav.querySelectorAll('.button').forEach((button) => {
     button.className = '';
