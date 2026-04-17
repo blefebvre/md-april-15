@@ -6,13 +6,40 @@ import { loadFragment } from '../fragment/fragment.js';
  */
 export default async function decorate(block) {
   const footerPath = '/footer';
-  const fragment = await loadFragment(footerPath);
+  let fragment = await loadFragment(footerPath);
+  // TODO: remove /content fallback before production
+  if (!fragment) fragment = await loadFragment('/content/footer');
   if (!fragment) return;
 
-  // decorate footer DOM
   block.textContent = '';
   const footer = document.createElement('div');
   while (fragment.firstElementChild) footer.append(fragment.firstElementChild);
+
+  // Restructure flat H3+UL pairs into column divs for grid layout
+  const sections = footer.querySelectorAll('.section');
+  if (sections.length > 0) {
+    const linksSection = sections[0];
+    const wrapper = linksSection.querySelector('.default-content-wrapper');
+    if (wrapper) {
+      const columns = document.createElement('div');
+      columns.className = 'footer-columns';
+
+      let currentCol = null;
+      Array.from(wrapper.children).forEach((child) => {
+        if (child.tagName === 'H3') {
+          currentCol = document.createElement('div');
+          currentCol.className = 'footer-col';
+          columns.append(currentCol);
+        }
+        if (currentCol) {
+          currentCol.append(child);
+        }
+      });
+
+      wrapper.textContent = '';
+      wrapper.append(columns);
+    }
+  }
 
   block.append(footer);
 }

@@ -10,7 +10,7 @@ footer .footer > div {
   padding: 40px 24px 24px;
 }
 
-footer .footer > div > div:first-child {
+footer .footer .footer-columns {
   display: grid;
   grid-template-columns: 1fr;
   gap: var(--spacing-l);
@@ -50,7 +50,8 @@ footer .footer p {
   margin: 0;
 }
 
-footer .footer > div > div:last-child {
+/* copyright section */
+footer .footer > div > .section:last-child {
   border-top: 1px solid #444;
   margin-top: var(--spacing-l);
   padding-top: var(--spacing-m);
@@ -59,7 +60,7 @@ footer .footer > div > div:last-child {
 }
 
 @media (width >= 600px) {
-  footer .footer > div > div:first-child {
+  footer .footer .footer-columns {
     grid-template-columns: repeat(2, 1fr);
   }
 }
@@ -69,7 +70,7 @@ footer .footer > div > div:last-child {
     padding: 40px 32px 24px;
   }
 
-  footer .footer > div > div:first-child {
+  footer .footer .footer-columns {
     grid-template-columns: repeat(5, 1fr);
   }
 }
