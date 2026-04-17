@@ -85,6 +85,16 @@ files.forEach((file) => {
     changes.push('callout→light-grey');
   }
 
+  // 1.5. Split the body section at each h2 heading to create separate sections
+  // On the original Canon pages, each h2 starts a new visual section
+  body.querySelectorAll(':scope > div').forEach((div) => {
+    const h2s = [...div.querySelectorAll(':scope > h2')];
+    // Split at each h2 after the first one (first h2 stays in its parent)
+    for (let i = h2s.length - 1; i >= 1; i--) {
+      splitAtElement(h2s[i], div);
+    }
+  });
+
   // 2. Find "How Canon Can Help" heading and split it into its own dark section
   body.querySelectorAll('h2').forEach((h2) => {
     const text = h2.textContent || '';
