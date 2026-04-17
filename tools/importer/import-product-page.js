@@ -4,276 +4,250 @@
 /**
  * Canon Product Page Import Script
  * Transforms Canon PDP into EDS format with section-based tabs.
+ *
+ * DOM structure (usa.canon.com):
+ *   #pdp-description > .xf-web-container > .aem-magento-container > .column-control
+ *     > div > .column-control-cmp > .container > .row > .col-md-12 > .ccMaxWidth
+ *       Components: .title, .contentsplit, .video, .mosaic-gallery, .textimage, .column-control
+ *
+ *   Images use data-src for Scene7 URLs (src is a placeholder).
+ *   Videos use .thumbnail-video <img> with ytimg.com URLs (no iframes).
  */
 
-const DM_PATTERN = /^https?:\/\/s7[a-z0-9]*\.scene7\.com\/is\/image\//;
+const SCENE7_RE = /scene7\.com\/is\/image\/(.+)/;
+const YTIMG_RE = /ytimg\.com\/vi\/([^/]+)/;
+const CANON_HOST = 'https://www.usa.canon.com';
 
-/**
- * Convert a Scene7 image URL into an <a> link (for DM autoblock on client).
- */
-function dmLink(document, src, alt) {
+function scene7Link(document, src, alt) {
   if (!src) return null;
   const a = document.createElement('a');
-  a.href = src.split('?')[0]; // strip query params
+  a.href = src.split('?')[0];
   a.textContent = alt || '';
   return a;
 }
 
-/**
- * Get the real image src from an img element (handles data-src lazy loading).
- */
-function imgSrc(img) {
-  const dataSrc = img.getAttribute('data-src');
-  const src = dataSrc || img.getAttribute('src') || '';
-  return src.includes('canon-image-default') ? dataSrc || '' : src;
+function getScene7Src(img) {
+  return img.getAttribute('data-src') || img.getAttribute('src') || '';
 }
 
-/**
- * Extract Overview tab content — the richest section with features, videos, columns.
- */
+function youtubeEmbed(document, videoId) {
+  const url = `https://www.youtube.com/watch?v=${videoId}`;
+  const a = document.createElement('a');
+  a.href = url;
+  a.textContent = url;
+  return WebImporter.Blocks.createBlock(document, { name: 'embed', cells: [[a]] });
+}
+
+function canonUrl(href) {
+  if (!href) return '#';
+  if (href.startsWith('http')) return href;
+  if (href.startsWith('/')) return CANON_HOST + href;
+  if (href === '#') return CANON_HOST + '/#';
+  return href;
+}
+
 function buildOverviewSection(document, descEl) {
   const frag = document.createDocumentFragment();
   const h2 = document.createElement('h2');
   h2.textContent = 'Overview';
   frag.append(h2);
 
-  // The overview content lives inside: #description .xf-web-container .aem-magento-container .root.responsivegrid .aem-Grid .column-control
-  const colCtrl = descEl.querySelector('.column-control');
-  if (!colCtrl) {
-    // Fallback: just grab all text content
-    const p = document.createElement('p');
-    p.textContent = descEl.textContent.trim().substring(0, 500);
-    frag.append(p);
-    return frag;
-  }
+  const ccMax = descEl.querySelector('.ccMaxWidth');
+  if (!ccMax) return frag;
 
-  const rows = colCtrl.querySelectorAll(':scope > .row');
-  rows.forEach((row) => {
-    const cols = row.querySelectorAll(':scope > [class*="col-"]');
-    const headings = row.querySelectorAll('h2, h3, h4');
-    const paragraphs = row.querySelectorAll('p');
-    const images = row.querySelectorAll('img[src]');
-    const videos = row.querySelectorAll('iframe[src*="youtube"], [data-video-url]');
+  const children = Array.from(ccMax.children);
+  let splitIdx = 0;
 
-    // Skip rows with no meaningful content
-    if (row.textContent.trim().length < 10 && images.length === 0 && videos.length === 0) return;
+  children.forEach((child) => {
+    const cls = child.className || '';
 
-    // Video rows — create embed block
-    videos.forEach((video) => {
-      const src = video.getAttribute('src') || video.getAttribute('data-video-url') || '';
-      if (src.includes('youtube')) {
-        const embedBlock = WebImporter.Blocks.createBlock(document, {
-          name: 'embed',
-          cells: [[(() => { const a = document.createElement('a'); a.href = src; a.textContent = src; return a; })()]],
-        });
-        frag.append(embedBlock);
+    // Title components (H2 headings)
+    if (cls.includes('title')) {
+      const heading = child.querySelector('h2');
+      if (heading && heading.textContent.trim() !== 'Overview') {
+        const el = document.createElement('h2');
+        el.textContent = heading.textContent.trim();
+        frag.append(el);
       }
-    });
+      return;
+    }
 
-    // Sample images gallery (3 images in a row)
-    if (images.length >= 3 && headings.length === 0 && cols.length === 1) {
-      const heading = document.createElement('h2');
-      const prevRow = row.previousElementSibling;
-      const prevH2 = prevRow?.querySelector('h2');
-      if (prevH2) {
-        heading.textContent = prevH2.textContent.trim();
-        frag.append(heading);
+    // Contentsplit: image+text feature → columns block
+    if (cls.includes('contentsplit')) {
+      const img = child.querySelector('img[data-src*="scene7"]');
+      const heading = child.querySelector('h3');
+      const para = child.querySelector('p');
+      const src = img ? getScene7Src(img) : '';
+
+      if (heading && src && SCENE7_RE.test(src)) {
+        const textDiv = document.createElement('div');
+        const hEl = document.createElement('h3');
+        hEl.textContent = heading.textContent.trim();
+        textDiv.append(hEl);
+        if (para) {
+          const pEl = document.createElement('p');
+          pEl.textContent = para.textContent.trim();
+          textDiv.append(pEl);
+        }
+
+        const imgDiv = document.createElement('div');
+        imgDiv.append(scene7Link(document, src, img.alt));
+
+        const cells = splitIdx % 2 === 0
+          ? [[textDiv, imgDiv]]
+          : [[imgDiv, textDiv]];
+        const colBlock = WebImporter.Blocks.createBlock(document, { name: 'columns', cells });
+        frag.append(colBlock);
+        splitIdx++;
       }
+      return;
+    }
+
+    // Video component → embed block
+    if (cls.includes('video')) {
+      const thumb = child.querySelector('.thumbnail-video, img[src*="ytimg"]');
+      if (thumb) {
+        const match = thumb.src?.match(YTIMG_RE);
+        if (match) {
+          frag.append(youtubeEmbed(document, match[1]));
+        }
+      }
+      return;
+    }
+
+    // Mosaic gallery → cards block (sample images)
+    if (cls.includes('mosaic-gallery')) {
+      const imgs = child.querySelectorAll('img[data-src*="scene7"]');
+      const seen = new Set();
       const cells = [];
-      images.forEach((img) => {
-        const src = imgSrc(img);
-        if (src && DM_PATTERN.test(src)) {
-          const link = dmLink(document, src, img.alt);
-          if (link) cells.push([link]);
+      imgs.forEach((img) => {
+        const src = getScene7Src(img);
+        if (src && SCENE7_RE.test(src) && !seen.has(src.split('?')[0])) {
+          seen.add(src.split('?')[0]);
+          cells.push([scene7Link(document, src, img.alt)]);
         }
       });
       if (cells.length > 0) {
-        const cardsBlock = WebImporter.Blocks.createBlock(document, { name: 'cards', cells });
-        frag.append(cardsBlock);
+        frag.append(WebImporter.Blocks.createBlock(document, { name: 'cards', cells }));
       }
       return;
     }
 
-    // Two-column feature rows (image + text side by side)
-    if (cols.length === 2) {
-      const cells = [];
-      const colPairs = [];
-      for (let i = 0; i < cols.length; i++) {
-        const col = cols[i];
-        const colHeadings = col.querySelectorAll('h3, h4');
-        const colParas = col.querySelectorAll('p');
-        const colImgs = col.querySelectorAll('img[src]');
+    // Textimage component → default content (h4 + paragraph)
+    if (cls.includes('textimage')) {
+      const heading = child.querySelector('h4');
+      const para = child.querySelector('p');
+      if (heading) {
+        const hEl = document.createElement('h4');
+        hEl.textContent = heading.textContent.trim();
+        frag.append(hEl);
+      }
+      if (para) {
+        const pEl = document.createElement('p');
+        pEl.textContent = para.textContent.trim();
+        frag.append(pEl);
+      }
+      return;
+    }
 
-        const hasText = colHeadings.length > 0 || (colParas.length > 0 && col.textContent.trim().length > 30);
-        const hasImg = colImgs.length > 0;
+    // Inner column-control → columns block with paired columns
+    if (cls.includes('column-control')) {
+      const leafRows = Array.from(child.querySelectorAll('.row'))
+        .filter((r) => !r.querySelector('.row'));
+      if (leafRows.length === 0) return;
 
-        if (hasImg && hasText) {
-          // Single col with both image and text (icon + description pattern)
-          const cell = document.createElement('div');
-          colImgs.forEach((img) => {
-            const src = imgSrc(img);
-            if (src && DM_PATTERN.test(src)) {
-              const p = document.createElement('p');
-              p.append(dmLink(document, src, img.alt));
-              cell.append(p);
+      const singleCols = [];
+
+      leafRows.forEach((row) => {
+        const cols = row.querySelectorAll(':scope > [class*="col-"]');
+
+        if (cols.length >= 2) {
+          const colDivs = [];
+          cols.forEach((col) => {
+            const div = document.createElement('div');
+            const img = col.querySelector('img[data-src*="scene7"]');
+            const heading = col.querySelector('h4');
+            const paras = col.querySelectorAll('p');
+
+            if (img) {
+              const src = getScene7Src(img);
+              if (src && SCENE7_RE.test(src)) {
+                const p = document.createElement('p');
+                p.append(scene7Link(document, src, img.alt));
+                div.append(p);
+              }
             }
-          });
-          colHeadings.forEach((h) => {
-            const el = document.createElement(h.tagName.toLowerCase());
-            el.textContent = h.textContent.trim();
-            cell.append(el);
-          });
-          colParas.forEach((p) => {
-            if (p.textContent.trim().length > 10) {
-              const newP = document.createElement('p');
-              newP.textContent = p.textContent.trim();
-              cell.append(newP);
+
+            const descPs = Array.from(paras).filter((p) => p.textContent.trim().length > 20);
+            if (descPs.length > 0) {
+              const pEl = document.createElement('p');
+              pEl.textContent = descPs[0].textContent.trim();
+              div.append(pEl);
             }
+
+            if (heading) {
+              const hEl = document.createElement('h4');
+              hEl.textContent = heading.textContent.trim();
+              div.append(hEl);
+              if (descPs.length > 0) {
+                const pEl2 = document.createElement('p');
+                pEl2.textContent = descPs[0].textContent.trim();
+                div.append(pEl2);
+              }
+            }
+
+            colDivs.push(div);
           });
-          colPairs.push(cell);
-        } else if (hasImg) {
-          // Image-only column
-          const cell = document.createElement('div');
-          const img = colImgs[0];
-          const src = imgSrc(img);
-          if (src && DM_PATTERN.test(src)) {
-            cell.append(dmLink(document, src, img.alt));
+
+          if (colDivs.length >= 2) {
+            frag.append(WebImporter.Blocks.createBlock(document, { name: 'columns', cells: [colDivs] }));
           }
-          colPairs.push(cell);
-        } else if (hasText) {
-          // Text-only column
-          const cell = document.createElement('div');
-          colHeadings.forEach((h) => {
-            const el = document.createElement(h.tagName.toLowerCase());
-            el.textContent = h.textContent.trim();
-            cell.append(el);
-          });
-          colParas.forEach((p) => {
-            if (p.textContent.trim().length > 10) {
-              const newP = document.createElement('p');
-              newP.textContent = p.textContent.trim();
-              cell.append(newP);
-            }
-          });
-          colPairs.push(cell);
+        } else if (cols.length === 1) {
+          singleCols.push(cols[0]);
         }
-      }
-      if (colPairs.length >= 2) {
-        cells.push(colPairs);
-        const colBlock = WebImporter.Blocks.createBlock(document, { name: 'columns', cells });
-        frag.append(colBlock);
-      }
-      return;
-    }
-
-    // Single-column content rows (heading + text + image = columns block)
-    if (cols.length <= 1) {
-      const rowHeadings = Array.from(headings);
-      const rowImages = Array.from(images).filter((img) => {
-        const src = imgSrc(img);
-        return src && DM_PATTERN.test(src);
       });
 
-      // H2 headings that precede content sections
-      const h2s = rowHeadings.filter((h) => h.tagName === 'H2');
-      if (h2s.length > 0 && rowHeadings.length === h2s.length && rowImages.length === 0) {
-        h2s.forEach((h) => {
-          const el = document.createElement('h2');
-          el.textContent = h.textContent.trim();
-          frag.append(el);
-        });
-        return;
-      }
+      if (singleCols.length >= 2) {
+        const colDivs = singleCols.map((col) => {
+          const div = document.createElement('div');
+          const heading = col.querySelector('h3, h4');
+          const strong = col.querySelector('b, strong');
+          const paras = col.querySelectorAll('p');
 
-      // Feature pattern: h3/h4 + paragraph + image -> columns block
-      const featureHeadings = rowHeadings.filter((h) => h.tagName === 'H3' || h.tagName === 'H4');
-      if (featureHeadings.length > 0 && rowImages.length > 0) {
-        // Group features: each heading + its following paragraphs + the next image
-        let currentFeatureIdx = 0;
-        featureHeadings.forEach((fh, idx) => {
-          const textDiv = document.createElement('div');
-          const hEl = document.createElement(fh.tagName.toLowerCase());
-          hEl.textContent = fh.textContent.trim();
-          textDiv.append(hEl);
+          if (heading) {
+            const hEl = document.createElement('h4');
+            hEl.textContent = heading.textContent.trim();
+            div.append(hEl);
+          } else if (strong) {
+            const hEl = document.createElement('h4');
+            hEl.textContent = strong.textContent.trim();
+            div.append(hEl);
+          }
 
-          // Get paragraphs between this heading and next heading (or end)
-          let sibling = fh.nextElementSibling;
-          while (sibling && !['H2', 'H3', 'H4'].includes(sibling.tagName)) {
-            if (sibling.tagName === 'P' && sibling.textContent.trim().length > 10) {
+          paras.forEach((p) => {
+            const text = p.textContent.trim();
+            if (text && (!strong || text !== strong.textContent.trim())) {
               const pEl = document.createElement('p');
-              pEl.textContent = sibling.textContent.trim();
-              textDiv.append(pEl);
+              pEl.textContent = text;
+              div.append(pEl);
             }
-            sibling = sibling.nextElementSibling;
-          }
+          });
 
-          // Pair with image
-          const img = rowImages[currentFeatureIdx] || rowImages[rowImages.length - 1];
-          if (img) {
-            const src = imgSrc(img);
-            const imgDiv = document.createElement('div');
-            imgDiv.append(dmLink(document, src, img.alt));
-
-            // Alternate image position
-            const cells = idx % 2 === 0
-              ? [[textDiv, imgDiv]]
-              : [[imgDiv, textDiv]];
-            const colBlock = WebImporter.Blocks.createBlock(document, { name: 'columns', cells });
-            frag.append(colBlock);
-            currentFeatureIdx++;
-          } else {
-            // No image, just default content
-            frag.append(textDiv);
-          }
+          return div;
         });
-        return;
+        frag.append(WebImporter.Blocks.createBlock(document, { name: 'columns', cells: [colDivs] }));
       }
 
-      // Plain content (just headings and text, no images)
-      if (featureHeadings.length > 0) {
-        featureHeadings.forEach((h) => {
-          const el = document.createElement(h.tagName.toLowerCase());
-          el.textContent = h.textContent.trim();
-          frag.append(el);
-        });
-        paragraphs.forEach((p) => {
-          if (p.textContent.trim().length > 20) {
-            const newP = document.createElement('p');
-            newP.textContent = p.textContent.trim();
-            frag.append(newP);
-          }
-        });
-      }
+      return;
     }
   });
-
-  // Accordion for firmware
-  const disclaimerSection = descEl.querySelector('.wrap-disclaimer, #description-disclaimer');
-  const accordion = descEl.querySelector('[data-role="collapsible"], .cms-accordion');
-  if (accordion) {
-    const title = accordion.querySelector('h3, [data-role="trigger"]');
-    const content = accordion.querySelector('[data-role="content"], .content');
-    if (title && content) {
-      const cells = [[
-        (() => { const p = document.createElement('p'); p.textContent = title.textContent.trim(); return p; })(),
-        content.cloneNode(true),
-      ]];
-      const accBlock = WebImporter.Blocks.createBlock(document, { name: 'accordion', cells });
-      frag.append(accBlock);
-    }
-  }
 
   return frag;
 }
 
-/**
- * Build a tab section with section-metadata.
- */
 function createTabSection(document, title, content) {
   const section = document.createElement('div');
   section.append(content);
-
-  // Add section-metadata block
   const metaBlock = WebImporter.Blocks.createBlock(document, {
     name: 'Section Metadata',
     cells: [
@@ -290,7 +264,6 @@ export default {
     const { document, url, params } = payload;
     const main = document.body;
 
-    // Clean up non-content elements
     const removeSels = [
       'header', 'footer', '[role="banner"]', '[role="contentinfo"]',
       'nav', '.breadcrumbs', '.tabsContainer', '#pdp-discontinued',
@@ -305,19 +278,16 @@ export default {
     // 1. Product Details placeholder
     const productInfo = main.querySelector('.wrap-media-product-info');
     if (productInfo) {
-      const pdBlock = WebImporter.Blocks.createBlock(document, { name: 'product-details', cells: [] });
-      result.append(pdBlock);
+      result.append(WebImporter.Blocks.createBlock(document, { name: 'product-details', cells: [] }));
     }
 
-    // Add section break before tabs
     result.append(document.createElement('hr'));
 
     // 2. Overview tab
     const descSection = main.querySelector('#pdp-description, .pdp-akeneo-description');
     if (descSection) {
       const overviewContent = buildOverviewSection(document, descSection);
-      const overviewSection = createTabSection(document, 'Overview', overviewContent);
-      result.append(overviewSection);
+      result.append(createTabSection(document, 'Overview', overviewContent));
       result.append(document.createElement('hr'));
     }
 
@@ -328,11 +298,13 @@ export default {
       const h2 = document.createElement('h2');
       h2.textContent = 'Specifications';
       specsFrag.append(h2);
+      const h3 = document.createElement('h3');
+      h3.textContent = 'Technical Specifications';
+      specsFrag.append(h3);
       const p = document.createElement('p');
       p.textContent = 'For full technical specifications, please visit the Canon USA product page.';
       specsFrag.append(p);
-      const specSection = createTabSection(document, 'Specifications', specsFrag);
-      result.append(specSection);
+      result.append(createTabSection(document, 'Specifications', specsFrag));
       result.append(document.createElement('hr'));
     }
 
@@ -349,18 +321,24 @@ export default {
         h3.textContent = 'Compatible Accessories';
         compFrag.append(h3);
         const ul = document.createElement('ul');
+        const seen = new Set();
         links.forEach((a) => {
-          const li = document.createElement('li');
-          const link = document.createElement('a');
-          link.href = a.href;
-          link.textContent = a.textContent.trim();
-          li.append(link);
-          ul.append(li);
+          const text = a.textContent.trim();
+          const href = canonUrl(a.getAttribute('href'));
+          const key = text + '|' + href;
+          if (text && !seen.has(key)) {
+            seen.add(key);
+            const li = document.createElement('li');
+            const link = document.createElement('a');
+            link.href = href;
+            link.textContent = text;
+            li.append(link);
+            ul.append(li);
+          }
         });
         compFrag.append(ul);
       }
-      const compTabSection = createTabSection(document, 'Compatibility', compFrag);
-      result.append(compTabSection);
+      result.append(createTabSection(document, 'Compatibility', compFrag));
       result.append(document.createElement('hr'));
     }
 
@@ -374,8 +352,7 @@ export default {
       const p = document.createElement('p');
       p.textContent = 'How is your Canon product performing for you?';
       revFrag.append(p);
-      const revTabSection = createTabSection(document, 'Reviews', revFrag);
-      result.append(revTabSection);
+      result.append(createTabSection(document, 'Reviews', revFrag));
       result.append(document.createElement('hr'));
     }
 
@@ -386,8 +363,20 @@ export default {
       const h2 = document.createElement('h2');
       h2.textContent = 'Resources';
       resFrag.append(h2);
-      const reTabSection = createTabSection(document, 'Resources', resFrag);
-      result.append(reTabSection);
+
+      const h3 = document.createElement('h3');
+      h3.textContent = 'Videos';
+      resFrag.append(h3);
+
+      const videoThumbs = resSection.querySelectorAll('.thumbnail-video, img[src*="ytimg"]');
+      videoThumbs.forEach((thumb) => {
+        const match = thumb.src?.match(YTIMG_RE);
+        if (match) {
+          resFrag.append(youtubeEmbed(document, match[1]));
+        }
+      });
+
+      result.append(createTabSection(document, 'Resources', resFrag));
       result.append(document.createElement('hr'));
     }
 
@@ -398,17 +387,39 @@ export default {
       const h2 = document.createElement('h2');
       h2.textContent = 'Support';
       supFrag.append(h2);
-      const supLinks = supSection.querySelectorAll('a[href]');
-      if (supLinks.length > 0) {
+      const p = document.createElement('p');
+      p.textContent = 'Get started with these quick links.';
+      supFrag.append(p);
+
+      let supportBase = '';
+      const supRefLink = main.querySelector('a[href*="/support/p/"]');
+      if (supRefLink) {
+        const supMatch = supRefLink.getAttribute('href').match(/\/support\/p\/([^#?]+)/);
+        if (supMatch) supportBase = CANON_HOST + '/support/p/' + supMatch[1];
+      }
+
+      const supLinks = supSection.querySelectorAll('.support-links a[href], .support-section a[href], #pdp-support a[href]');
+      const allLinks = supLinks.length > 0 ? supLinks : supSection.querySelectorAll('a[href]');
+      if (allLinks.length > 0) {
         const ul = document.createElement('ul');
         const seen = new Set();
-        supLinks.forEach((a) => {
+        allLinks.forEach((a) => {
           const text = a.textContent.trim();
-          if (text && !seen.has(text) && text.length > 3) {
+          if (text && text.length > 3 && !seen.has(text)) {
             seen.add(text);
             const li = document.createElement('li');
             const link = document.createElement('a');
-            link.href = a.href;
+
+            const cardRef = a.getAttribute('data-card-id-reference');
+            const rawHref = a.getAttribute('href');
+            if (cardRef && supportBase) {
+              link.href = supportBase + '#idReference=' + cardRef;
+            } else if (a.classList.contains('support-link') && supportBase) {
+              link.href = supportBase;
+            } else {
+              link.href = canonUrl(rawHref);
+            }
+
             link.textContent = text;
             li.append(link);
             ul.append(li);
@@ -416,50 +427,24 @@ export default {
         });
         supFrag.append(ul);
       }
-      const supTabSection = createTabSection(document, 'Support', supFrag);
-      result.append(supTabSection);
+      result.append(createTabSection(document, 'Support', supFrag));
     }
 
-    // 8. Disclaimer (outside tabs)
+    // 8. Metadata
     result.append(document.createElement('hr'));
-    const disclaimer = main.querySelector('#description-disclaimer, .wrap-disclaimer');
-    if (disclaimer) {
-      const listItems = disclaimer.querySelectorAll('li');
-      if (listItems.length > 0) {
-        const h3 = document.createElement('h3');
-        h3.textContent = 'Product Disclaimer';
-        result.append(h3);
-        const ol = document.createElement('ol');
-        listItems.forEach((li) => {
-          const newLi = document.createElement('li');
-          newLi.textContent = li.textContent.trim();
-          ol.append(newLi);
-        });
-        result.append(ol);
-      }
-    }
-
-    // 9. Metadata
-    result.append(document.createElement('hr'));
-    const title = document.querySelector('title')?.textContent?.trim()?.replace(' | Canon U.S.A.', '') || '';
-    const desc = document.querySelector('meta[name="description"]')?.content || '';
-    const ogImage = document.querySelector('meta[property="og:image"]')?.content || '';
-
     WebImporter.rules.createMetadata(result, document);
 
-    // Generate path
     const path = WebImporter.FileUtils.sanitizePath(
       new URL(params.originalURL).pathname.replace(/\/$/, '').replace(/\.html$/, ''),
     );
 
-    // Replace main content
     main.innerHTML = '';
     main.append(result);
 
     return [{
       element: main,
       path,
-      report: { title, template: 'product-page' },
+      report: { title: document.title, template: 'product-page' },
     }];
   },
 };

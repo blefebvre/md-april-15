@@ -50,6 +50,8 @@ export default function transform(hookName, element, payload) {
       'ol.items',
       '.tabsContainer',
       '#pdp-discontinued',
+      '#description-disclaimer',
+      '.wrap-disclaimer',
       '.page-anchors-top',
       '.ambanners',
       '#upsell-modal-component',
