@@ -6,7 +6,9 @@ import { loadFragment } from '../fragment/fragment.js';
  */
 export default async function decorate(block) {
   const footerPath = '/footer';
-  const fragment = await loadFragment(footerPath);
+  let fragment = await loadFragment(footerPath);
+  // TODO: remove /content fallback before production
+  if (!fragment) fragment = await loadFragment('/content/footer');
   if (!fragment) return;
 
   block.textContent = '';
