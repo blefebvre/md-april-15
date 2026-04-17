@@ -141,28 +141,43 @@ function buildAutoBlocks(main) {
 
     buildDynamicMediaImages(main);
 
-    // Clean up broken Canon placeholder images and orphaned captions
+    // Clean up broken images, empty links, tracking pixels, and orphaned elements
     main.querySelectorAll('img').forEach((img) => {
       const src = img.getAttribute('src') || img.src || '';
-      if (src.includes('canon-image-default') || src === 'about:error' || src === '') {
-        // Remove the image and its wrapper
+      if (src.includes('canon-image-default') || src === 'about:error' || src === ''
+        || src.includes('bat.bing.com') || src.includes('analytics.twitter')
+        || src.includes('t.co/i/adsct')) {
         const wrapper = img.closest('picture') || img.closest('a') || img;
         const parent = wrapper.parentElement;
         wrapper.remove();
-        // If parent is now empty, remove it too
-        if (parent && !parent.textContent.trim() && !parent.querySelector('img, picture, a')) {
+        if (parent && !parent.textContent.trim() && !parent.querySelector('img, picture')) {
           parent.remove();
         }
       }
     });
 
-    // Remove empty list items (from photo gallery placeholders)
+    // Remove empty links (shop links with no text/image) and their parent <p>
+    main.querySelectorAll('a').forEach((a) => {
+      if (!a.textContent.trim() && !a.querySelector('img, picture')) {
+        const parent = a.parentElement;
+        a.remove();
+        if (parent && parent.tagName === 'P' && !parent.textContent.trim() && !parent.querySelector('img, picture, a')) {
+          parent.remove();
+        }
+      }
+    });
+
+    // Remove empty list items and lists
     main.querySelectorAll('li').forEach((li) => {
       if (!li.textContent.trim() && !li.querySelector('img, picture')) li.remove();
     });
-    // Remove empty lists
     main.querySelectorAll('ul, ol').forEach((list) => {
       if (list.children.length === 0) list.remove();
+    });
+
+    // Remove empty paragraphs
+    main.querySelectorAll('p').forEach((p) => {
+      if (!p.textContent.trim() && !p.querySelector('img, picture, a, button')) p.remove();
     });
 
     buildHeroBlock(main);
